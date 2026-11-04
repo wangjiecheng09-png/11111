@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>夜班英语课堂 · 第3课 入院问过敏史</title>
+<style>
+body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#FFF7E8;color:#222;margin:0;padding:16px}
+.wrap{max-width:720px;margin:0 auto}
+h1{color:#0F5E5A;font-size:22px;margin:8px 0 4px}.sub{color:#666;font-size:14px}
+.card{background:#fff;border:2px solid #0F5E5A;border-radius:14px;padding:16px;margin:14px 0}
+.card h2{color:#0F5E5A;font-size:18px;margin:0 0 8px}
+.teacher{border-left:6px solid #0F5E5A}.classmate{border-left:6px solid #E8A838}
+button{background:#0F5E5A;color:#fff;border:0;border-radius:999px;padding:8px 14px;margin:4px 4px 4px 0;cursor:pointer}
+button.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A}
+.line{margin:10px 0}.en{font-size:17px}.zh{color:#555;font-size:14px}
+.board{background:#0F5E5A;color:#FFF7E8;border-radius:12px;padding:16px}
+.board b{font-size:20px}
+.vocab{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vocab div{background:#FFF7E8;color:#222;border-radius:8px;padding:8px}
+.q{margin:10px 0}.ans{font-weight:bold;color:#0F5E5A}
+.note{font-size:13px;color:#666}
+</style></head><body><div class="wrap">
+<h1>夜班英语课堂 · 第3课</h1>
+<p class="sub">入院问过敏史 · 跟今晚第3集同一课 · 原型第1版，先试一课</p>
+<p><label>语速 <input type="range" id="rate" min="0.7" max="1.1" step="0.1" value="0.9"> <span id="ratev">0.9</span></label>
+<button class="ghost" onclick="toggleZh()">中文开/关</button></p>
+
+<div class="card teacher"><h2>👩‍🏫 老师讲：入院第一句，为什么先问过敏史</h2>
+<p>新病人办入院，护士第一句就要问过敏史。不是客套，是安全：有些药一用就可能出事，问清楚了再给药，等于先把一道关卡住了。</p>
+<div class="line"><div class="en">Do you have any allergies?</div><div class="zh">你对什么过敏吗？</div>
+<button onclick="speak('Do you have any allergies?')">🔊 朗读</button></div>
+<div class="line"><div class="en">Yes, I'm allergic to penicillin.</div><div class="zh">是的，我对青霉素过敏。</div>
+<button onclick="speak(&quot;Yes, I&apos;m allergic to penicillin.&quot;)">🔊 朗读</button></div>
+<p class="note">老师提醒：这句问错了会出大事，一定要记牢。学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p></div>
+
+<div class="card classmate"><h2>🙋 同学问：最容易卡住的3个点</h2>
+<p><b>问：allergy 和 allergic to 有什么区别？</b><br>答：allergy 是名词，过敏；allergic to 是“对……过敏”，后面要接过敏的东西。说“ I'm allergic to penicillin” 就是“我对青霉素过敏”。</p>
+<p><b>问：A 和 B 哪句对？</b><br>答：两句都能用。A：Do you have any allergies? B：Are you allergic to anything? 今晚投票只是问你平时更顺口说哪句，不是选对错。
+<button onclick="speak('Are you allergic to anything?')">🔊 读 B 句</button></p>
+<p><b>问：penicillin 怎么读？</b><br>答：/ˌpenɪˈsɪlɪn/，青霉素。跟读三遍，读顺了再往下走。</p></div>
+
+<div class="board"><h2 style="color:#FFF7E8">📋 白板 · 截图保存</h2>
+<p><b>Do you have any allergies?</b><br>你对什么过敏吗？</p>
+<p><b>Yes, I'm allergic to penicillin.</b><br>是的，我对青霉素过敏。</p>
+<div class="vocab">
+<div>allergy<br>/ˈælədʒi/ · 过敏（名词）</div>
+<div>allergic<br>/əˈlɜːdʒɪk/ · 过敏的</div>
+<div>allergic to<br>对……过敏</div>
+<div>penicillin<br>/ˌpenɪˈsɪlɪn/ · 青霉素</div>
+</div></div>
+
+<div class="card"><h2>✏️ 跟读 + 小测（做完再走）</h2>
+<p>跟读：<button onclick="speak('Do you have any allergies? Yes, I am allergic to penicillin.')">🔊 整段跟读</button> 读完自己再说一遍，不用录音，顺了就行。</p>
+<div class="q"><b>1. 入院问过敏史，下面哪句不能用？</b><br>
+<button onclick="quiz(this,false)">Do you have any allergies?</button>
+<button onclick="quiz(this,true)">Do you pain?</button>
+<span class="ans" id="q1"></span></div>
+<div class="q"><b>2. I'm allergic ___ penicillin. 空里填什么？</b><br>
+<button onclick="quiz2(this,false)">for</button>
+<button onclick="quiz2(this,true)">to</button>
+<span class="ans" id="q2"></span></div>
+<div class="card" style="border-color:#E8A838"><h2>🧩 自己造句：把这句变成你的</h2>
+<p>句型：I'm allergic to ___ .（我对……过敏。）<br>在空里填一个过敏的东西，试试：penicillin（青霉素）、peanuts（花生）、pollen（花粉）</p>
+<p><input id="myword" placeholder="填一个词，例如 peanuts" style="padding:8px;border-radius:8px;border:1.5px solid #0F5E5A;width:60%">
+<button onclick="makeSentence()">生成我的句子</button></p>
+<p id="mysent" class="ans"></p>
+<p><button class="ghost" onclick="if(document.getElementById('mysent').dataset.t){speak(document.getElementById('mysent').dataset.t)}">🔊 朗读我的句子</button></p>
+<p class="note">这只是语言练习，不是问诊；真实过敏情况以医生诊断和医嘱为准。</p></div>
+
+<div class="card"><h2>✅ 学完打勾 + 错题回炉</h2>
+<p id="progress">进度：还没完成本课小测</p>
+<p id="review" class="note">错过的题会先出现在这里，做对了再往下走。</p>
+<p><button onclick="markDone()">我学完了，打勾</button> <button class="ghost" onclick="clearProgress()">清除本课进度</button></p></div>
+
+<p><button onclick="window.print()">🖨️ 打印 / 保存这页白板</button></p>
+<p class="note">原型说明：本课只用第3集原句，没有新编的模板句。下一课想做哪个科室、哪一集，在群里或评论区说，点名最多的先做。</p></div>
+</div>
+<script>
+let showZh=true;
+function speak(t){const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=parseFloat(document.getElementById('rate').value);speechSynthesis.cancel();speechSynthesis.speak(u);}
+document.getElementById('rate').oninput=e=>{document.getElementById('ratev').textContent=e.target.value};
+function toggleZh(){showZh=!showZh;document.querySelectorAll('.zh').forEach(el=>el.style.display=showZh?'block':'none');}
+let mistakes=JSON.parse(localStorage.getItem('classroom-ep03-mistakes')||'[]');
+function showProgress(){const done=localStorage.getItem('classroom-ep03-done');document.getElementById('progress').textContent=done?'进度：✅ 本课已完成（已打勾）':'进度：还没完成本课小测';document.getElementById('review').textContent=mistakes.length?('错题回炉：你之前错过 '+mistakes.join('、')+'，先把这几道做对再打勾。'):'错过的题会先出现在这里，做对了再打勾。';}
+function noteMistake(name,correct){if(!correct&&!mistakes.includes(name))mistakes.push(name);if(correct)mistakes=mistakes.filter(m=>m!==name);localStorage.setItem('classroom-ep03-mistakes',JSON.stringify(mistakes));showProgress();}
+function quiz(el,correct){document.getElementById('q1').textContent=correct?' ✅ 对，这句是错的，不能这样问。':' ❌ 这句是对的，再想想。';noteMistake('第1题',correct);}
+function quiz2(el,correct){document.getElementById('q2').textContent=correct?' ✅ 对，allergic to + 过敏的东西。':' ❌ 再想想，allergic 后面固定跟 to。';noteMistake('第2题',correct);}
+function makeSentence(){const w=document.getElementById('myword').value.trim();if(!w){document.getElementById('mysent').textContent='先填一个词，再生成。';return;}const s='I am allergic to '+w+'.';const el=document.getElementById('mysent');el.textContent='你的句子：'+s;el.dataset.t=s;}
+function markDone(){if(mistakes.length){alert('先把错题回炉做对：'+mistakes.join('、'));return;}localStorage.setItem('classroom-ep03-done','1');showProgress();}
+function clearProgress(){localStorage.removeItem('classroom-ep03-done');localStorage.removeItem('classroom-ep03-mistakes');mistakes=[];showProgress();}
+showProgress();
+</script></body></html>
