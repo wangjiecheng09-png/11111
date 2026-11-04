@@ -87,6 +87,6 @@ function quiz(el,correct){document.getElementById('q1').textContent=correct?' �
 function quiz2(el,correct){document.getElementById('q2').textContent=correct?' ✅ 对，allergic to + 过敏的东西。':' ❌ 再想想，allergic 后面固定跟 to。';noteMistake('第2题',correct);}
 function makeSentence(){const w=document.getElementById('myword').value.trim();if(!w){document.getElementById('mysent').textContent='先填一个词，再生成。';return;}const s='I am allergic to '+w+'.';const el=document.getElementById('mysent');el.textContent='你的句子：'+s;el.dataset.t=s;}
 function markDone(){if(mistakes.length){alert('先把错题回炉做对：'+mistakes.join('、'));return;}localStorage.setItem('classroom-ep03-done','1');showProgress();}
-function clearProgress(){localStorage.removeItem('classroom-ep03-done');localStorage.removeItem('classroom-ep03-mistakes');mistakes=[];showProgress();}
+function clearProgress(){localStorage.removeItem('classroom-ep03-done');localStorage.removeItem('classroom-ep03-mistakes');mistakes=[];document.getElementById('q1').textContent='';document.getElementById('q2').textContent='';showProgress();}
 showProgress();
 </script></body></html>
