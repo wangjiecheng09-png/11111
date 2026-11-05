@@ -18,9 +18,9 @@ button.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A}
 .q{margin:10px 0}.ans{font-weight:bold;color:#0F5E5A}
 .note{font-size:13px;color:#666}
 </style></head><body><div class="wrap">
-<p><a href="index.html">← 回总站首页</a></p>
+<p><a href="index.html">← 回课堂首页</a></p>
 <h1>夜班英语课堂 · 第1课</h1>
-<p class="sub">疼痛评估 · 跟第1集同一课 · 只用第1集原句</p>
+<p class="sub">疼痛评估 · 跟第 1 集同一课</p>
 
 <p><label>语速 <input type="range" id="rate" min="0.7" max="1.1" step="0.1" value="0.9"> <span id="ratev">0.9</span></label>
 <button class="ghost" onclick="toggleZh()">中文开/关</button></p>
@@ -50,7 +50,8 @@ button.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A}
 <div class="card"><h2>✅ 学完打勾 + 错题回炉</h2>
 <p id="progress">进度：还没完成本课小测</p>
 <p id="review" class="note">错过的题会先出现在这里，做对了再往下走。</p>
-<p><button onclick="markDone()">我学完了，打勾</button> <button class="ghost" onclick="clearProgress()">清除本课进度</button></p></div>
+<p><button onclick="markDone()">我学完了，打勾</button> <button class="ghost" onclick="clearProgress()">清除本课进度</button></p>
+<p><span id="homeHint" class="note">完成本课打勾后，从这里回首页。</span> <button id="homeBtn" style="display:none" onclick="location.href='index.html'">✅ 已完成，回首页 →</button></p></div>
 <p><button onclick="window.print()">🖨️ 打印 / 保存这页白板</button></p>
 </div>
 </div>
@@ -61,7 +62,7 @@ function speak(t){if(!('speechSynthesis' in window)){showVoiceHint();return;}con
 document.getElementById('rate').oninput=e=>{document.getElementById('ratev').textContent=e.target.value;};
 function toggleZh(){showZh=!showZh;document.querySelectorAll('.zh').forEach(el=>el.style.display=showZh?'block':'none');}
 let mistakes=JSON.parse(localStorage.getItem('classroom-ep01-mistakes')||'[]');
-function showProgress(){const done=localStorage.getItem('classroom-ep01-done');document.getElementById('progress').textContent=done?'进度：✅ 本课已完成（已打勾）':'进度：还没完成本课小测';document.getElementById('review').textContent=mistakes.length?('错题回炉：你之前错过 '+mistakes.join('、')+'，先把这几道做对再打勾。'):'错过的题会先出现在这里，做对了再打勾。';}
+function showProgress(){const done=localStorage.getItem('classroom-ep01-done');document.getElementById('progress').textContent=done?'进度：✅ 本课已完成（已打勾）':'进度：还没完成本课小测';document.getElementById('review').textContent=mistakes.length?('错题回炉：你之前错过 '+mistakes.join('、')+'，先把这几道做对再打勾。'):'错过的题会先出现在这里，做对了再打勾。';var hb=document.getElementById('homeBtn'),hh=document.getElementById('homeHint');if(hb)hb.style.display=done?'inline-block':'none';if(hh)hh.textContent=done?'✅ 本课已完成，点下面回首页继续。':'完成本课打勾后，从这里回首页。';}
 function noteMistake(name,correct){if(!correct&&!mistakes.includes(name))mistakes.push(name);if(correct)mistakes=mistakes.filter(m=>m!==name);localStorage.setItem('classroom-ep01-mistakes',JSON.stringify(mistakes));showProgress();}
 function quiz1(el,correct){document.getElementById('q1').textContent=correct?' ✅ 对。':' ❌ 再想想。';noteMistake('第1题',correct);}function quiz2(el,correct){document.getElementById('q2').textContent=correct?' ✅ 对。':' ❌ 再想想。';noteMistake('第2题',correct);}
 function makeSentence(){const w=document.getElementById('myword').value.trim();if(!w){document.getElementById('mysent').textContent='先填一个词，再生成。';return;}const s="About seven, it's ___.".replace('___',w);const el=document.getElementById('mysent');el.textContent='你的句子：'+s;el.dataset.t=s;}
