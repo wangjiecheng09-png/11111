@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>夜班英语课堂 · 总站</title>
+<style>
+body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#FFF7E8;color:#222;margin:0;padding:16px 16px 90px}
+.wrap{max-width:720px;margin:0 auto}
+h1{color:#0F5E5A;font-size:24px;margin:8px 0 4px}.sub{color:#666;font-size:14px}
+.card{background:#fff;border:2px solid #0F5E5A;border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 4px 14px rgba(15,94,90,.12)}
+.card h2{color:#0F5E5A;font-size:18px;margin:0 0 8px}
+button,.btn{background:#0F5E5A;color:#fff;border:0;border-radius:999px;padding:9px 16px;margin:4px 4px 4px 0;cursor:pointer;text-decoration:none;display:inline-block;font-size:15px}
+button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A}
+button.active{background:#E8A838;color:#222}
+input[type=text]{width:100%;box-sizing:border-box;padding:10px;border-radius:10px;border:1.5px solid #0F5E5A;font-size:16px}
+.lesson{border:1.5px solid #ddd;border-radius:12px;padding:12px;margin:10px 0}
+.lesson b{font-size:17px}.tag{color:#0F5E5A;font-size:13px}
+.note{font-size:13px;color:#666}.soon{color:#999}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#0F5E5A;display:flex;justify-content:space-around;padding:10px 0;z-index:10}
+.nav button{background:none;color:#FFF7E8;font-size:16px;margin:0;padding:8px 10px}
+.nav button.active{color:#FFD97A;font-weight:bold}
+.section{display:none}.section.show{display:block}
+</style></head><body><div class="wrap">
+<h1>🌙 夜班英语课堂</h1>
+<p class="sub">每天一个临床场景 · 护士英语一句即用 · 错 vs 对，截图保存，下次查房直接用</p>
+<p class="note">苹果手机在微信里直接打开就能学；安卓手机请在 Chrome 里打开再听。想放桌面：苹果用 Safari 打开，分享 → 添加到主屏幕；安卓用 Chrome 打开，菜单 → 添加到主屏幕。</p>
+
+<div id="sec-home" class="section show">
+<div class="card"><h2>📌 今日一课</h2>
+<p><b>第 4 课 · 输液</b><br>I'm going to start an IV drip for you.（我要给你输液了）<br>It may feel a little cold.（可能会感觉有点凉）</p>
+<a class="btn" href="classroom-ep04-iv-drip.html">开始第 4 课 →</a></div>
+<div class="card"><h2>↩️ 继续学习</h2>
+<p id="continue">还没开始任何一课，先从第 1 课试试。</p>
+<a class="btn ghost" href="classroom-ep01-pain.html">第 1 课 · 疼痛评估</a></div>
+</div>
+
+<div id="sec-lessons" class="section">
+<div class="card"><h2>📚 课程</h2>
+<p><button class="cat active" onclick="filterCat(this,'all')">全部</button>
+<button class="cat ghost" onclick="filterCat(this,'week1')">第 1 周</button>
+<button class="cat ghost" onclick="filterCat(this,'admission')">入院场景</button>
+<button class="cat ghost" onclick="filterCat(this,'iv')">给药输液</button></p>
+<div id="lessonList">
+<div class="lesson" data-cat="week1" data-kw="第1课 疼痛评估 pain sharp dull On a scale of zero to ten how bad is your pain About seven sharp">
+<b>第 1 课 · 疼痛评估</b> <span class="tag">第 1 周</span><br>
+<span>On a scale of zero to ten, how bad is your pain? / About seven, it's sharp.</span><br>
+<a class="btn" href="classroom-ep01-pain.html">进入课堂 →</a></div>
+<div class="lesson" data-cat="week1" data-kw="第2课 生命体征 血压 blood pressure normal Let me check your blood pressure">
+<b>第 2 课 · 生命体征</b> <span class="tag">第 1 周</span><br>
+<span>Let me check your blood pressure. / Your blood pressure is one twenty over eighty, that's normal.</span><br>
+<a class="btn" href="classroom-ep02-vital-signs.html">进入课堂 →</a></div>
+<div class="lesson" data-cat="week1 admission" data-kw="第3课 入院问过敏史 allergy allergic penicillin 青霉素 过敏 Do you have any allergies">
+<b>第 3 课 · 入院问过敏史</b> <span class="tag">第 1 周 · 入院场景</span><br>
+<span>Do you have any allergies? / I'm allergic to penicillin.</span><br>
+<a class="btn" href="classroom-ep03-allergies.html">进入课堂 →</a></div>
+<div class="lesson" data-cat="week1 iv" data-kw="第4课 输液 IV drip cold 凉 I'm going to start an IV drip for you It may feel a little cold">
+<b>第 4 课 · 输液</b> <span class="tag">第 1 周 · 给药输液</span><br>
+<span>I'm going to start an IV drip for you. / It may feel a little cold.</span><br>
+<a class="btn" href="classroom-ep04-iv-drip.html">进入课堂 →</a></div>
+<div class="lesson" data-cat="week1" data-kw="第5课 换药 dressing hurt change your dressing Please tell me if it hurts">
+<b>第 5 课 · 换药</b> <span class="tag">第 1 周</span><br>
+<span>I need to change your dressing. / Please tell me if it hurts.</span><br>
+<a class="btn" href="classroom-ep05-dressing.html">进入课堂 →</a></div>
+<div class="lesson" data-cat="week1" data-kw="第6课 给药核对 身份 date of birth name medicine dose Please tell me your name and date of birth">
+<b>第 6 课 · 给药核对</b> <span class="tag">第 1 周</span><br>
+<span>Please tell me your name and date of birth.</span><br>
+<a class="btn" href="classroom-ep06-identity-check.html">进入课堂 →</a></div>
+<div class="lesson" data-cat="week1" data-kw="第7课 术后观察 operation dizzy How are you feeling after the operation A bit dizzy">
+<b>第 7 课 · 术后观察</b> <span class="tag">第 1 周</span><br>
+<span>How are you feeling after the operation? / A bit dizzy, but okay.</span><br>
+<a class="btn" href="classroom-ep07-postop.html">进入课堂 →</a></div>
+<div class="lesson" data-cat="week1" data-kw="第8课 术前禁食 fast surgery midnight No food or water after midnight">
+<b>第 8 课 · 术前禁食</b> <span class="tag">第 1 周</span><br>
+<span>You need to fast before surgery. / No food or water after midnight.</span><br>
+<a class="btn" href="classroom-ep08-fasting.html">进入课堂 →</a></div>
+<div class="lesson" data-cat="week1" data-kw="第9课 防跌倒 呼叫铃 call bell alone press Please press the call bell if you need help Don't get up alone">
+<b>第 9 课 · 防跌倒呼叫铃</b> <span class="tag">第 1 周</span><br>
+<span>Please press the call bell if you need help. / Don't get up alone.</span><br>
+<a class="btn" href="classroom-ep09-callbell.html">进入课堂 →</a></div>
+<div class="lesson" data-cat="week1" data-kw="第10课 出院宣教 twice a day follow-up medicine after meals Take this medicine twice a day after meals Come back for a follow-up">
+<b>第 10 课 · 出院宣教</b> <span class="tag">第 1 周</span><br>
+<span>Take this medicine twice a day after meals. / Come back for a follow-up in one week.</span><br>
+<a class="btn" href="classroom-ep10-discharge.html">进入课堂 →</a></div>
+</div></div>
+</div>
+
+<div id="sec-search" class="section">
+<div class="card"><h2>🔍 搜索</h2>
+<p><input type="text" id="q" placeholder="搜一句英文、一个单词、一个场景，例如：输液、allergy、血压" oninput="doSearch()"></p>
+<p class="note">试试搜：输液、allergy、penicillin、cold、血压</p>
+<div id="searchResult"></div></div>
+</div>
+
+<div id="sec-my" class="section">
+<div class="card"><h2>👤 我的</h2>
+<p id="myprog">正在读取本机进度……</p>
+<p><button class="ghost" onclick="clearAllProgress()">清除本机全部课堂进度</button></p>
+<p class="note">进度存在你这台手机里，换设备要重新学。学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p></div>
+</div>
+
+<p class="note">每天一个临床场景，学完一课再学下一课。</p>
+</div>
+<nav class="nav">
+<button class="active" onclick="showSec(this,'sec-home')">🏠 首页</button>
+<button onclick="showSec(this,'sec-lessons')">📚 课程</button>
+<button onclick="showSec(this,'sec-search')">🔍 搜索</button>
+<button onclick="showSec(this,'sec-my')">👤 我的</button>
+</nav>
+<script>
+function showSec(btn,id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));document.getElementById(id).classList.add('show');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(id==='sec-my')loadMy();}
+function filterCat(btn,cat){document.querySelectorAll('.cat').forEach(b=>{b.classList.remove('active');b.classList.add('ghost');});btn.classList.remove('ghost');btn.classList.add('active');document.querySelectorAll('#lessonList .lesson').forEach(el=>{el.style.display=(cat==='all'||el.dataset.cat.includes(cat))?'block':'none';});}
+function doSearch(){const q=document.getElementById('q').value.trim().toLowerCase();const out=document.getElementById('searchResult');if(!q){out.innerHTML='<p class="note">输入关键词，上面课程里能搜到的都会列出来。</p>';return;}const hits=[];document.querySelectorAll('#lessonList .lesson').forEach(el=>{if(el.dataset.kw.toLowerCase().includes(q))hits.push(el.outerHTML);});out.innerHTML=hits.length?hits.join(''):'<p>没搜到“'+document.getElementById('q').value+'”，换个词试试，例如：输液、allergy、cold。</p>';}
+function loadMy(){const names={'ep01':'第 1 课 · 疼痛评估','ep02':'第 2 课 · 生命体征','ep03':'第 3 课 · 入院问过敏史','ep04':'第 4 课 · 输液','ep05':'第 5 课 · 换药','ep06':'第 6 课 · 给药核对','ep07':'第 7 课 · 术后观察','ep08':'第 8 课 · 术前禁食','ep09':'第 9 课 · 防跌倒呼叫铃','ep10':'第 10 课 · 出院宣教'};let html='';let any=false;for(const k in names){const d=localStorage.getItem('classroom-'+k+'-done')?'✅ 已完成':'还没完成';if(localStorage.getItem('classroom-'+k+'-done'))any=true;const m=JSON.parse(localStorage.getItem('classroom-'+k+'-mistakes')||'[]');html+=names[k]+'：'+d+(m.length?'（错题回炉：'+m.join('、')+'）':'')+'<br>';}document.getElementById('myprog').innerHTML=html;document.getElementById('continue').textContent=any?'你已经学过课了，点下面继续。':'还没开始任何一课，先从第 1 课试试。';}
+function clearAllProgress(){['classroom-ep01-done','classroom-ep01-mistakes','classroom-ep02-done','classroom-ep02-mistakes','classroom-ep03-done','classroom-ep03-mistakes','classroom-ep04-done','classroom-ep04-mistakes','classroom-ep05-done','classroom-ep05-mistakes','classroom-ep06-done','classroom-ep06-mistakes','classroom-ep07-done','classroom-ep07-mistakes','classroom-ep08-done','classroom-ep08-mistakes','classroom-ep09-done','classroom-ep09-mistakes','classroom-ep10-done','classroom-ep10-mistakes'].forEach(k=>localStorage.removeItem(k));loadMy();}
+loadMy();doSearch();
+</script></body></html>
