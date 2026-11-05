@@ -1,0 +1,53 @@
+<!--
+  夜班英语 · 正在更新页面
+  ============================================================
+  开关和时间都在 maintenance.json 里改，只改那一个文件：
+    {"maintenance": false, "until": "预计 22:30 前回来"}
+  - 日常小更新：不用开这个页面。GitHub Pages 部署是整体替换的，
+    粉丝在更新那一分钟里看到的还是旧版，更新完自动看到新版，
+    不会看到一半坏掉的页面。
+  - 大更新（比如第 1 周结束后的粉丝版上线）：把 maintenance 改成
+    true，再把 until 改成回来的时间，推送后约 1 分钟生效；
+    更新完再把 maintenance 改回 false 推送一次。
+  - 这个页面本身不要加维护检查脚本，不然会自己跳自己。
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="avatar.png"><link rel="apple-touch-icon" href="avatar.png">
+<meta property="og:title" content="夜班英语正在更新">
+<title>夜班英语正在更新</title>
+<style>
+:root{--teal:#0F5E5A;--night:#0F2A28;--cream:#FFF7E8;--gold:#E8A838;--gold-soft:#FFE08A;--ink:#222}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#0F2A28;background-image:radial-gradient(ellipse 420px 220px at 50% -40px,rgba(255,224,138,.22),rgba(255,224,138,0) 70%);color:#FFF7E8;margin:0;padding:16px 16px 90px;min-height:100vh;font-size:16px;line-height:1.6}
+.wrap{max-width:720px;margin:0 auto;text-align:center}
+.moon{font-size:64px;line-height:1;margin:36px 0 8px}
+.moon-glow{width:84px;height:84px;margin:36px auto 8px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFE08A,#E8A838 70%);box-shadow:0 0 40px 10px rgba(232,168,56,.35)}
+h1{color:#E8A838;font-size:26px;line-height:1.3;margin:12px 0 4px}
+.sub{color:#FFF7E8;font-size:17px;margin:6px 0}
+.card{background:#FFF7E8;color:#222;border:2px solid #0F5E5A;border-radius:16px;padding:20px 16px;margin:20px 0;box-shadow:0 2px 10px rgba(15,42,40,.25);text-align:left}
+.card .big{font-size:18px;font-weight:bold;color:#0F5E5A;margin:0 0 8px}
+.card p{margin:8px 0}
+.note{font-size:13px;color:#BFD9D2}
+.btn{background:#E8A838;color:#222;border:0;border-radius:999px;padding:12px 22px;margin:10px 4px 4px 0;cursor:pointer;text-decoration:none;display:inline-block;font-size:16px;font-weight:bold;line-height:1.4;min-height:44px}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible{outline:3px solid #FFE08A;outline-offset:2px}
+</style></head>
+<body><div class="wrap">
+<div class="moon-glow" aria-hidden="true"></div>
+<h1>夜班英语正在更新</h1>
+<p class="sub">护士正在备课，马上回来 🌙</p>
+<div class="card">
+<p class="big" id="until">预计 22:30 前回来</p>
+<p>今晚的课正在换新内容，句子、音频和练习都在更新，更新完马上就能接着学。</p>
+<p>等的时候，可以先复习一下第 1、2 课的单词，或者看看今晚的视频，回来接着打卡就好。</p>
+</div>
+<a class="btn" href="index.html">回课堂看看 →</a>
+<p class="note">如果点进去又回到这里，说明还在更新，等一会儿就好。</p>
+</div>
+<script>
+/* 只读 maintenance.json 里的回来时间来显示；读不到就用页面里写好的默认时间。 */
+try{fetch('maintenance.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){if(d&&d.until){document.getElementById('until').textContent=d.until;}}).catch(function(){})}catch(e){}
+</script>
+</body></html>

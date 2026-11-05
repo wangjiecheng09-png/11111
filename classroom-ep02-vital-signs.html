@@ -114,4 +114,4 @@ function clearProgress(){localStorage.removeItem('classroom-ep02-done');localSto
 showProgress();
 </script><script>
 (function(){var _sp=window.showProgress;if(typeof _sp!=="function")return;window.showProgress=function(){_sp();var d=null;try{d=localStorage.getItem('classroom-ep02-done');}catch(e){}var b=document.getElementById("homeBtn"),h=document.getElementById("homeHint");if(b)b.style.display=d?"block":"none";if(h)h.textContent=d?"✅ 本课已完成，点下面回首页继续。":"完成本课打勾后，从这里回首页。";};showProgress();})();
-</script></body></html>
+</script><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
