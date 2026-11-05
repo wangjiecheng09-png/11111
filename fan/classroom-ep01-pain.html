@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="../avatar.png"><link rel="apple-touch-icon" href="../avatar.png"><meta property="og:title" content="夜班英语课堂"><meta property="og:image" content="https://wangjiecheng09-png.github.io/11111/avatar.png">
 <title>夜班英语课堂 · 第1课 疼痛评估</title>
 <style>body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#FFF7E8;color:#222;margin:0;padding:16px 16px 90px;min-height:100vh;box-sizing:border-box;font-size:16px}
 .wrap{max-width:720px;margin:0 auto}
@@ -82,7 +83,7 @@ a{color:#0F5E5A}
 <script>
 let showZh=true;
 function showVoiceHint(){document.getElementById('voicehint').style.display='block';}
-function speak(t){if(!('speechSynthesis' in window)){showVoiceHint();return;}const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=parseFloat(document.getElementById('rate').value);const vs=speechSynthesis.getVoices();const v=vs.find(x=>x.lang==='en-US')||vs.find(x=>x.lang&&x.lang.startsWith('en'));if(v)u.voice=v;u.onerror=showVoiceHint;speechSynthesis.cancel();speechSynthesis.speak(u);setTimeout(()=>{if(!speechSynthesis.speaking&&!speechSynthesis.pending)showVoiceHint();},1200);}
+function speak(t){if(!('speechSynthesis' in window)){showVoiceHint();return;}var rate=0.9;try{var _r=document.getElementById('rate');if(_r)rate=parseFloat(_r.value)||0.9;}catch(e){}function doSpeak(){var u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=rate;var vs=[];try{vs=speechSynthesis.getVoices()||[];}catch(e){}var v=null;for(var i=0;i<vs.length;i++){if(vs[i].lang==='en-US'){v=vs[i];break;}}if(!v)for(var j=0;j<vs.length;j++){if(vs[j].lang&&vs[j].lang.indexOf('en')===0){v=vs[j];break;}}if(v)u.voice=v;var started=false;u.onstart=function(){started=true;};u.onerror=function(){showVoiceHint();};speechSynthesis.speak(u);try{speechSynthesis.resume();}catch(e){}setTimeout(function(){if(!started&&!speechSynthesis.speaking&&!speechSynthesis.pending)showVoiceHint();},2000);}try{if(speechSynthesis.speaking||speechSynthesis.pending){speechSynthesis.cancel();setTimeout(doSpeak,150);}else{doSpeak();}}catch(e){doSpeak();}}
 if('speechSynthesis' in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices();};}
 document.getElementById('rate').oninput=e=>{document.getElementById('ratev').textContent=e.target.value;};
 function toggleZh(){showZh=!showZh;document.querySelectorAll('.zh').forEach(el=>el.style.display=showZh?'block':'none');}
