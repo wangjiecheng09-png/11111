@@ -31,6 +31,10 @@ input[type=text]{width:100%;box-sizing:border-box;padding:10px;border-radius:10p
 <div class="card"><h2>↩️ 继续学习</h2>
 <p id="continue">还没开始任何一课，先从第 1 课试试。</p>
 <a class="btn ghost" id="continueBtn" href="classroom-ep01-pain.html">第 1 课 · 疼痛评估</a></div>
+<div class="card"><h2>🎮 夜班重开（游戏）</h2>
+<p>单独的互动游戏分类，跟课堂分开：选一句 → 看后果 → 选错了倒带重开，选对才过关。</p>
+<p>第 1 关 · 发药核对，免费玩；后面关卡以后用兑换码解锁。</p>
+<a class="btn" href="night-reopen/index.html">开始玩第 1 关 →</a></div>
 </div>
 
 <div id="sec-lessons" class="section">
@@ -84,6 +88,10 @@ input[type=text]{width:100%;box-sizing:border-box;padding:10px;border-radius:10p
 <b>急诊科 / 外科合集 · 筹备中</b> <span class="tag soon">部门合集</span><br>
 <span class="soon">按评论点名最多的科室先做，同样收进这个总站。</span></div>
 </div></div>
+<div class="card"><h2>🎮 夜班重开（游戏）</h2>
+<p>单独分类，不在课程列表里：互动选路游戏，选错先看后果，再倒带重开。</p>
+<p>第 1 关 · 发药核对，免费玩；后面关卡以后用兑换码解锁。</p>
+<a class="btn" href="night-reopen/index.html">开始玩第 1 关 →</a></div>
 </div>
 
 <div id="sec-search" class="section">
@@ -107,6 +115,7 @@ input[type=text]{width:100%;box-sizing:border-box;padding:10px;border-radius:10p
 <button onclick="showSec(this,'sec-lessons')">📚 课程</button>
 <button onclick="showSec(this,'sec-search')">🔍 搜索</button>
 <button onclick="showSec(this,'sec-my')">👤 我的</button>
+<button onclick="location.href='night-reopen/index.html'">🎮 重开</button>
 </nav>
 <script>
 function showSec(btn,id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));document.getElementById(id).classList.add('show');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(id==='sec-my')loadMy();}

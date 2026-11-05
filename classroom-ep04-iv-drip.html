@@ -18,6 +18,7 @@ button.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A}
 .q{margin:10px 0}.ans{font-weight:bold;color:#0F5E5A}
 .note{font-size:13px;color:#666}
 </style></head><body><div class="wrap">
+<p><a href="index.html">← 回总站首页</a></p>
 <h1>夜班英语课堂 · 第4课</h1>
 <p class="sub">给病人输液 · 跟今晚第4集同一课 · 第3课格式，未发布草稿</p>
 <p class="note">怎么用：苹果手机在微信里直接打开就能听、能学；想像 App 那样放桌面图标，就在自带浏览器 Safari 里打开，再点分享 → 添加到主屏幕。安卓手机在微信里听不到声，要在 Chrome 里打开（微信里点 … → 在浏览器打开）再听、再加图标。</p>
@@ -70,7 +71,9 @@ button.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A}
 <div class="card"><h2>✅ 学完打勾 + 错题回炉</h2>
 <p id="progress">进度：还没完成本课小测</p>
 <p id="review" class="note">错过的题会先出现在这里，做对了再往下走。</p>
-<p><button onclick="markDone()">我学完了，打勾</button> <button class="ghost" onclick="clearProgress()">清除本课进度</button></p></div>
+<p><button onclick="markDone()">我学完了，打勾</button> <button class="ghost" onclick="clearProgress()">清除本课进度</button></p>
+<p id="homeHint" class="note">完成本课打勾后，从这里回首页。</p>
+<p><button id="homeBtn" style="display:none" onclick="location.href='index.html'">✅ 已完成，回首页 →</button></p></div>
 
 <p><button onclick="window.print()">🖨️ 打印 / 保存这页白板</button></p>
 <p class="note">草稿说明：本课只用第4集原句，没有新编的模板句。未推送到公开课堂链接，需用户点头后再发布。</p></div>
@@ -90,4 +93,6 @@ function makeSentence(){const w=document.getElementById('myword').value.trim();i
 function markDone(){if(mistakes.length){alert('先把错题回炉做对：'+mistakes.join('、'));return;}localStorage.setItem('classroom-ep04-done','1');showProgress();}
 function clearProgress(){localStorage.removeItem('classroom-ep04-done');localStorage.removeItem('classroom-ep04-mistakes');mistakes=[];document.getElementById('q1').textContent='';document.getElementById('q2').textContent='';showProgress();}
 showProgress();
+</script><script>
+(function(){var _sp=window.showProgress;if(typeof _sp!=="function")return;window.showProgress=function(){_sp();var d=null;try{d=localStorage.getItem('classroom-ep04-done');}catch(e){}var b=document.getElementById("homeBtn"),h=document.getElementById("homeHint");if(b)b.style.display=d?"inline-block":"none";if(h)h.textContent=d?"✅ 本课已完成，点下面回首页继续。":"完成本课打勾后，从这里回首页。";};showProgress();})();
 </script></body></html>

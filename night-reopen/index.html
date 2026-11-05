@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>夜班重开 · 第1关 发药核对</title><style>body{font-family:system-ui,"PingFang SC","Microsoft YaHei",sans-serif;background:#0F2A28;color:#FFF7E8;margin:0;padding:16px}.wrap{max-width:680px;margin:0 auto}.tag{color:#FFE08A;font-size:13px}.card{background:#FFF7E8;color:#222;border-radius:14px;padding:18px;margin:14px 0}.en{font-size:18px;font-weight:700}.zh{color:#555;font-size:14px;margin-top:6px}button{background:#0F5E5A;color:#fff;border:0;border-radius:999px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;font-size:16px}button.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A}button.warn{background:#C0392B}.hidden{display:none}.badge{display:inline-block;background:#FFE08A;color:#222;border-radius:999px;padding:2px 10px;font-size:13px}.note{font-size:13px;color:#FFE08A}.replay{color:#FFE08A;font-size:15px}</style></head><body><div class="wrap">
+<p class="tag">夜班重开 · 独立小模板（与第 1 周视频、课堂分开）</p>
+<p><a href="https://wangjiecheng09-png.github.io/11111/" style="color:#FFE08A">← 回夜班英语总站</a> · 现在不用登录，直接玩</p>
+<h1>第 1 关 · 发药核对</h1>
+<p class="note">玩法：选一句 → 看后果 → 选错了可以“重开”倒带，再选一次。选对了才过关。</p>
+<p>重开次数：<b id="retries">0</b> 次 · 状态：<span class="badge" id="status">进行中</span></p>
+
+<div class="card" id="scene">
+<h2>🌙 夜里 02:10 · 病房</h2>
+<p>你要给 12 床发药。病人半睡半醒，你只问了一句名字，他含糊应了一声。你手里是他的药——发，还是不发？</p>
+<p><b>你先说哪句？</b></p>
+<button onclick="choose('wrong')">A · What's your name?<br><span style="font-size:13px">你叫什么名字？</span></button>
+<button onclick="choose('right')">B · Please tell me your name and date of birth.<br><span style="font-size:13px">请告诉我你的姓名和出生日期。</span></button>
+</div>
+
+<div class="card hidden" id="consequence">
+<h2>⏪ 后果</h2>
+<p class="en">You gave the medicine to the wrong patient.</p>
+<p class="zh">药发错人了。只问名字不够，病房里同名、同音的人并不少。</p>
+<p><b>倒带重来：</b>回到发药前，这次把身份核对全。</p>
+<button class="warn" onclick="replay()">↩️ 重开这一夜</button> <a href="https://wangjiecheng09-png.github.io/11111/"><button class="ghost">🏠 回总站</button></a>
+</div>
+
+<div class="card hidden" id="correct">
+<h2>✅ 过关</h2>
+<p class="en">Please tell me your name and date of birth.</p>
+<p class="zh">请告诉我你的姓名和出生日期。</p>
+<p class="en">Let me check the medicine name and dose.</p>
+<p class="zh">再核对药名和剂量。</p>
+<p>这句不是客套，是给药安全的第一步。核对全了，再发药。</p>
+<p><button onclick="speak('Please tell me your name and date of birth. Let me check the medicine name and dose.')">🔊 朗读这两句</button></p>
+<p><button class="ghost" onclick="location.reload()">↻ 再玩一次</button> <a href="https://wangjiecheng09-png.github.io/11111/"><button>🏠 回夜班英语总站</button></a></p>
+<p class="note" style="color:#0F5E5A">第 2 关 · 输液（I'm going to start an IV drip for you.）🔒 暂未开放——以后用兑换码解锁，现在先跑通第 1 关。</p>
+<p class="note" style="color:#0F5E5A">以后流程：不用登录先玩第 1 关 → 买断/会员兑换码在总站兑换 → 解锁后面关卡 → 过关后点“回总站”继续学，进度存在本机。</p>
+</div>
+
+<p class="note">学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p>
+</div><script>
+let retries=0;
+function choose(c){
+  document.getElementById('scene').classList.add('hidden');
+  if(c==='wrong'){
+    document.getElementById('consequence').classList.remove('hidden');
+    document.getElementById('status').textContent='发错了 · 可以重开';
+  }else{
+    document.getElementById('correct').classList.remove('hidden');
+    document.getElementById('status').textContent='已过关 ✅';
+    try{localStorage.setItem('night-reopen-ep01-done','1');}catch(e){}
+  }
+}
+function replay(){
+  retries++;
+  document.getElementById('retries').textContent=retries;
+  document.getElementById('consequence').classList.add('hidden');
+  document.getElementById('scene').classList.remove('hidden');
+  document.getElementById('status').textContent='重开第 '+retries+' 次 · 进行中';
+  window.scrollTo(0,0);
+}
+function speak(t){
+  if(!('speechSynthesis' in window)){alert('这台设备不支持朗读，请在 Chrome / Safari 里打开。');return;}
+  const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=0.9;speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+</script></body></html>
