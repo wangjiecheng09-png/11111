@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>夜班英语课堂 · 第2课 生命体征</title>
+<style>
+body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#FFF7E8;color:#222;margin:0;padding:16px}
+.wrap{max-width:720px;margin:0 auto}
+h1{color:#0F5E5A;font-size:22px;margin:8px 0 4px}.sub{color:#666;font-size:14px}
+.card{background:#fff;border:2px solid #0F5E5A;border-radius:14px;padding:16px;margin:14px 0}
+.card h2{color:#0F5E5A;font-size:18px;margin:0 0 8px}
+.teacher{border-left:6px solid #0F5E5A}.classmate{border-left:6px solid #E8A838}
+button{background:#0F5E5A;color:#fff;border:0;border-radius:999px;padding:8px 14px;margin:4px 4px 4px 0;cursor:pointer}
+button.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A}
+.line{margin:10px 0}.en{font-size:17px}.zh{color:#555;font-size:14px}
+.board{background:#0F5E5A;color:#FFF7E8;border-radius:12px;padding:16px}
+.board b{font-size:20px}
+.vocab{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vocab div{background:#FFF7E8;color:#222;border-radius:8px;padding:8px}
+.q{margin:10px 0}.ans{font-weight:bold;color:#0F5E5A}
+.note{font-size:13px;color:#666}
+</style></head><body><div class="wrap">
+<p><a href="index.html">← 回总站首页</a></p>
+<h1>夜班英语课堂 · 第2课</h1>
+<p class="sub">生命体征 · 跟第2集同一课 · 只用第2集原句</p>
+<p class="note">怎么用：苹果手机在微信里直接打开就能听、能学；想像 App 那样放桌面图标，就在自带浏览器 Safari 里打开，再点分享 → 添加到主屏幕。安卓手机在微信里听不到声，要在 Chrome 里打开（微信里点 … → 在浏览器打开）再听、再加图标。</p>
+<p><label>语速 <input type="range" id="rate" min="0.7" max="1.1" step="0.1" value="0.9"> <span id="ratev">0.9</span></label>
+<button class="ghost" onclick="toggleZh()">中文开/关</button></p>
+<p id="voicehint" class="note" style="display:none">🔇 没听到声音？安卓机常见原因：1) 在 Chrome 里打开本页，不要用微信内置浏览器；2) 手机媒体音量调大；3) 设置 → 系统 → 语言与输入 → 文字转语音输出，选 Google 文字转语音，并下载英文语音数据。装好后刷新本页再点朗读。</p>
+<div class="card teacher"><h2>👩‍🏫 老师讲</h2>
+<div class="line"><div class="en">Let me check your blood pressure.</div><div class="zh">我给你量一下血压。</div>
+<button onclick="speak('Let me check your blood pressure.')">🔊 朗读</button></div>
+<div class="line"><div class="en">Your blood pressure is one twenty over eighty, that&#x27;s normal.</div><div class="zh">你的血压是一百二比八十，正常。</div>
+<button onclick="speak('Your blood pressure is one twenty over eighty, that&#x27;s normal.')">🔊 朗读</button></div>
+<p class="note">学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p></div>
+<div class="card classmate"><h2>🙋 同学问</h2>
+<p>跟读三遍，读顺了再往下走。重点词都在下面白板里，截图保存，下次查房直接用。</p></div>
+<div class="board"><h2 style="color:#FFF7E8">📋 白板 · 截图保存</h2>
+<p><b>Let me check your blood pressure.</b><br>我给你量一下血压。</p>
+<p><b>Your blood pressure is one twenty over eighty, that&#x27;s normal.</b><br>你的血压是一百二比八十，正常。</p>
+<div class="vocab"><div>blood pressure<br>/blʌd ˈpreʃər/ · 血压</div><div>normal<br>/ˈnɔːrməl/ · 正常</div><div>check<br>/tʃek/ · 检查、测量</div><div>eighty<br>/ˈeɪti/ · 八十</div></div></div>
+<div class="card"><h2>✏️ 跟读 + 小测（做完再走）</h2>
+<p>跟读：<button onclick="speak('Let me check your blood pressure. Your blood pressure is one twenty over eighty, that&#x27;s normal.')">🔊 整段跟读</button> 读完自己再说一遍，不用录音，顺了就行。</p>
+<div class="q"><b>1. 量血压，下面哪句能用？</b><br><button onclick="quiz1(this,true)">Let me check your blood pressure.</button><button onclick="quiz1(this,false)">Do you blood pressure?</button><span class="ans" id="q1"></span></div><div class="q"><b>2. normal 是什么意思？</b><br><button onclick="quiz2(this,true)">正常</button><button onclick="quiz2(this,false)">不正常</button><span class="ans" id="q2"></span></div>
+<div class="card" style="border-color:#E8A838"><h2>🧩 自己造句：把这句变成你的</h2>
+<p>句型：Your blood pressure is ___ over eighty.<br>填 one twenty（一百二），例如 one twenty</p>
+<p><input id="myword" placeholder="填一个词" style="padding:8px;border-radius:8px;border:1.5px solid #0F5E5A;width:60%">
+<button onclick="makeSentence()">生成我的句子</button></p>
+<p id="mysent" class="ans"></p>
+<p><button class="ghost" onclick="if(document.getElementById('mysent').dataset.t){speak(document.getElementById('mysent').dataset.t)}">🔊 朗读我的句子</button></p>
+<p class="note">这只是语言练习，不是问诊；真实情况以医生诊断和医嘱为准。</p></div>
+<div class="card"><h2>✅ 学完打勾 + 错题回炉</h2>
+<p id="progress">进度：还没完成本课小测</p>
+<p id="review" class="note">错过的题会先出现在这里，做对了再往下走。</p>
+<p><button onclick="markDone()">我学完了，打勾</button> <button class="ghost" onclick="clearProgress()">清除本课进度</button></p></div>
+<p><button onclick="window.print()">🖨️ 打印 / 保存这页白板</button></p>
+<p class="note">原型说明：本课只用第2集原句，没有新编的模板句。</p></div>
+</div>
+<script>
+let showZh=true;
+function showVoiceHint(){document.getElementById('voicehint').style.display='block';}
+function speak(t){if(!('speechSynthesis' in window)){showVoiceHint();return;}const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=parseFloat(document.getElementById('rate').value);const vs=speechSynthesis.getVoices();const v=vs.find(x=>x.lang==='en-US')||vs.find(x=>x.lang&&x.lang.startsWith('en'));if(v)u.voice=v;u.onerror=showVoiceHint;speechSynthesis.cancel();speechSynthesis.speak(u);setTimeout(()=>{if(!speechSynthesis.speaking&&!speechSynthesis.pending)showVoiceHint();},1200);}
+document.getElementById('rate').oninput=e=>{document.getElementById('ratev').textContent=e.target.value;};
+function toggleZh(){showZh=!showZh;document.querySelectorAll('.zh').forEach(el=>el.style.display=showZh?'block':'none');}
+let mistakes=JSON.parse(localStorage.getItem('classroom-ep02-mistakes')||'[]');
+function showProgress(){const done=localStorage.getItem('classroom-ep02-done');document.getElementById('progress').textContent=done?'进度：✅ 本课已完成（已打勾）':'进度：还没完成本课小测';document.getElementById('review').textContent=mistakes.length?('错题回炉：你之前错过 '+mistakes.join('、')+'，先把这几道做对再打勾。'):'错过的题会先出现在这里，做对了再打勾。';}
+function noteMistake(name,correct){if(!correct&&!mistakes.includes(name))mistakes.push(name);if(correct)mistakes=mistakes.filter(m=>m!==name);localStorage.setItem('classroom-ep02-mistakes',JSON.stringify(mistakes));showProgress();}
+function quiz1(el,correct){document.getElementById('q1').textContent=correct?' ✅ 对。':' ❌ 再想想。';noteMistake('第1题',correct);}function quiz2(el,correct){document.getElementById('q2').textContent=correct?' ✅ 对。':' ❌ 再想想。';noteMistake('第2题',correct);}
+function makeSentence(){const w=document.getElementById('myword').value.trim();if(!w){document.getElementById('mysent').textContent='先填一个词，再生成。';return;}const s='Your blood pressure is ___ over eighty.'.replace('___',w);const el=document.getElementById('mysent');el.textContent='你的句子：'+s;el.dataset.t=s;}
+function markDone(){if(mistakes.length){alert('先把错题回炉做对：'+mistakes.join('、'));return;}localStorage.setItem('classroom-ep02-done','1');showProgress();}
+function clearProgress(){localStorage.removeItem('classroom-ep02-done');localStorage.removeItem('classroom-ep02-mistakes');mistakes=[];document.getElementById('q1').textContent='';document.getElementById('q2').textContent='';showProgress();}
+showProgress();
+</script></body></html>
