@@ -122,7 +122,7 @@ function quizAns(btn,idx){var q=btn.parentElement;if(q.dataset.done)return;q.dat
 function saveCheck(){var a=document.getElementById('ck1').checked,b=document.getElementById('ck2').checked;try{localStorage.setItem('freepack-checkin',JSON.stringify([a,b]));}catch(e){}document.getElementById('ckMsg').textContent=(a&&b)?'✅ 两天都打卡了，继续加油！':(a||b)?'已打卡 1 天，继续下一课。':'';}
 (function(){try{var v=JSON.parse(localStorage.getItem('freepack-checkin')||'[]');if(v[0])document.getElementById('ck1').checked=true;if(v[1])document.getElementById('ck2').checked=true;saveCheck();}catch(e){}})();
 </script>
-<script src="../audio/audio-data.js?v=2"></script>
+<script src="../audio/audio-data-fan.js?v=1"></script>
 <script>
 function voiceFail(){alert('这台设备不支持朗读，请在 Chrome / Safari 里打开。安卓手机在微信里听不到声，请在 Chrome 里打开再听。');}
 var _audioEl=null,_blobUrls={};

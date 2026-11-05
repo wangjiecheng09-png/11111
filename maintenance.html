@@ -43,11 +43,15 @@ h1{color:#E8A838;font-size:26px;line-height:1.3;margin:12px 0 4px}
 <p>今晚的课正在换新内容，句子、音频和练习都在更新，更新完马上就能接着学。</p>
 <p>等的时候，可以先复习一下第 1、2 课的单词，或者看看今晚的视频，回来接着打卡就好。</p>
 </div>
-<a class="btn" href="index.html">回课堂看看 →</a>
+<a class="btn" href="fan/index.html" onclick="goHome();return false;">回课堂看看 →</a>
 <p class="note">如果点进去又回到这里，说明还在更新，等一会儿就好。</p>
 </div>
 <script>
 /* 只读 maintenance.json 里的回来时间来显示；读不到就用页面里写好的默认时间。 */
 try{fetch('maintenance.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){if(d&&d.until){document.getElementById('until').textContent=d.until;}}).catch(function(){})}catch(e){}
 </script>
+<script>/* 回课堂：从粉丝版来回 fan 首页，从总站来回总站首页，直接打开默认回 fan（更安全） */
+function homeUrl(){var r="";try{r=document.referrer||"";}catch(e){}if(r.indexOf("/fan/")>=0)return "fan/index.html";if(r)return "index.html";return "fan/index.html";}
+function goHome(){location.href=homeUrl();}
+try{var b=document.querySelector("a.btn");if(b)b.href=homeUrl();}catch(e){}</script>
 </body></html>
