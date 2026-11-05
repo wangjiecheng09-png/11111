@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>夜班英语课堂 · 今日一课</title>
+<style>body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#FFF7E8;color:#222;margin:0;padding:24px 16px}.wrap{max-width:720px;margin:0 auto;text-align:center}h1{color:#0F5E5A;font-size:22px}a{color:#0F5E5A}.note{font-size:13px;color:#666}</style></head>
+<body><div class="wrap">
+<h1>🌙 夜班英语 · 今日一课</h1>
+<p id="msg">正在带你去今日一课……</p>
+<p class="note">如果没有自动跳转，点下面今日这课：</p>
+<p><a id="todayLink" href="index.html">去今日一课 →</a></p>
+<p class="note"><a href="index.html">← 回总站首页</a> · 学习交流，不构成诊疗建议</p>
+</div>
+<script>
+// 今日一课直达：按北京时间（Asia/Shanghai）日期决定今天是哪一课。
+// 第 1 周：11-02 第 1 课 … 11-11 第 10 课；11-11 之后固定为最新一课（第 10 课）。
+// 纯前端，无登录、无后端，离线 / GitHub Pages 可用。
+var LESSONS = {
+  "2026-11-02": ["ep01", "第 1 课 · 疼痛评估", "classroom-ep01-pain.html"],
+  "2026-11-03": ["ep02", "第 2 课 · 生命体征", "classroom-ep02-vital-signs.html"],
+  "2026-11-04": ["ep03", "第 3 课 · 入院问过敏史", "classroom-ep03-allergies.html"],
+  "2026-11-05": ["ep04", "第 4 课 · 输液", "classroom-ep04-iv-drip.html"],
+  "2026-11-06": ["ep05", "第 5 课 · 换药", "classroom-ep05-dressing.html"],
+  "2026-11-07": ["ep06", "第 6 课 · 给药核对", "classroom-ep06-identity-check.html"],
+  "2026-11-08": ["ep07", "第 7 课 · 术后观察", "classroom-ep07-postop.html"],
+  "2026-11-09": ["ep08", "第 8 课 · 术前禁食", "classroom-ep08-fasting.html"],
+  "2026-11-10": ["ep09", "第 9 课 · 防跌倒呼叫铃", "classroom-ep09-callbell.html"],
+  "2026-11-11": ["ep10", "第 10 课 · 出院宣教", "classroom-ep10-discharge.html"]
+};
+function todayKey() {
+  try {
+    var parts = new Intl.DateTimeFormat("en-CA", {timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit"}).formatToParts(new Date());
+    var y = "", m = "", d = "";
+    parts.forEach(function(p){ if(p.type==="year") y=p.value; if(p.type==="month") m=p.value; if(p.type==="day") d=p.value; });
+    return y + "-" + m + "-" + d;
+  } catch (e) {
+    var n = new Date();
+    return n.getFullYear() + "-" + String(n.getMonth()+1).padStart(2,"0") + "-" + String(n.getDate()).padStart(2,"0");
+  }
+}
+var key = todayKey();
+var lesson = LESSONS[key];
+if (!lesson) {
+  // 11-02 之前按第 1 课；11-11 之后按最新一课（第 10 课）。
+  lesson = key < "2026-11-02"
+    ? LESSONS["2026-11-02"]
+    : LESSONS["2026-11-11"];
+}
+document.getElementById("msg").textContent = "今天是" + key + "，" + lesson[1] + "，正在带你去……";
+var a = document.getElementById("todayLink");
+a.href = lesson[2];
+a.textContent = "去" + lesson[1] + " →";
+location.replace(lesson[2]);
+</script></body></html>
