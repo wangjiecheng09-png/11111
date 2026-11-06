@@ -109,6 +109,7 @@ details.transcript p{margin:10px 0}
 <p class="note">视频、讲稿、课堂笔记、讨论区都在本页每节课下面；课堂、讲义、音频、小抄、小测在原课里，这里把它们串成一门课。</p>
 </div>
 <nav class="coursebar"><a class="cb-link" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="module-m1-review.html">📖 复习</a><a class="cb-cta" id="barCta" href="classroom-ep01-pain.html">▶ 开始学习</a></nav>
+<script src="video/keypoints-ep01-data.js?v=1"></script>
 <script>
 var lessons=[
 {n:1,t:"疼痛评估",f:"classroom-ep01-pain.html",en:"On a scale of zero to ten, how bad is your pain?",zh:"从零到十分，你的疼痛有几分？",en2:"About seven, it's sharp.",zh2:"大概七分，是刺痛。"},
@@ -134,7 +135,9 @@ function videoBlock(L){
   if(L.n>2&&!hasVideoAccess()){
     return '<div class="card lockcard"><h2>\uD83D\uDD12 \u7B2C '+L.n+' \u8BFE\u89C6\u9891\u8FD8\u6CA1\u89E3\u9501</h2><p>\u8FD9\u8282\u8BFE\u7684\u89C6\u9891\u3001\u8BB2\u7A3F\u3001\u8BFE\u5802\u7B14\u8BB0\u548C\u8BA8\u8BBA\u533A\uFF0C\u8D2D\u4E70\u89C6\u9891\u8BFE\u540E\u89E3\u9501\u3002\u7B2C 1\u30012 \u8BFE\u514D\u8D39\u4F53\u9A8C\uFF0C\u4E0D\u7528\u4E70\u3002</p><p class="note">\u5DF2\u7ECF\u4E70\u8FC7\u5468\u5305\u6216\u5F00\u4E86\u4F1A\u5458\uFF1F\u5148\u5728\u300C\u6211\u7684\u300D\u91CC\u7528\u5151\u6362\u7801\u5151\u6362\uFF0C\u56DE\u6765\u8FD9\u91CC\u5C31\u5F00\u4E86\u3002</p></div>';
   }
-  return '<div class="card videocard"><h2>\uD83C\uDFAC \u7B2C '+L.n+' \u8BFE\u89C6\u9891</h2><div class="video-slot" data-video="'+LESSON_VIDEO[L.n]+'"><p class="note">\u6B63\u5728\u68C0\u67E5\u89C6\u9891\u2026</p></div><p class="note">\u89C6\u9891\u548C\u8BFE\u5802\u6717\u8BFB\u662F\u540C\u4E00\u8BFE\u7684\u539F\u53E5\uFF1B\u5148\u770B\u89C6\u9891\u5B66\u4E00\u904D\uFF0C\u518D\u8DDF\u8BFB\u4E00\u904D\u3002</p></div>'
+  var kp='';
+  if(L.n===1){kp='<div style="margin-top:12px"><b>\uD83D\uDCCC \u7B2C 1 \u8BFE\u91CD\u70B9 \u00B7 \u622A\u56FE\u4FDD\u5B58</b><img id="keypointsImgM1" alt="\u7B2C 1 \u8BFE\u91CD\u70B9 \u00B7 \u75BC\u75DB\u8BC4\u4F30" style="width:100%;border-radius:12px;display:block;margin-top:8px;background:#0F2A28"><p class="note">\u514D\u8D39\u9644\u8D60\uFF0C\u622A\u56FE\u4FDD\u5B58\uFF0C\u4E0B\u6B21\u67E5\u623F\u76F4\u63A5\u7528\u3002</p></div>';}
+  return '<div class="card videocard"><h2>\uD83C\uDFAC \u7B2C '+L.n+' \u8BFE\u89C6\u9891</h2><div class="video-slot" data-video="'+LESSON_VIDEO[L.n]+'"><p class="note">\u6B63\u5728\u68C0\u67E5\u89C6\u9891\u2026</p></div><p class="note">\u89C6\u9891\u548C\u8BFE\u5802\u6717\u8BFB\u662F\u540C\u4E00\u8BFE\u7684\u539F\u53E5\uFF1B\u5148\u770B\u89C6\u9891\u5B66\u4E00\u904D\uFF0C\u518D\u8DDF\u8BFB\u4E00\u904D\u3002</p>'+kp+'</div>'
   +'<details class="card transcript"><summary>\uD83D\uDCDD \u672C\u8BFE\u8BB2\u7A3F\uFF08\u89C6\u9891\u91CC\u8BF4\u7684\u539F\u8BDD\uFF0C\u70B9\u5F00\u770B\uFF09</summary><p>'+LESSON_TRANSCRIPT[String(L.n)]+'</p><p class="note">\u8BB2\u7A3F\u5C31\u662F\u7B2C'+L.n+'\u96C6\u89C6\u9891\u7684\u539F\u7A3F\uFF0C\u4E00\u5B57\u4E0D\u6539\u3002</p></details>'
   +'<div class="card notes"><h2>\uD83D\uDCDD \u6211\u7684\u8BFE\u5802\u7B14\u8BB0</h2><p class="note">\u8BB0\u4E00\u53E5\u4F60\u81EA\u5DF1\u7684\u8BDD\u3001\u4E00\u4E2A\u5BB9\u6613\u5FD8\u7684\u8BCD\uFF0C\u6216\u4E00\u4E2A\u60F3\u95EE\u7684\u95EE\u9898\u3002\u53EA\u5B58\u5728\u4F60\u8FD9\u53F0\u624B\u673A\u91CC\u3002</p><textarea id="myNotes-'+key+'" placeholder="\u4F8B\u5982\uFF1Asharp \u662F\u523A\u75DB\uFF0Cdull \u662F\u949D\u75DB\uFF0C\u522B\u6DF7\u4E86\u3002"></textarea><p><button onclick="saveModuleNotes(\''+key+'\')">\uD83D\uDCBE \u4FDD\u5B58\u7B14\u8BB0</button> <span id="notesState-'+key+'" class="note"></span></p></div>'
   +'<div class="card"><h2>\uD83D\uDCAC \u8BA8\u8BBA\u533A</h2><p>\u672C\u8BFE\u8BA8\u8BBA\u533A\u8FD8\u5728\u51C6\u5907\u4E2D\uFF0C\u656C\u8BF7\u671F\u5F85\u3002</p><p class="note">\u60F3\u95EE\u7684\u95EE\u9898\u5148\u8BB0\u5728\u4E0A\u9762\u201C\u6211\u7684\u8BFE\u5802\u7B14\u8BB0\u201D\u91CC\uFF1B\u8BA8\u8BBA\u533A\u4E0A\u7EBF\u540E\uFF0C\u95EE\u9898\u548C\u56DE\u7B54\u90FD\u4F1A\u51FA\u73B0\u5728\u8FD9\u91CC\uFF0C\u4E0D\u4F1A\u7F16\u9020\u522B\u4EBA\u7684\u63D0\u95EE\u3002</p></div>';
@@ -158,6 +161,7 @@ var cb=document.getElementById("continueBtn");
 if(doneCount===10){cb.textContent="📖 10 课全学完了，去复习页";cb.href="module-m1-review.html";}
 else{cb.textContent="▶ 继续学第 "+(firstTodo+1)+" 课 · "+lessons[firstTodo].t;cb.href=lessons[firstTodo].f;}
 </script>
+<script>(function(){var im=document.getElementById('keypointsImgM1');if(!im)return;try{var b=window.__KEYPOINTS_EP01;if(!b)return;var s=atob(b),a=new Uint8Array(s.length);for(var i=0;i<s.length;i++)a[i]=s.charCodeAt(i);im.src=URL.createObjectURL(new Blob([a],{type:'image/png'}));}catch(e){}})();</script>
 <script>(function(){var cb=document.getElementById("continueBtn"),b=document.getElementById("barCta");if(cb&&b){b.textContent=cb.textContent;b.href=cb.href;}})();</script><script>
 /* ---- 视频接口：R2 https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/<文件名>.mp4；文件不存在时显示占位，不出坏播放器。存在性检查不用 fetch HEAD（跨域无 CORS 头会被拦），改用 <video> 自身的 loadedmetadata/error 事件——播放本身不需要 CORS ---- */
 (function(){
