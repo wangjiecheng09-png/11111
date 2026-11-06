@@ -73,6 +73,9 @@ button.opt:active{transform:scale(.99)}
 <p class="note">学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p></div>
 <div class="card classmate"><h2>🙋 同学问</h2>
 <p>跟读三遍，读顺了再往下走。重点词都在下面白板里，截图保存，下次查房直接用。</p></div>
+<div class="card" id="wordcardBox"><h2>🎬 先看一遍 · 单词卡</h2>
+<video id="wordcardVideo" controls playsinline preload="metadata" style="width:100%;max-width:320px;aspect-ratio:9/16;display:block;margin:0 auto;border-radius:12px;background:#0F2A28"></video>
+<p class="note">6 秒，pain / ache / sore——看一遍，再记下面的白板。</p></div>
 <div class="board"><h2 style="color:#FFF7E8">📋 白板 · 截图保存</h2>
 <p><b>On a scale of zero to ten, how bad is your pain?</b><br>从零到十分，你的疼痛有几分？</p>
 <p><b>About seven, it&#x27;s sharp.</b><br>大概七分，是刺痛。</p>
@@ -96,6 +99,8 @@ button.opt:active{transform:scale(.99)}
 </div>
 </div>
 <script src="../audio/audio-data-fan.js?v=1"></script>
+<script src="../video/wordcard-data.js?v=1"></script>
+<script>(function(){var v=document.getElementById('wordcardVideo');if(!v)return;try{var b=window.__WORDCARD_EP01;if(!b)return;var s=atob(b),a=new Uint8Array(s.length);for(var i=0;i<s.length;i++)a[i]=s.charCodeAt(i);v.src=URL.createObjectURL(new Blob([a],{type:'video/mp4'}));}catch(e){}})();</script>
 <script>
 let showZh=true;
 function showVoiceHint(){document.getElementById('voicehint').style.display='block';}
