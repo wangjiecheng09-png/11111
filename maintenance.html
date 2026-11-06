@@ -50,7 +50,7 @@ h1{color:#E8A838;font-size:26px;line-height:1.3;margin:12px 0 4px}
 /* 只读 maintenance.json 里的回来时间来显示；读不到就用页面里写好的默认时间。 */
 try{fetch('maintenance.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){if(d&&d.until){document.getElementById('until').textContent=d.until;}}).catch(function(){})}catch(e){}
 </script>
-<script>/* 回课堂：从粉丝版来回 fan 首页，从总站来回总站首页，直接打开默认回 fan（更安全） */
+<script>/* 回课堂：从粉丝版来回 fan 首页，其余回首页，直接打开默认回 fan（更安全） */
 function homeUrl(){var r="";try{r=document.referrer||"";}catch(e){}if(r.indexOf("/fan/")>=0)return "fan/index.html";if(r)return "index.html";return "fan/index.html";}
 function goHome(){location.href=homeUrl();}
 try{var b=document.querySelector("a.btn");if(b)b.href=homeUrl();}catch(e){}</script>

@@ -60,8 +60,8 @@ button.opt:active{transform:scale(.99)}
 <h1>🌙 夜班英语 · 今日一课</h1>
 <p id="msg">正在带你去今日一课……</p>
 <p class="note">如果没有自动跳转，点下面今日这课：</p>
-<p><a id="todayLink" href="index.html">去今日一课 →</a></p>
-<p class="note"><a href="index.html">← 回总站首页</a> · 学习交流，不构成诊疗建议</p>
+<p><a id="todayLink" href="fan/index.html">去今日一课 →</a></p>
+<p class="note"><a id="homeLink" href="fan/index.html">← 回夜班英语课堂</a> · 学习交流，不构成诊疗建议</p>
 </div>
 <script>
 // 今日一课直达：按北京时间（Asia/Shanghai）日期决定今天是哪一课。
@@ -99,7 +99,7 @@ if (!lesson) {
     : LESSONS["2026-11-11"];
 }
 var _ref="";try{_ref=document.referrer||"";}catch(e){}
-/* 从粉丝版来：免费的第 1、2 课去 fan 课堂，付费的第 3-10 课回 fan 首页（锁定列表）；其余情况去总站原课 */
+/* 从粉丝版来：第 1、2 课去 fan 课堂，第 3-10 课回 fan 首页（锁定列表）；其余情况去原课 */
 var _fromFan = _ref.indexOf("/fan/")>=0;
 var target = lesson[2];
 if(_fromFan){
@@ -111,5 +111,6 @@ document.getElementById("msg").textContent = "今天是" + key + "，" + lesson[
 var a = document.getElementById("todayLink");
 a.href = target;
 a.textContent = (target==="fan/index.html") ? "回粉丝课堂看看 →" : "去" + lesson[1] + " →";
+var _h=document.getElementById("homeLink");if(_h){if(_fromFan){_h.href="fan/index.html";_h.textContent="← 回粉丝课堂";}else{_h.href="index.html";_h.textContent="← 回夜班英语课堂";}}
 location.replace(target);
 </script><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>

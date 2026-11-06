@@ -115,14 +115,14 @@ function replay(){
   document.getElementById('status').textContent='重开第 '+retries+' 次 · 进行中';
   window.scrollTo(0,0);
 }
-function voiceFail(){alert('这台设备不支持朗读，请在 Chrome / Safari 里打开。安卓手机在微信里听不到声，请在 Chrome 里打开再听。');}
+function voiceFail(){alert('这台设备暂时没声，先彻底关掉页面重开一次试试；还是没声就换 Chrome / Safari 打开。');}
 var _audioEl=null,_blobUrls={};
 function playMp3(t){var b=window.__AUDIO&&window.__AUDIO[t];if(!b)return false;try{if(!_blobUrls[t]){var s=atob(b),a=new Uint8Array(s.length);for(var i=0;i<s.length;i++)a[i]=s.charCodeAt(i);_blobUrls[t]=URL.createObjectURL(new Blob([a],{type:'audio/mpeg'}));}if(!_audioEl)_audioEl=new Audio();var r=0.9;try{var _e=document.getElementById('rate');if(_e)r=parseFloat(_e.value)||0.9;}catch(e){}_audioEl.playbackRate=r;_audioEl.src=_blobUrls[t];var p=_audioEl.play();if(p&&p.catch)p.catch(function(){speakTts(t);});return true;}catch(e){return false;}}
 function speakTts(t){if(!('speechSynthesis' in window)){voiceFail();return;}var u=new SpeechSynthesisUtterance(t);u.lang='en-US';try{var _e=document.getElementById('rate');if(_e)u.rate=parseFloat(_e.value)||0.9;else u.rate=0.9;}catch(e){u.rate=0.9;}var vs=[];try{vs=speechSynthesis.getVoices()||[];}catch(e){}for(var i=0;i<vs.length;i++){if(vs[i].lang&&vs[i].lang.indexOf('en-US')===0){u.voice=vs[i];break;}}if(!u.voice)for(var j=0;j<vs.length;j++){if(vs[j].lang&&vs[j].lang.indexOf('en')===0){u.voice=vs[j];break;}}var started=false;u.onstart=function(){started=true;};u.onerror=function(){voiceFail();};try{speechSynthesis.cancel();}catch(e){}speechSynthesis.speak(u);try{speechSynthesis.resume();}catch(e){}setTimeout(function(){if(!started&&!speechSynthesis.speaking&&!speechSynthesis.pending)voiceFail();},2000);}
 function speak(t){if(typeof t!=='string')t=String(t);if(playMp3(t))return;speakTts(t);}
 if('speechSynthesis' in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices();};}
 document.addEventListener('pointerdown',function(){try{speechSynthesis.getVoices();}catch(e){}},{once:true});
-</script><script>/* 回课堂：从粉丝版来回 fan 首页，从总站来回总站首页，直接打开默认回 fan（更安全） */
+</script><script>/* 回课堂：从粉丝版来回 fan 首页，其余回首页，直接打开默认回 fan（更安全） */
 function homeUrl(){var r="";try{r=document.referrer||"";}catch(e){}if(r.indexOf("/fan/")>=0)return "../fan/index.html";if(r)return "../index.html";return "../fan/index.html";}
 function goHome(){location.href=homeUrl();}
 try{document.querySelectorAll("a[data-home]").forEach(function(a){a.href=homeUrl();});}catch(e){}</script>
