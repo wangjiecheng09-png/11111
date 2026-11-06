@@ -44,8 +44,6 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 .video-slot .ph b{color:#FFD97A}
 .vrate{margin-top:8px}
 .vrate select{font-size:15px;padding:8px;border-radius:10px;border:1.5px solid #0F5E5A}
-details.transcript summary{cursor:pointer;font-weight:bold;color:#0F5E5A;font-size:17px}
-details.transcript p{margin:10px 0}
 .notes textarea{width:100%;min-height:90px;box-sizing:border-box;padding:10px;border-radius:10px;border:1.5px solid #0F5E5A;font-size:16px;font-family:inherit}
 .pathmap{display:flex;overflow-x:auto;padding:6px 2px}
 .pm-node{flex:1;min-width:56px;text-align:center;font-size:12px;color:#666}
@@ -74,7 +72,6 @@ if(typeof hasVideoAccess!=="function"){window.hasVideoAccess=function(n){return 
 var LESSON_N=3;
 var LECTURE_URL="https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson3-15min-v2-chattts-heart.mp4";
 var SHORT_URL="https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep03-allergies-shortvideo-golden.mp4";
-var TRANSCRIPT="护士英语第三课，入院第一句一定要问过敏史。护士问，Do you have any allergies？意思是，你对什么过敏吗？病人回答，Yes, I&#x27;m allergic to penicillin，意思是，是的，我对青霉素过敏。记住，allergy 是过敏，allergic to 是对什么过敏。这句问错了会出大事，一定要记牢。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。";
 function saveDetailNotes(key){try{var ta=document.getElementById("myNotes-"+key);localStorage.setItem('classroom-'+key+'-notes',ta.value);var st=document.getElementById("notesState-"+key);if(st)st.textContent="已保存 "+new Date().toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"})+"（只存在这台手机里）";}catch(e){}}
 (function(){
 var key='ep'+('0'+LESSON_N).slice(-2);
@@ -89,7 +86,6 @@ if(!hasV&&!hasT){
   }else{
     h+='<div class="card videocard lesson-video"><h2>🎬 精讲视频（主视频）</h2><p class="note">视频需购买后看；文字已开放。</p></div>';
   }
-  h+='<details class="card transcript"><summary>📝 本课讲稿（视频里说的原话，点开看）</summary><p>'+TRANSCRIPT+'</p><p class="note">讲稿就是第'+LESSON_N+'集视频的原稿，一字不改。</p><p class="note">⚠️ 这里先放的是短视频原稿；15 分钟精讲的完整讲稿还在写，写好后这里会换成精讲讲稿。</p></details>';
   h+='<div class="card notes"><h2>📝 我的课堂笔记</h2><p class="note">记一句你自己的话、一个容易忘的词，或一个想问的问题。只存在你这台手机里。</p><textarea id="myNotes-'+key+'" placeholder="例如：今天最容易忘的词是哪个？记下来。"></textarea><p><button data-k="'+key+'" onclick="saveDetailNotes(this.dataset.k)">💾 保存笔记</button> <span id="notesState-'+key+'" class="note"></span></p></div>';
   h+='<div class="card"><h2>💬 讨论区</h2><p>本课讨论区还在准备中，敬请期待。</p><p class="note">想问的问题先记在上面“我的课堂笔记”里；讨论区上线后，问题和回答都会出现在这里，不会编造别人的提问。</p></div>';
   
