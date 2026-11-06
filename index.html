@@ -74,7 +74,14 @@ button.opt:active{transform:scale(.99)}
 .mycourse{display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid #E7DFC8;padding:10px 0}
 .mycourse:last-child{border-bottom:0}
 .btn.gold{background:#E8A838;color:#222}
-</style></head><body><div class="wrap">
+</style>
+.tier{font-weight:bold;padding:4px 12px;border-radius:999px;font-size:15px}
+.tier-free{background:#EDEBE3;color:#666}
+.tier-month{background:#0F5E5A;color:#fff}
+.tier-quarter{background:#E8A838;color:#222}
+.tier-year{background:#0F2A28;color:#FFD97A}
+.member-row{margin:6px 0}
+</head><body><div class="wrap">
 <h1>夜班英语课堂</h1>
 <p class="sub">每天一个临床场景 · 护士英语一句即用 · 错 vs 对，截图保存，下次查房直接用</p>
 <p class="note">怎么用：苹果手机在微信里直接打开就能听、能学；想像 App 那样放桌面图标，就在自带浏览器 Safari 里打开，再点分享 → 添加到主屏幕。安卓手机在微信里听不到声，要在 Chrome 里打开（微信里点 … → 在浏览器打开）再听、再加图标。</p>
@@ -218,10 +225,16 @@ button.opt:active{transform:scale(.99)}
 
 <div id="sec-my" class="section">
 <div class="card hero-my"><h2>👤 我的学习</h2>
+<p>你好，<b id="userNameDisplay">夜班学员</b></p>
 <p><span class="streak">🔥 <b id="streakNum">0</b> 天连续打卡</span><br><span id="todayCheckinState">今天还没打卡</span></p>
 <p><button class="gold" id="checkinBtn" onclick="doCheckin()">✅ 今日打卡</button></p>
 <p class="note" style="color:#FFE08A">打卡存在本机浏览器里，换设备要重新算。每天学一课、点一次打卡，断了就从 1 重新数。</p></div>
-<div class="card"><h2>📈 我的进度</h2>
+<div class="card"><h2>📈 我的进度</h2><div class="card"><h2>💎 我的会员</h2>
+<p class="member-row">当前身份：<span class="tier tier-free" id="memberTier">普通用户</span></p>
+<p class="member-row" id="memberBuyoutLine" style="display:none">已购周包：<b>入院到出院</b>（买断，不限期）</p>
+<p class="member-row">会员到期时间：<b id="memberUntil">未开通会员</b></p>
+<p class="note">周包是买断，不算会员；会员到期后自动变回普通用户。会员到期时间按兑换那天算：月会员 30 天、季会员 90 天、年会员 365 天。</p></div>
+
 <p><b>入院到出院</b> <span id="m1ProgText">0 / 10 节</span></p>
 <div class="bar"><div id="m1Bar"></div></div>
 <p><b>全部 9 门课</b> <span id="allProgText">0 / 54 节</span></p>
@@ -245,9 +258,15 @@ button.opt:active{transform:scale(.99)}
 <div class="card"><h2>🎁 免费资料包</h2>
 <p>第 1、2 课的样品包：单词短语表、小抄卡、跟读音频、小测、打卡、口袋卡。</p>
 <a class="btn ghost" href="fan/free-pack.html">领免费体验包 →</a></div>
-<div class="card"><h2>⚙️ 设置</h2>
+<div class="card"><h2>⚙️ 设置</h2><p>用户名称：<input type="text" id="userNameInput" maxlength="20" placeholder="给自己起个名字，例如：小夜"> <button class="btn" onclick="saveUserName()">保存</button></p>
+<p id="userNameMsg" class="note"></p>
+<p>兑换码：<input type="text" id="redeemInput" maxlength="32" placeholder="输入兑换码"> <button class="btn gold" onclick="redeemCode()">兑换</button></p>
+<p id="redeemMsg" class="note"></p>
+<p class="note">兑换码现在是本机验证（没有服务器），以后会上服务器验码；一个码只能用一次。买断码开周包，会员码开会员。</p>
+
 <p><button class="ghost" onclick="clearAllProgress()">清除本机全部课堂进度</button>
-<button class="ghost" onclick="clearCheckins()">清除本机打卡记录</button></p>
+<button class="ghost" onclick="clearCheckins()">清除本机打卡记录</button>
+<button class="ghost" onclick="clearMembership()">清除本机会员与兑换记录（测试用）</button></p>
 <p class="note">说明：没有登录账号，进度、错题、打卡只存在你这台手机 / 这台电脑的浏览器里，换设备要重新学。学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p></div>
 </div>
 <p class="note">总站链接固定不变：https://wangjiecheng09-png.github.io/11111/ —— 以后新课、部门合集、学生课都往这里加。</p>
@@ -286,6 +305,43 @@ for(var d=1;d<=dim;d++){var k=y+'-'+String(m).padStart(2,'0')+'-'+String(d).padS
 while(cell%7!==0){html+='<td class="dim"></td>';cell++;}
 html+='</tr></table>';document.getElementById('calBox').innerHTML=html;}
 function clearCheckins(){localStorage.removeItem('yeban-checkin-days');loadMy();}
+/* ---- 会员：身份 / 兑换码 / 到期（本机验证，测试码仅供测试；服务器验码以后再上） ---- */
+var MEMBER_TIERS={month:['月会员','tier-month',30],quarter:['季会员','tier-quarter',90],year:['年会员','tier-year',365]};
+/* 测试码的 SHA-256（只存哈希，不存明文；正式码由服务器发，绝不进仓库） */
+var REDEEM_CODES={
+'58e03a19070568b0ef243af4418d80034dd6b4e197ac308b7d3270184599dd6b':{type:'buyout',pack:'week1'},
+'55d354332b7636becb0d4e19232a92281a31290ef2c50fc7b078a94711666f48':{type:'vip',tier:'month'},
+'c6c85179cb3103e04b90a56ca6759fa96c8d3af1bb012ee296a9053e3864294c':{type:'vip',tier:'quarter'},
+'5bcc0bf266937c86c4d5142b2704b04356c9d999eda27646e47cf940ca981d08':{type:'vip',tier:'year'},
+'6e33464c0bd03f3c442a1efcf1d43bd9ed1064cd1e2dab069f3504d9b7a13c21':{type:'expired'}};
+function getEntitlement(){try{var e=JSON.parse(localStorage.getItem('yeban-entitlement')||'{}');return e&&typeof e==='object'?e:{};}catch(err){return{};}}
+function saveEntitlement(e){localStorage.setItem('yeban-entitlement',JSON.stringify(e));}
+function getUsedCodes(){try{var a=JSON.parse(localStorage.getItem('yeban-used-codes')||'[]');return Array.isArray(a)?a:[];}catch(err){return[];}}
+function addDays(key,days){var p=key.split('-');var d=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]));d.setUTCDate(d.getUTCDate()+days);return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0');}
+function renderMember(){var ent=getEntitlement();var today=shanghaiToday().key;
+if(ent.vip&&ent.vip.until&&ent.vip.until<today){delete ent.vip;saveEntitlement(ent);}
+var tierEl=document.getElementById('memberTier'),untilEl=document.getElementById('memberUntil'),buyEl=document.getElementById('memberBuyoutLine');
+if(ent.vip&&ent.vip.until&&MEMBER_TIERS[ent.vip.tier]){var t=MEMBER_TIERS[ent.vip.tier];tierEl.textContent=t[0];tierEl.className='tier '+t[1];untilEl.textContent=ent.vip.until+'（到期后自动变回普通用户）';}
+else{tierEl.textContent='普通用户';tierEl.className='tier tier-free';untilEl.textContent='未开通会员';}
+if(buyEl)buyEl.style.display=(ent.buyout&&ent.buyout.indexOf('week1')>=0)?'block':'none';
+var nm='';try{nm=(localStorage.getItem('yeban-username')||'').trim();}catch(err){}
+var disp=document.getElementById('userNameDisplay');if(disp)disp.textContent=nm||'夜班学员';
+var inp=document.getElementById('userNameInput');if(inp&&document.activeElement!==inp)inp.value=nm;}
+async function sha256hex(s){if(window.crypto&&crypto.subtle){try{var buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');}catch(err){}}return sha256sync(s);}
+function sha256sync(ascii){function rr(v,a){return (v>>>a)|(v<<(32-a));}var maxWord=Math.pow(2,32),i,j,result='';var words=[],asciiBitLength=ascii.length*8;var hash=sha256sync.h=sha256sync.h||[],k=sha256sync.k=sha256sync.k||[];var primeCounter=k.length,isComposite={};for(var candidate=2;primeCounter<64;candidate++){if(!isComposite[candidate]){for(i=0;i<313;i+=candidate)isComposite[i]=candidate;hash[primeCounter]=(Math.pow(candidate,.5)*maxWord)|0;k[primeCounter++]=(Math.pow(candidate,1/3)*maxWord)|0;}}ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);if(j>>8)return '';words[i>>2]|=j<<((3-i)%4)*8;}words[words.length]=((asciiBitLength/maxWord)|0);words[words.length]=(asciiBitLength);for(j=0;j<words.length;){var w=words.slice(j,j+=16),oldHash=hash;hash=hash.slice(0,8);for(i=0;i<64;i++){var w15=w[i-15],w2=w[i-2];var a=hash[0],e=hash[4];var temp1=hash[7]+(rr(e,6)^rr(e,11)^rr(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rr(w15,7)^rr(w15,18)^(w15>>>3))+w[i-7]+(rr(w2,17)^rr(w2,19)^(w2>>>10)))|0);var temp2=(rr(a,2)^rr(a,13)^rr(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));hash=[(temp1+temp2)|0].concat(hash);hash[4]=(hash[4]+temp1)|0;}for(i=0;i<8;i++)hash[i]=(hash[i]+oldHash[i])|0;}for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16);}return result;}
+async function redeemCode(){var msg=document.getElementById('redeemMsg');var inp=document.getElementById('redeemInput');var code=(inp.value||'').trim().toUpperCase();if(!code){msg.textContent='先输入兑换码。';return;}
+var h=await sha256hex(code);if(!h){msg.textContent='当前浏览器不支持本机验码，换 Chrome / Safari 再试。';return;}
+var c=REDEEM_CODES[h];if(!c){msg.textContent='这个码不对，再看一眼，是不是字母输错了？';return;}
+if(c.type==='expired'){msg.textContent='这个码已经过期了。';return;}
+var used=getUsedCodes();if(used.indexOf(h)>=0){msg.textContent='这个码已经用过啦，一个码只能用一次。去“我的会员”看一眼是不是已经开通过了。';return;}
+used.push(h);localStorage.setItem('yeban-used-codes',JSON.stringify(used));
+var ent=getEntitlement();
+if(c.type==='buyout'){ent.buyout=ent.buyout||[];if(ent.buyout.indexOf('week1')<0)ent.buyout.push('week1');msg.textContent='开通成功！周包“入院到出院”已买断，不限期。';}
+else{var t=MEMBER_TIERS[c.tier];ent.vip={tier:c.tier,until:addDays(shanghaiToday().key,t[2])};msg.textContent='开通成功！'+t[0]+'已开通，到期时间 '+ent.vip.until+'。';}
+saveEntitlement(ent);inp.value='';renderMember();}
+function saveUserName(){var inp=document.getElementById('userNameInput');var v=(inp.value||'').trim().slice(0,20);try{localStorage.setItem('yeban-username',v);}catch(err){}document.getElementById('userNameMsg').textContent=v?'已保存：'+v:'已清空，用默认名字“夜班学员”。';renderMember();}
+function clearMembership(){localStorage.removeItem('yeban-entitlement');localStorage.removeItem('yeban-used-codes');renderMember();document.getElementById('redeemMsg').textContent='本机会员与兑换记录已清除（测试用）。';}
+
 
 var MY_NAMES={'ep01':'第 1 课 · 疼痛评估','ep02':'第 2 课 · 生命体征','ep03':'第 3 课 · 入院问过敏史','ep04':'第 4 课 · 输液','ep05':'第 5 课 · 换药','ep06':'第 6 课 · 给药核对','ep07':'第 7 课 · 术后观察','ep08':'第 8 课 · 术前禁食','ep09':'第 9 课 · 防跌倒呼叫铃','ep10':'第 10 课 · 出院宣教'};
 var MY_KEYS=Object.keys(MY_NAMES);
@@ -323,7 +379,7 @@ document.getElementById('m1ProgText').textContent='已学 '+done+' / '+MY_TOTAL+
 document.getElementById('m1Bar').style.width=pct1+'%';
 document.getElementById('allProgText').textContent='已学 '+all+' / 54 节 · '+pctA+'%';
 document.getElementById('allBar').style.width=pctA+'%';
-renderCal();renderBadges();renderMyCourses();renderMyMistakes();updateContinue();}
+renderCal();renderBadges();renderMember();renderCal();renderBadges();renderMyCourses();renderMyMistakes();updateContinue();}
 function clearAllProgress(){['classroom-ep01-done','classroom-ep01-mistakes','classroom-ep02-done','classroom-ep02-mistakes','classroom-ep03-done','classroom-ep03-mistakes','classroom-ep04-done','classroom-ep04-mistakes','classroom-ep05-done','classroom-ep05-mistakes','classroom-ep06-done','classroom-ep06-mistakes','classroom-ep07-done','classroom-ep07-mistakes','classroom-ep08-done','classroom-ep08-mistakes','classroom-ep09-done','classroom-ep09-mistakes','classroom-ep10-done','classroom-ep10-mistakes','classroom-a1-done','classroom-a1-mistakes'].forEach(k=>localStorage.removeItem(k));loadMy();}
 updateToday();updateContinue();loadMy();doSearch();
 </script><!-- pages-rebuild --><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>

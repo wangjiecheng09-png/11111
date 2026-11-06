@@ -74,7 +74,14 @@ button.opt:active{transform:scale(.99)}
 .mycourse{display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid #E7DFC8;padding:10px 0}
 .mycourse:last-child{border-bottom:0}
 .btn.gold{background:#E8A838;color:#222}
-</style></head><body><div class="wrap">
+</style>
+.tier{font-weight:bold;padding:4px 12px;border-radius:999px;font-size:15px}
+.tier-free{background:#EDEBE3;color:#666}
+.tier-month{background:#0F5E5A;color:#fff}
+.tier-quarter{background:#E8A838;color:#222}
+.tier-year{background:#0F2A28;color:#FFD97A}
+.member-row{margin:6px 0}
+</head><body><div class="wrap">
 <h1>🌙 夜班英语课堂</h1>
 <p class="sub">每天一个临床场景 · 护士英语一句即用 · 错 vs 对，截图保存，下次查房直接用</p>
 <p class="note">苹果、安卓手机在微信里直接打开就能学。想放桌面：苹果用 Safari 打开，分享 → 添加到主屏幕；安卓用 Chrome 打开，菜单 → 添加到主屏幕。</p>
@@ -186,10 +193,15 @@ button.opt:active{transform:scale(.99)}
 
 <div id="sec-my" class="section">
 <div class="card hero-my"><h2>👤 我的学习</h2>
+<p>你好，<b id="userNameDisplay">夜班学员</b></p>
 <p><span class="streak">🔥 <b id="streakNum">0</b> 天连续打卡</span><br><span id="todayCheckinState">今天还没打卡</span></p>
 <p><button class="gold" id="checkinBtn" onclick="doCheckin()">✅ 今日打卡</button></p>
 <p class="note" style="color:#FFE08A">打卡存在本机浏览器里，换设备要重新算。每天学一课、点一次打卡，断了就从 1 重新数。</p></div>
-<div class="card"><h2>📈 我的进度</h2>
+<div class="card"><h2>📈 我的进度</h2><div class="card"><h2>💎 我的会员</h2>
+<p class="member-row">当前身份：<span class="tier tier-free" id="memberTier">普通用户</span></p>
+<p class="member-row">会员到期时间：<b id="memberUntil">未开通会员</b></p>
+<p class="note">粉丝版现在只看第 1、2 课，会员以后再开。</p></div>
+
 <p><b>入院到出院</b> <span id="m1ProgText">0 / 2 节</span></p>
 <div class="bar"><div id="m1Bar"></div></div>
 <p><b>全部 9 门课</b> <span id="allProgText">0 / 54 节</span></p>
@@ -213,7 +225,9 @@ button.opt:active{transform:scale(.99)}
 <div class="card"><h2>🎁 免费资料包</h2>
 <p>第 1、2 课的样品包：单词短语表、小抄卡、跟读音频、小测、打卡、口袋卡。</p>
 <a class="btn ghost" href="free-pack.html">领免费体验包 →</a></div>
-<div class="card"><h2>⚙️ 设置</h2>
+<div class="card"><h2>⚙️ 设置</h2><p>用户名称：<input type="text" id="userNameInput" maxlength="20" placeholder="给自己起个名字，例如：小夜"> <button class="btn" onclick="saveUserName()">保存</button></p>
+<p id="userNameMsg" class="note"></p>
+
 <p><button class="ghost" onclick="clearAllProgress()">清除本机全部课堂进度</button>
 <button class="ghost" onclick="clearCheckins()">清除本机打卡记录</button></p>
 <p class="note">说明：没有登录账号，进度、错题、打卡只存在你这台手机 / 这台电脑的浏览器里，换设备要重新学。学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p></div>
@@ -248,6 +262,15 @@ for(var d=1;d<=dim;d++){var k=y+'-'+String(m).padStart(2,'0')+'-'+String(d).padS
 while(cell%7!==0){html+='<td class="dim"></td>';cell++;}
 html+='</tr></table>';document.getElementById('calBox').innerHTML=html;}
 function clearCheckins(){localStorage.removeItem('yeban-checkin-days');loadMy();}
+/* ---- 会员（粉丝版）：只显示普通用户；兑换码不在粉丝版开通 ---- */
+function renderMember(){var tierEl=document.getElementById('memberTier'),untilEl=document.getElementById('memberUntil');
+if(tierEl){tierEl.textContent='普通用户';tierEl.className='tier tier-free';}
+if(untilEl)untilEl.textContent='未开通会员';
+var nm='';try{nm=(localStorage.getItem('yeban-username')||'').trim();}catch(err){}
+var disp=document.getElementById('userNameDisplay');if(disp)disp.textContent=nm||'夜班学员';
+var inp=document.getElementById('userNameInput');if(inp&&document.activeElement!==inp)inp.value=nm;}
+function saveUserName(){var inp=document.getElementById('userNameInput');var v=(inp.value||'').trim().slice(0,20);try{localStorage.setItem('yeban-username',v);}catch(err){}document.getElementById('userNameMsg').textContent=v?'已保存：'+v:'已清空，用默认名字“夜班学员”。';renderMember();}
+
 
 var MY_NAMES={'ep01':['第 1 课 · 疼痛评估','classroom-ep01-pain.html'],'ep02':['第 2 课 · 生命体征','classroom-ep02-vital-signs.html']};
 var MY_KEYS=Object.keys(MY_NAMES);
@@ -290,7 +313,7 @@ document.getElementById('m1ProgText').textContent='已学 '+done+' / '+MY_TOTAL+
 document.getElementById('m1Bar').style.width=pct1+'%';
 document.getElementById('allProgText').textContent='已学 '+all+' / 54 节 · '+pctA+'%';
 document.getElementById('allBar').style.width=pctA+'%';
-renderCal();renderBadges();renderMyCourses();renderMyMistakes();updateContinue();}
+renderCal();renderBadges();renderMember();renderCal();renderBadges();renderMyCourses();renderMyMistakes();updateContinue();}
 function clearAllProgress(){['classroom-ep01-done','classroom-ep01-mistakes','classroom-ep02-done','classroom-ep02-mistakes'].forEach(k=>localStorage.removeItem(k));loadMy();}
 loadMy();doSearch();
 </script><script>/* 维护开关：../maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("../maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("../maintenance.html")<0){location.replace("../maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
