@@ -59,7 +59,7 @@ details.transcript p{margin:10px 0}
 
 <div class="card videocard" id="videoCard">
 <h2>🎬 课程预告</h2>
-<div class="video-slot" id="videoSlot" data-video="video/module-m1-trailer.mp4"><p class="note">正在检查视频…</p></div>
+<div class="video-slot" id="videoSlot" data-video="https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/module-m1-trailer.mp4"><p class="note">正在检查视频…</p></div>
 <p class="note">预告片是这门课的 1 分钟介绍；传好后这里就能直接看。下面 10 节课每节都有自己的视频。</p>
 </div>
 <div class="card"><h2>学完能做到什么</h2>
@@ -125,7 +125,7 @@ var lessons=[
 function getEntitlement(){try{var e=JSON.parse(localStorage.getItem('yeban-entitlement')||'{}');return e&&typeof e==='object'?e:{};}catch(err){return{};}}
 function shanghaiTodayKey(){try{var ps=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Shanghai",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());var y=0,m=0,d=0;ps.forEach(function(p){if(p.type==="year")y=+p.value;if(p.type==="month")m=+p.value;if(p.type==="day")d=+p.value;});return y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");}catch(e){var n=new Date();return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0");}}
 function hasVideoAccess(){var e=getEntitlement();if(e.buyout&&e.buyout.indexOf('week1')>=0)return true;if(e.vip&&e.vip.until&&e.vip.until>=shanghaiTodayKey())return true;return false;}
-var LESSON_VIDEO={"1": "video/week1-ep01-pain-shortvideo-careful.mp4", "2": "video/week1-ep02-vital-signs-shortvideo-golden.mp4", "3": "video/week1-ep03-allergies-shortvideo-golden.mp4", "4": "video/week1-ep04-iv-drip-shortvideo-golden.mp4", "5": "video/week1-ep05-dressing-shortvideo-golden.mp4", "6": "video/week1-ep06-identity-check-shortvideo-golden.mp4", "7": "video/week1-ep07-postop-shortvideo-golden.mp4", "8": "video/week1-ep08-fasting-shortvideo-golden.mp4", "9": "video/week1-ep09-callbell-shortvideo-golden.mp4", "10": "video/week1-ep10-discharge-shortvideo-careful.mp4"};
+var LESSON_VIDEO={"1": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep01-pain-shortvideo-safe2.mp4", "2": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep02-vital-signs-shortvideo-golden.mp4", "3": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep03-allergies-shortvideo-golden.mp4", "4": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep04-iv-drip-shortvideo-golden.mp4", "5": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep05-dressing-shortvideo-golden.mp4", "6": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep06-identity-check-shortvideo-golden.mp4", "7": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep07-postop-shortvideo-golden.mp4", "8": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep08-fasting-shortvideo-golden.mp4", "9": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep09-callbell-shortvideo-golden.mp4", "10": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/week1-ep10-discharge-shortvideo-safe2.mp4"};
 var LESSON_TRANSCRIPT={"1": "护士英语第一课，病人说疼，你只会说 pain 吗？今天教你一句临床最常用的话。护士问，On a scale of zero to ten, how bad is your pain？意思是，从零到十分，你的疼痛有几分？病人回答，About seven, it&#x27;s sharp。意思是，大概七分，是刺痛。记住两个词，sharp 是刺痛，dull 是钝痛。下次查房，你就可以这样问，疼痛几分，是刺痛还是钝痛？评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "2": "护士英语第二课，量血压别只会说 blood pressure。护士说，Let me check your blood pressure，意思是，我给你量一下血压。量完说，Your blood pressure is one twenty over eighty，that&#x27;s normal，意思是，你的血压是一百二比八十，正常。记住，blood pressure 是血压，normal 是正常。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "3": "护士英语第三课，入院第一句一定要问过敏史。护士问，Do you have any allergies？意思是，你对什么过敏吗？病人回答，Yes, I&#x27;m allergic to penicillin，意思是，是的，我对青霉素过敏。记住，allergy 是过敏，allergic to 是对什么过敏。这句问错了会出大事，一定要记牢。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "4": "护士英语第四课，给病人输液怎么说？护士说，I&#x27;m going to start an IV drip for you，意思是，我要给你输液了。再补一句，It may feel a little cold，意思是，可能会感觉有点凉。记住，IV drip 是输液，cold 是凉。这样说，病人就不会紧张了。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "5": "护士英语第五课，换药别只会说 change。护士说，I need to change your dressing，意思是，我需要给你换药。再补一句，Please tell me if it hurts，意思是，如果疼请告诉我。记住，dressing 是敷料、换药，hurt 是疼。疼就说，病人也安心。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "6": "护士英语第六课，发药前一定要核对身份。护士说，Please tell me your name and date of birth，意思是，请告诉我你的姓名和出生日期。病人回答后，再核对药名和剂量。这句不是客套，是给药安全的第一步。记住，date of birth 是出生日期。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "7": "护士英语第七课，术后查房第一句怎么问？护士问，How are you feeling after the operation？意思是，手术后你感觉怎么样？病人回答，A bit dizzy, but okay，意思是，有点晕，但还好。记住，operation 是手术，dizzy 是头晕。听到 dizzy，就要多观察一会儿。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "8": "护士英语第八课，术前禁食怎么交代清楚？护士说，You need to fast before surgery，意思是，手术前你需要禁食。再补一句，No food or water after midnight，意思是，午夜之后不要吃东西，也不要喝水。记住，fast 是禁食，surgery 是手术。这句说不清楚，手术可能要推迟。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "9": "护士英语第九课，防跌倒一句话就能救人。护士说，Please press the call bell if you need help，意思是，需要帮助请按呼叫铃。再补一句，Don&#x27;t get up alone，意思是，不要自己一个人起来。记住，call bell 是呼叫铃，alone 是独自一人。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "10": "护士英语第十课，出院宣教别说一半就走。护士说，Take this medicine twice a day after meals，意思是，这个药每天吃两次，饭后吃。再补一句，Come back for a follow-up in one week，意思是，一周后回来复查。记住，twice a day 是每天两次，follow-up 是复查。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。"};
 function videoBlock(L){
   var key='ep'+('0'+L.n).slice(-2);
@@ -157,16 +157,21 @@ if(doneCount===10){cb.textContent="📖 10 课全学完了，去复习页";cb.hr
 else{cb.textContent="▶ 继续学第 "+(firstTodo+1)+" 课 · "+lessons[firstTodo].t;cb.href=lessons[firstTodo].f;}
 </script>
 <script>(function(){var cb=document.getElementById("continueBtn"),b=document.getElementById("barCta");if(cb&&b){b.textContent=cb.textContent;b.href=cb.href;}})();</script><script>
-/* ---- 视频接口：video/<文件名>；文件不存在时显示占位，不出坏播放器 ---- */
+/* ---- 视频接口：R2 https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/<文件名>.mp4；文件不存在时显示占位，不出坏播放器。存在性检查不用 fetch HEAD（跨域无 CORS 头会被拦），改用 <video> 自身的 loadedmetadata/error 事件——播放本身不需要 CORS ---- */
 (function(){
 function setupSlot(slot){
   var src=slot.getAttribute("data-video");
   function placeholder(){slot.innerHTML='<div class="ph"><b>\uD83C\uDFAC \u672C\u8BFE\u89C6\u9891\u6B63\u5728\u4E0A\u4F20\uFF0C\u7A0D\u540E\u4E0A\u7EBF</b><br>\u89C6\u9891\u4F20\u597D\u540E\u8FD9\u91CC\u5C31\u80FD\u76F4\u63A5\u770B\u3002</div>';}
   if(!src){placeholder();return;}
-  fetch(src,{method:"HEAD",cache:"no-store"}).then(function(r){
-    if(!r.ok){placeholder();return;}
-    var v=document.createElement("video");
-    v.setAttribute("controls","");v.setAttribute("playsinline","");v.setAttribute("preload","metadata");v.src=src;
+  var done=false;
+  var probe=document.createElement("video");
+  probe.setAttribute("preload","metadata");
+  probe.setAttribute("playsinline","");
+  var timer=setTimeout(function(){if(!done){done=true;probe.removeAttribute("src");probe.load();placeholder();}},20000);
+  probe.addEventListener("loadedmetadata",function(){
+    if(done)return;done=true;clearTimeout(timer);
+    var v=probe;
+    v.setAttribute("controls","");v.setAttribute("preload","metadata");
     slot.innerHTML="";slot.appendChild(v);
     var bar=document.createElement("p");bar.className="vrate";
     bar.innerHTML='\u500D\u901F <select aria-label="\u500D\u901F"><option value="0.75">0.75\u00D7</option><option value="1" selected>1\u00D7</option><option value="1.25">1.25\u00D7</option><option value="1.5">1.5\u00D7</option></select>\u3000<button class="ghost">\u26F6 \u5168\u5C4F</button>';
@@ -175,7 +180,11 @@ function setupSlot(slot){
     sel.addEventListener("change",function(e){v.playbackRate=parseFloat(e.target.value);});
     fs.addEventListener("click",function(){if(v.requestFullscreen)v.requestFullscreen();});
     v.addEventListener("error",function(){placeholder();if(bar.parentNode)bar.parentNode.removeChild(bar);});
-  }).catch(function(){placeholder();});
+  });
+  probe.addEventListener("error",function(){
+    if(done)return;done=true;clearTimeout(timer);placeholder();
+  });
+  probe.src=src;
 }
 var slots=document.querySelectorAll(".video-slot");
 for(var i=0;i<slots.length;i++)setupSlot(slots[i]);
