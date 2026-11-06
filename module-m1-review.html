@@ -39,14 +39,14 @@ th{background:#FFF7E8;color:#0F5E5A}
 }
 </style></head>
 <body><div class="wrap">
-<p class="no-print"><a href="module-m1.html">← 回模块 1</a> · <a href="video-courses.html">视频课程</a> · <a href="index.html">回课堂首页</a></p>
+<p class="no-print"><a href="module-m1.html">← 回入院到出院</a> · <a href="video-courses.html">视频课</a> · <a href="index.html">回课堂首页</a></p>
 <h1>夜班英语 · 入院到出院 · 复习</h1>
-<p class="sub">模块 1 · 第 1 周</p>
+<p class="sub">第 1 周</p>
 <p class="sub no-print">10 课的关键句和单词一次过一遍，错题回炉重做，最后一张 10 句合一的总结小抄卡，打印出来下次查房直接用。</p>
 
-<div class="card no-print"><h2>模块完成情况</h2>
+<div class="card no-print"><h2>完成情况</h2>
 <p id="modStatus">正在读进度……</p>
-<p class="note">学完是本模块的结课记录，<b>不是执业资格、不是职称、不是学历</b>。学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p>
+<p class="note">学完是本课的结课记录，<b>不是执业资格、不是职称、不是学历</b>。学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p>
 </div>
 
 <div class="card no-print"><h2>10 课关键句，一次过</h2>
@@ -89,8 +89,8 @@ th{background:#FFF7E8;color:#0F5E5A}
 </div>
 
 <div class="cheat" id="cheatCard">
-<h2>📋 模块 1 总结小抄 · 入院到出院 10 句</h2>
-<p class="note">夜班英语 · 模块 1 · 截图保存，下次查房直接用</p>
+<h2>📋 总结小抄 · 入院到出院 10 句</h2>
+<p class="note">夜班英语 · 入院到出院 · 截图保存，下次查房直接用</p>
 <ol>
 <li><b>疼痛评估：</b>On a scale of zero to ten, how bad is your pain?（从零到十分，你的疼痛有几分？）</li>
 <li><b>测生命体征：</b>Let me check your blood pressure.（我给你量一下血压。）</li>
@@ -107,9 +107,9 @@ th{background:#FFF7E8;color:#0F5E5A}
 <button class="btn btn-block no-print" onclick="window.print()">🖨️ 只打印这张小抄卡</button>
 </div>
 
-<p class="note no-print"><a href="module-m1.html">← 回模块 1</a> · <a href="index.html">回课堂首页</a></p>
+<p class="note no-print"><a href="module-m1.html">← 回入院到出院</a> · <a href="index.html">回课堂首页</a></p>
 </div>
-<div class="nav no-print"><a href="index.html">🏠 首页</a><a href="video-courses.html">🎬 视频课程</a><a href="module-m1.html">📚 模块 1</a><a href="module-m1-review.html" class="active">📖 复习</a><a href="night-reopen/index.html">🎮 重开</a></div>
+<div class="nav no-print"><a href="index.html">🏠 首页</a><a href="video-courses.html">🎬 视频课</a><a href="module-m1.html">📚 入院到出院</a><a href="module-m1-review.html" class="active">📖 复习</a><a href="night-reopen/index.html">🎮 重开</a></div>
 <script>
 var doneKeys=["classroom-ep01-done","classroom-ep02-done","classroom-ep03-done","classroom-ep04-done","classroom-ep05-done","classroom-ep06-done","classroom-ep07-done","classroom-ep08-done","classroom-ep09-done","classroom-ep10-done"];
 var mistKeys=["classroom-ep01-mistakes","classroom-ep02-mistakes","classroom-ep03-mistakes","classroom-ep04-mistakes","classroom-ep05-mistakes","classroom-ep06-mistakes","classroom-ep07-mistakes","classroom-ep08-mistakes","classroom-ep09-mistakes","classroom-ep10-mistakes"];
@@ -117,7 +117,7 @@ var lessonFiles=["classroom-ep01-pain.html","classroom-ep02-vital-signs.html","c
 var lessonNames=["第 1 课 · 疼痛评估","第 2 课 · 测生命体征","第 3 课 · 入院问过敏史","第 4 课 · 输液","第 5 课 · 换药","第 6 课 · 给药核对身份","第 7 课 · 术后观察","第 8 课 · 术前禁食","第 9 课 · 防跌倒呼叫铃","第 10 课 · 出院宣教"];
 function get(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 var done=0;doneKeys.forEach(function(k){if(get(k))done++;});
-document.getElementById("modStatus").textContent=done===10?"✅ 模块 1 的 10 课全学完了。复习页过一遍，错题都做对了，这张小抄卡就是你的了。":"已完成 "+done+" / 10 课。先把没学的课学完，再来复习效果最好。";
+document.getElementById("modStatus").textContent=done===10?"✅ 入院到出院的 10 课全学完了。复习页过一遍，错题都做对了，这张小抄卡就是你的了。":"已完成 "+done+" / 10 课。先把没学的课学完，再来复习效果最好。";
 function renderMistakes(){
   var html="",total=0;
   mistKeys.forEach(function(k,i){
