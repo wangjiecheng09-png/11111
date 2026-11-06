@@ -58,6 +58,15 @@ button.opt:active{transform:scale(.99)}
 .wordrow button{flex:none;margin:0;padding:6px 10px;min-height:36px;font-size:14px}
 .hero-my{background:#0F2A28;color:#FFF7E8;border-color:#0F2A28}
 .hero-my h2{color:#FFE08A}
+.hero-my{padding:12px 16px}
+.hero-my p{margin:6px 0}
+.hero-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hero-row .streak{font-size:20px}
+.hero-row button{margin:0}
+.member-card{background:#FFFBF0;border-color:#E8A838}
+.prog-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:10px 0 0}
+.prog-row .prog-num{font-weight:bold;white-space:nowrap}
+.prog-row+.bar{margin:6px 0 4px}
 .streak{font-size:22px}
 .bar{height:12px;background:#E7DFC8;border-radius:999px;overflow:hidden;margin:8px 0}
 .bar>div{height:100%;background:#0F5E5A;width:0%}
@@ -194,17 +203,16 @@ button.opt:active{transform:scale(.99)}
 <div id="sec-my" class="section">
 <div class="card hero-my"><h2>👤 我的学习</h2>
 <p>你好，<b id="userNameDisplay">夜班学员</b></p>
-<p><span class="streak">🔥 <b id="streakNum">0</b> 天连续打卡</span><br><span id="todayCheckinState">今天还没打卡</span></p>
-<p><button class="gold" id="checkinBtn" onclick="doCheckin()">✅ 今日打卡</button></p>
-<p class="note" style="color:#FFE08A">打卡存在本机浏览器里，换设备要重新算。每天学一课、点一次打卡，断了就从 1 重新数。</p></div>
-<div class="card"><h2>📈 我的进度</h2><div class="card"><h2>💎 我的会员</h2>
+<p class="hero-row"><span class="streak">🔥 <b id="streakNum">0</b> 天连续打卡</span><button class="gold" id="checkinBtn" onclick="doCheckin()">✅ 今日打卡</button></p>
+<p class="note" style="color:#FFE08A"><span id="todayCheckinState">今天还没打卡</span> · 打卡只存本机，换设备重算；断了从 1 重新数。</p></div>
+<div class="card member-card"><h2>💎 我的会员</h2>
 <p class="member-row">当前身份：<span class="tier tier-free" id="memberTier">普通用户</span></p>
 <p class="member-row">会员到期时间：<b id="memberUntil">未开通会员</b></p>
 </div>
-
-<p><b>入院到出院</b> <span id="m1ProgText">0 / 2 节</span></p>
+<div class="card"><h2>📈 我的进度</h2>
+<p class="prog-row"><b>入院到出院</b><span class="prog-num" id="m1ProgText">0 / 2 节</span></p>
 <div class="bar"><div id="m1Bar"></div></div>
-<p><b>全部 9 门课</b> <span id="allProgText">0 / 54 节</span></p>
+<p class="prog-row"><b>全部 9 门课</b><span class="prog-num" id="allProgText">0 / 54 节</span></p>
 <div class="bar"><div id="allBar"></div></div>
 </div>
 <div class="card"><h2>📅 打卡日历</h2>
@@ -243,7 +251,6 @@ button.opt:active{transform:scale(.99)}
 </nav>
 <script>
 function showSec(btn,id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));document.getElementById(id).classList.add('show');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(id==='sec-my')loadMy();try{if(history.replaceState)history.replaceState(null,'','#'+id);}catch(e){}}
-(function(){var h=(location.hash||'').slice(1);if(h&&document.getElementById(h)){var bs=document.querySelectorAll('.nav button');for(var i=0;i<bs.length;i++){if((bs[i].getAttribute('onclick')||'').indexOf("'"+h+"'")>=0){showSec(bs[i],h);break;}}}})();
 function toggleGroup(id){var g=document.getElementById(id);if(!g)return;var body=g.querySelector('.group-body');var head=g.querySelector('.group-head');var arrow=g.querySelector('.group-arrow');var open=body.style.display==='none';body.style.display=open?'block':'none';if(arrow)arrow.textContent=open?'▼':'▶';if(head)head.setAttribute('aria-expanded',open?'true':'false');}
 function doSearch(){const q=document.getElementById('q').value.trim().toLowerCase();const out=document.getElementById('searchResult');if(!q){out.innerHTML='<p class="note">输入关键词，上面课程里能搜到的都会列出来。</p>';return;}const hits=[];document.querySelectorAll('#lessonList .lesson').forEach(el=>{if(el.dataset.kw.toLowerCase().includes(q))hits.push(el.outerHTML);});out.innerHTML=hits.length?hits.join(''):'<p>没搜到“'+document.getElementById('q').value+'”，换个词试试，例如：输液、allergy、cold。</p>';}
 /* ---- 我的：打卡 / 进度 / 日历 / 徽章（新 key：yeban-checkin-days，存 YYYY-MM-DD 数组；与免费包的 freepack-checkin 不冲突） ---- */
@@ -272,16 +279,16 @@ var inp=document.getElementById('userNameInput');if(inp&&document.activeElement!
 function saveUserName(){var inp=document.getElementById('userNameInput');var v=(inp.value||'').trim().slice(0,20);try{localStorage.setItem('yeban-username',v);}catch(err){}document.getElementById('userNameMsg').textContent=v?'已保存：'+v:'已清空，用默认名字“夜班学员”。';renderMember();}
 
 
-var MY_NAMES={'ep01':['第 1 课 · 疼痛评估','classroom-ep01-pain.html']};
+var MY_NAMES={'ep01':['第 1 课 · 疼痛评估','classroom-ep01-pain.html'],'ep02':['第 2 课 · 生命体征','classroom-ep02-vital-signs.html']};
 var MY_KEYS=Object.keys(MY_NAMES);
-var MY_TOTAL=1;
+var MY_TOTAL=2;
 function myDoneCount(){var n=0;MY_KEYS.forEach(function(k){if(localStorage.getItem('classroom-'+k+'-done'))n++;});return n;}
 function myAllDoneCount(){var n=myDoneCount();if(localStorage.getItem('classroom-a1-done'))n++;return n;}
 function renderBadges(){var done=myDoneCount(),streak=calcStreak(getCheckins());
 var zeroFree=false;MY_KEYS.forEach(function(k){if(localStorage.getItem('classroom-'+k+'-done')){var mm=JSON.parse(localStorage.getItem('classroom-'+k+'-mistakes')||'[]');if(!mm.length)zeroFree=true;}});
 var list=[
 ['🌱','第一课','学完 1 节',done>=1],
-['📚','第 1 课学完','学完第 1 课',done>=MY_TOTAL],
+['📚','免费两课学完','学完 2 节',done>=MY_TOTAL],
 ['🎯','零错题','一课全对',zeroFree],
 ['🔥','打卡 7 天','连续打卡 7 天',streak>=7]];
 document.getElementById('badgeGrid').innerHTML=list.map(function(b){return '<div class="badge-cell'+(b[3]?'':' locked')+'"><div class="ic">'+b[0]+'</div><b>'+b[1]+'</b><br><span style="font-size:13px">'+(b[3]?'✅ 已解锁':('🔒 '+b[2]))+'</span></div>';}).join('');}
@@ -297,7 +304,7 @@ function renderMyCourses(){var done=myDoneCount();var rows=[
 ['🧒','儿科英语','4 节',null,'敬请期待']];
 document.getElementById('myCourses').innerHTML=rows.map(function(r){return '<div class="mycourse"><div><b>'+r[0]+' '+r[1]+'</b><br><span class="note">'+r[2]+' · '+r[4]+'</span></div>'+(r[3]?'<a class="btn ghost" href="'+r[3]+'">去学习 →</a>':'<span class="note">🔒 敬请期待</span>')+'</div>';}).join('');}
 function renderMyMistakes(){var html='';var any=false;
-MY_KEYS.forEach(function(k){var mm=JSON.parse(localStorage.getItem('classroom-'+k+'-mistakes')||'[]');if(mm.length){any=true;var nm=MY_NAMES[k];var title=Array.isArray(nm)?nm[0]:nm;var href=Array.isArray(nm)?nm[1]:('classroom-'+k+'-'+({'ep01':'pain','ep03':'allergies','ep04':'iv-drip','ep05':'dressing','ep06':'identity-check','ep07':'postop','ep08':'fasting','ep09':'callbell','ep10':'discharge'}[k])+'.html');html+='<p><b>'+title+'</b>：'+mm.join('、')+' <a href="'+href+'">回炉 →</a></p>';}});
+MY_KEYS.forEach(function(k){var mm=JSON.parse(localStorage.getItem('classroom-'+k+'-mistakes')||'[]');if(mm.length){any=true;var nm=MY_NAMES[k];var title=Array.isArray(nm)?nm[0]:nm;var href=Array.isArray(nm)?nm[1]:('classroom-'+k+'-'+({'ep01':'pain','ep02':'vital-signs','ep03':'allergies','ep04':'iv-drip','ep05':'dressing','ep06':'identity-check','ep07':'postop','ep08':'fasting','ep09':'callbell','ep10':'discharge'}[k])+'.html');html+='<p><b>'+title+'</b>：'+mm.join('、')+' <a href="'+href+'">回炉 →</a></p>';}});
 document.getElementById('myMistakes').innerHTML=any?html:'<p class="note">还没有错题，做题错了会记在这里。</p>';}
 function updateContinue(){var names=MY_NAMES;var next=null;for(var k in names){if(!localStorage.getItem('classroom-'+k+'-done')&&!next)next=[names[k][0],names[k][1]];}
 var c=document.getElementById('continue'),b=document.getElementById('continueBtn');
@@ -314,6 +321,8 @@ document.getElementById('m1Bar').style.width=pct1+'%';
 document.getElementById('allProgText').textContent='已学 '+all+' / 54 节 · '+pctA+'%';
 document.getElementById('allBar').style.width=pctA+'%';
 renderCal();renderBadges();renderMember();renderCal();renderBadges();renderMyCourses();renderMyMistakes();updateContinue();}
-function clearAllProgress(){['classroom-ep01-done','classroom-ep01-mistakes'].forEach(k=>localStorage.removeItem(k));loadMy();}
+function clearAllProgress(){['classroom-ep01-done','classroom-ep01-mistakes','classroom-ep02-done','classroom-ep02-mistakes'].forEach(k=>localStorage.removeItem(k));loadMy();}
 loadMy();doSearch();
+/* hash 直达必须放在最后：showSec('sec-my') 会调 loadMy → myDoneCount 用 MY_NAMES/MY_KEYS，放在前面会在赋值前抛错、中断整个脚本 */
+(function(){var h=(location.hash||'').slice(1);if(h&&document.getElementById(h)){var bs=document.querySelectorAll('.nav button');for(var i=0;i<bs.length;i++){if((bs[i].getAttribute('onclick')||'').indexOf("'"+h+"'")>=0){showSec(bs[i],h);break;}}}})();
 </script><script>/* 维护开关：../maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("../maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("../maintenance.html")<0){location.replace("../maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>

@@ -58,6 +58,15 @@ button.opt:active{transform:scale(.99)}
 .wordrow button{flex:none;margin:0;padding:6px 10px;min-height:36px;font-size:14px}
 .hero-my{background:#0F2A28;color:#FFF7E8;border-color:#0F2A28}
 .hero-my h2{color:#FFE08A}
+.hero-my{padding:12px 16px}
+.hero-my p{margin:6px 0}
+.hero-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hero-row .streak{font-size:20px}
+.hero-row button{margin:0}
+.member-card{background:#FFFBF0;border-color:#E8A838}
+.prog-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:10px 0 0}
+.prog-row .prog-num{font-weight:bold;white-space:nowrap}
+.prog-row+.bar{margin:6px 0 4px}
 .streak{font-size:22px}
 .bar{height:12px;background:#E7DFC8;border-radius:999px;overflow:hidden;margin:8px 0}
 .bar>div{height:100%;background:#0F5E5A;width:0%}
@@ -252,20 +261,19 @@ button.opt:active{transform:scale(.99)}
 <div id="sec-my" class="section">
 <div class="card hero-my"><h2>👤 我的学习</h2>
 <p>你好，<b id="userNameDisplay">夜班学员</b></p>
-<p><span class="streak">🔥 <b id="streakNum">0</b> 天连续打卡</span><br><span id="todayCheckinState">今天还没打卡</span></p>
-<p><button class="gold" id="checkinBtn" onclick="doCheckin()">✅ 今日打卡</button></p>
-<p class="note" style="color:#FFE08A">打卡存在本机浏览器里，换设备要重新算。每天学一课、点一次打卡，断了就从 1 重新数。</p></div>
-<div class="card"><h2>📈 我的进度</h2><div class="card" id="memberCard"><h2>💎 我的会员</h2>
+<p class="hero-row"><span class="streak">🔥 <b id="streakNum">0</b> 天连续打卡</span><button class="gold" id="checkinBtn" onclick="doCheckin()">✅ 今日打卡</button></p>
+<p class="note" style="color:#FFE08A"><span id="todayCheckinState">今天还没打卡</span> · 打卡只存本机，换设备重算；断了从 1 重新数。</p></div>
+<div class="card member-card" id="memberCard"><h2>💎 我的会员</h2>
 <p class="member-row">当前身份：<span class="tier tier-free" id="memberTier">普通用户</span></p>
 <p class="member-row" id="memberLessonLine" style="display:none">已购单课：<b id="memberLessonList"></b>（买断，不限期）</p>
 <p class="member-row" id="memberBundleLine" style="display:none">已购优惠包：<b>入院到出院 + 护士基本功</b>（买断，不限期）</p>
 <p class="member-row" id="memberCollLine" style="display:none">已购合集：<b id="memberCollList"></b>（买断，不限期）</p>
 <p class="member-row">会员到期时间：<b id="memberUntil">未开通会员</b></p>
 <p class="note">买断（单课、优惠包、合集）不限期，不算会员；会员只学文字，不解锁视频；会员到期后自动变回普通用户。会员到期时间按兑换那天算：月会员 30 天、季会员 90 天、年会员 365 天。</p></div>
-
-<p><b>入院到出院</b> <span id="m1ProgText">0 / 10 节</span></p>
+<div class="card"><h2>📈 我的进度</h2>
+<p class="prog-row"><b>入院到出院</b><span class="prog-num" id="m1ProgText">0 / 10 节</span></p>
 <div class="bar"><div id="m1Bar"></div></div>
-<p><b>全部 9 门课</b> <span id="allProgText">0 / 54 节</span></p>
+<p class="prog-row"><b>全部 9 门课</b><span class="prog-num" id="allProgText">0 / 54 节</span></p>
 <div class="bar"><div id="allBar"></div></div>
 <p class="note">54 节是 9 门课的总数；已上线 11 节（入院到出院 10 节 + 基础合集 1 节），其余做好一门、开一门。</p></div>
 <div class="card"><h2>📅 打卡日历</h2>
