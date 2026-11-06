@@ -29,10 +29,12 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 .nav{position:fixed;left:0;right:0;bottom:0;background:#0F5E5A;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));z-index:10}
 .nav a{background:none;color:#FFF7E8;font-size:15px;margin:0;padding:8px 6px;min-height:44px;text-decoration:none;display:inline-block}
 .nav a.active{color:#FFD97A;font-weight:bold}
-.coursebar{position:fixed;left:0;right:0;bottom:0;background:#0F2A28;display:flex;align-items:center;gap:2px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));z-index:10}
-.coursebar a{color:#FFF7E8;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding:8px 6px;font-size:14px;white-space:nowrap}
-.coursebar a.cb-link.active{color:#FFD97A;font-weight:bold}
-.coursebar a.cb-cta{flex:1;justify-content:center;background:#E8A838;color:#222;font-weight:bold;border-radius:999px;font-size:15px;padding:11px 12px;white-space:normal;text-align:center}
+.coursebar{position:fixed;left:0;right:0;bottom:0;background:#0F2A28;display:flex;align-items:center;gap:6px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));z-index:10}
+.coursebar a{color:#FFF7E8;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;gap:4px;padding:8px 10px;font-size:13px;white-space:nowrap;border:1.5px solid rgba(255,247,232,.45);border-radius:999px;flex:none}
+.coursebar a.cb-link.active{color:#FFD97A;font-weight:bold;border-color:#E8A838}
+.coursebar a.cb-cta{flex:1 1 auto;min-width:0;justify-content:center;background:#E8A838;color:#222;font-weight:bold;border-color:#E8A838;border-radius:999px;font-size:14px;padding:10px 12px;white-space:normal;text-align:center;line-height:1.25}
+.homebtn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:10px 16px;border-radius:999px;background:#0F2A28;color:#FFE08A;font-size:14px;font-weight:bold;text-decoration:none;border:1.5px solid #0F2A28}
+.homebtn:active{transform:scale(.97)}
 
 .videocard video{width:100%;border-radius:12px;background:#0F2A28;display:block}
 .video-slot .ph{background:#0F2A28;color:#FFF7E8;border-radius:12px;padding:28px 16px;text-align:center;line-height:1.8}
@@ -52,7 +54,7 @@ details.transcript p{margin:10px 0}
 .lockcard h2{color:#0F5E5A}
 </style></head>
 <body><div class="wrap">
-<p><a href="index.html">← 回课堂首页</a> · <a href="video-courses.html">视频课</a></p>
+<p><a class="homebtn" href="index.html">🌙 回课堂首页</a></p>
 <h1>入院到出院</h1>
 <p class="sub">10 节课</p>
 <p class="sub">10 节课 · 每节约 10 分钟 · 按病人走的路排：入院 → 住院日常 → 操作 → 出院。每天一课，10 天走完一个夜班的完整流程。</p>
@@ -106,7 +108,7 @@ details.transcript p{margin:10px 0}
 
 <p class="note">视频、讲稿、课堂笔记、讨论区都在本页每节课下面；课堂、讲义、音频、小抄、小测在原课里，这里把它们串成一门课。</p>
 </div>
-<nav class="coursebar"><a class="cb-home" href="index.html">🏠 回课堂</a><a class="cb-link" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="module-m1-review.html">📖 复习</a><a class="cb-cta" id="barCta" href="classroom-ep01-pain.html">▶ 开始学习</a></nav>
+<nav class="coursebar"><a class="cb-link" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="module-m1-review.html">📖 复习</a><a class="cb-cta" id="barCta" href="classroom-ep01-pain.html">▶ 开始学习</a></nav>
 <script>
 var lessons=[
 {n:1,t:"疼痛评估",f:"classroom-ep01-pain.html",en:"On a scale of zero to ten, how bad is your pain?",zh:"从零到十分，你的疼痛有几分？",en2:"About seven, it's sharp.",zh2:"大概七分，是刺痛。"},
