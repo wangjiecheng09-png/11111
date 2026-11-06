@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="avatar.png"><link rel="apple-touch-icon" href="avatar.png"><meta property="og:title" content="夜班英语课堂"><meta property="og:image" content="https://wangjiecheng09-png.github.io/11111/avatar.png">
+<title>夜班英语课堂 · 模块 1 夜班第一周——入院到出院</title>
+<style>body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#FFF7E8;color:#222;margin:0;padding:16px 16px 90px;min-height:100vh;box-sizing:border-box;font-size:16px;line-height:1.6}
+:root{--teal:#0F5E5A;--teal-deep:#0B4743;--cream:#FFF7E8;--paper:#fff;--ink:#222;--muted:#666;--gold:#E8A838;--line:#E7DFC8;--r-card:16px;--r-inner:12px;--shadow:0 2px 10px rgba(15,42,40,.08)}
+*{box-sizing:border-box}
+.wrap{max-width:720px;margin:0 auto}
+h1{color:#0F5E5A;font-size:24px;line-height:1.3;margin:8px 0 4px}
+h2{color:#0F5E5A;font-size:18px;line-height:1.4}
+.sub{color:#666;font-size:14px}
+.card{background:#fff;border:2px solid #0F5E5A;border-radius:16px;padding:16px;margin:14px 0;box-shadow:0 2px 10px rgba(15,42,40,.08)}
+.card h2{color:#0F5E5A;font-size:18px;margin:0 0 8px}
+button,.btn{background:#0F5E5A;color:#fff;border:0;border-radius:999px;padding:11px 18px;margin:4px 4px 4px 0;cursor:pointer;text-decoration:none;display:inline-block;font-size:15px;line-height:1.4;min-height:44px}
+button:active,.btn:active{transform:scale(.97)}
+button:focus-visible,.btn:focus-visible,a:focus-visible{outline:3px solid #E8A838;outline-offset:2px}
+button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A}
+.btn-block{display:block;width:100%;text-align:center;margin:10px 0}
+.lesson{border:1.5px solid #E7DFC8;border-radius:14px;padding:14px;margin:10px 0;background:#fff}
+.lesson b{font-size:17px}
+.lesson .en{font-size:16px;margin:6px 0 2px}
+.lesson .zh{color:#666;font-size:14px}
+.tag{color:#0F5E5A;font-size:13px}
+.done-tag{color:#0F5E5A;font-weight:bold}
+.note{font-size:13px;color:#666}
+.bar{height:12px;background:#E7DFC8;border-radius:999px;overflow:hidden;margin:8px 0}
+.bar>div{height:100%;background:#0F5E5A;width:0%}
+.warn{background:#FFF7E8;border:1.5px solid #E8A838;border-radius:12px;padding:12px;margin:12px 0;font-size:14px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#0F5E5A;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));z-index:10}
+.nav a{background:none;color:#FFF7E8;font-size:16px;margin:0;padding:8px 10px;min-height:44px;text-decoration:none;display:inline-block}
+.nav a.active{color:#FFD97A;font-weight:bold}
+</style></head>
+<body><div class="wrap">
+<p><a href="index.html">← 回课堂首页</a></p>
+<h1>模块 1 · 夜班第一周——入院到出院</h1>
+<p class="sub">10 节课 · 每节约 10 分钟 · 按病人走的路排：入院 → 住院日常 → 操作 → 出院。每天一课，10 天走完一个夜班的完整流程。</p>
+
+<div class="card"><h2>学完能做到什么</h2>
+<p>10 个夜班里最常说的场景，每个场景至少会 2 句能直接用的原句：</p>
+<ul>
+<li>入院时能问清过敏史、问清主诉，能核对病人身份。</li>
+<li>查房时能量血压、问疼痛（0–10 分，刺痛还是钝痛）、看伤口、问术后感觉。</li>
+<li>操作前能先交代一句再动手：输液、换药，每一步先说清楚。</li>
+<li>给药前能核对身份和药名剂量，告诉病人这是什么药。</li>
+<li>病人要起来时能说清：按呼叫铃，别自己一个人起来。</li>
+<li>出院能交代吃药和复查时间。</li>
+</ul>
+<p class="note">适合谁：在职护士、夜班护士、护理专业学生。完全零基础的，建议先跟完免费体验（第 1、2 课）再决定。</p>
+<p class="note">学完是本模块的结课记录，<b>不是执业资格、不是职称、不是学历</b>。学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p>
+</div>
+
+<div class="card"><h2>我的进度</h2>
+<div class="bar"><div id="progBar"></div></div>
+<p id="progText">正在读进度……</p>
+<a class="btn btn-block" id="continueBtn" href="classroom-ep01-pain.html">▶ 从第 1 课开始</a>
+<p class="note">进度存在你这台手机里，换设备要重新学。</p>
+</div>
+
+<div class="card"><h2>10 节课，按顺序学</h2>
+<div id="lessonList"></div>
+</div>
+
+<div class="card"><h2>学完 10 课之后</h2>
+<p>去<a href="module-m1-review.html">模块 1 复习页</a>：10 课的关键句和单词一次过一遍，错题回炉重做，再拿一张 10 句合一的总结小抄卡，打印出来下次查房直接用。</p>
+<a class="btn btn-block" href="module-m1-review.html">📖 去复习页</a>
+</div>
+
+<div class="warn">⚠️ 第 6 课有一处要特别说明：课里教的原句是 “Please tell me your name and date of birth.”（请告诉我你的姓名和出生日期）。按中国临床标准（WS/T 840-2025《患者身份识别管理标准》+ 三查七对），发药前要同时用两个以上身份标识——姓名 + 床号 + 住院号，床号不能单独作依据，还要看腕带。完整说法见复习页，夜班重开第 1 关也是按这个标准做的。</div>
+
+<p class="note">模块 1 的 10 节课就是第 1 周的 10 课，视频、课堂、讲义、音频、小抄、小测都在原课里，这里只把它们串成一个模块，没有重做。</p>
+</div>
+<div class="nav"><a href="index.html">🏠 首页</a><a href="module-m1.html" class="active">📚 模块 1</a><a href="module-m1-review.html">📖 复习</a><a href="night-reopen/index.html">🎮 重开</a></div>
+<script>
+var lessons=[
+{n:1,t:"疼痛评估",f:"classroom-ep01-pain.html",en:"On a scale of zero to ten, how bad is your pain?",zh:"从零到十分，你的疼痛有几分？",en2:"About seven, it's sharp.",zh2:"大概七分，是刺痛。"},
+{n:2,t:"测生命体征",f:"classroom-ep02-vital-signs.html",en:"Let me check your blood pressure.",zh:"我给你量一下血压。",en2:"Your blood pressure is one twenty over eighty, that's normal.",zh2:"你的血压是一百二比八十，正常。"},
+{n:3,t:"入院问过敏史",f:"classroom-ep03-allergies.html",en:"Do you have any allergies?",zh:"你对什么过敏吗？",en2:"Yes, I'm allergic to penicillin.",zh2:"是的，我对青霉素过敏。"},
+{n:4,t:"输液",f:"classroom-ep04-iv-drip.html",en:"I'm going to start an IV drip for you.",zh:"我要给你输液了。",en2:"It may feel a little cold.",zh2:"可能会感觉有点凉。"},
+{n:5,t:"换药",f:"classroom-ep05-dressing.html",en:"I need to change your dressing.",zh:"我需要给你换药。",en2:"Please tell me if it hurts.",zh2:"如果疼请告诉我。"},
+{n:6,t:"给药核对身份",f:"classroom-ep06-identity-check.html",en:"Please tell me your name and date of birth.",zh:"请告诉我你的姓名和出生日期。",en2:"Let me check the medicine name and dose.",zh2:"我来核对一下药名和剂量。"},
+{n:7,t:"术后观察",f:"classroom-ep07-postop.html",en:"How are you feeling after the operation?",zh:"手术后你感觉怎么样？",en2:"A bit dizzy, but okay.",zh2:"有点晕，但还好。"},
+{n:8,t:"术前禁食",f:"classroom-ep08-fasting.html",en:"You need to fast before surgery.",zh:"手术前你需要禁食。",en2:"No food or water after midnight.",zh2:"午夜之后不要吃东西，也不要喝水。"},
+{n:9,t:"防跌倒呼叫铃",f:"classroom-ep09-callbell.html",en:"Please press the call bell if you need help.",zh:"需要帮助请按呼叫铃。",en2:"Don't get up alone.",zh2:"不要自己一个人起来。"},
+{n:10,t:"出院宣教",f:"classroom-ep10-discharge.html",en:"Take this medicine twice a day after meals.",zh:"这个药每天吃两次，饭后吃。",en2:"Come back for a follow-up in one week.",zh2:"一周后来复查。"}
+];
+var doneKeys=["classroom-ep01-done","classroom-ep02-done","classroom-ep03-done","classroom-ep04-done","classroom-ep05-done","classroom-ep06-done","classroom-ep07-done","classroom-ep08-done","classroom-ep09-done","classroom-ep10-done"];
+function isDone(i){try{return !!localStorage.getItem(doneKeys[i]);}catch(e){return false;}}
+var doneCount=0,html="",firstTodo=0;
+lessons.forEach(function(L,i){
+  var d=isDone(i); if(d)doneCount++;
+  if(!d&&firstTodo===0)firstTodo=i;
+  html+='<div class="lesson"><b>第 '+L.n+' 课 · '+L.t+'</b> '+(d?'<span class="done-tag">✅ 已完成</span>':'<span class="tag">未完成</span>')+'<div class="en">'+L.en+'</div><div class="zh">'+L.zh+'</div><div class="en">'+L.en2+'</div><div class="zh">'+L.zh2+'</div><a class="btn ghost" href="'+L.f+'">'+(d?"再学一遍 →":"开始学 →")+'</a></div>';
+});
+document.getElementById("lessonList").innerHTML=html;
+document.getElementById("progBar").style.width=(doneCount*10)+"%";
+document.getElementById("progText").textContent=doneCount===10?"✅ 10 课全学完了，去复习页拿总结小抄卡吧。":"已完成 "+doneCount+" / 10 课。";
+var cb=document.getElementById("continueBtn");
+if(doneCount===10){cb.textContent="📖 10 课全学完了，去复习页";cb.href="module-m1-review.html";}
+else{cb.textContent="▶ 继续学第 "+(firstTodo+1)+" 课 · "+lessons[firstTodo].t;cb.href=lessons[firstTodo].f;}
+</script>
+<script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
