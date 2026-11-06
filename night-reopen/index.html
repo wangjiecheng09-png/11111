@@ -23,6 +23,8 @@ input[type=text]{width:100%;box-sizing:border-box;padding:10px;border-radius:10p
 .soon{color:#999}
 .nav{position:fixed;left:0;right:0;bottom:0;background:#0F5E5A;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));z-index:10}
 .nav button{background:none;color:#FFF7E8;font-size:16px;margin:0;padding:8px 10px;min-height:44px}
+.nav a{background:none;color:#FFF7E8;font-size:15px;margin:0;padding:8px 6px;min-height:44px;text-decoration:none;display:inline-block}
+.nav a.active{color:#FFD97A;font-weight:bold}
 .nav button.active{color:#FFD97A;font-weight:bold}
 .section{display:none}
 .section.show{display:block}
@@ -126,4 +128,5 @@ document.addEventListener('pointerdown',function(){try{speechSynthesis.getVoices
 function homeUrl(){var r="";try{r=document.referrer||"";}catch(e){}if(r.indexOf("/fan/")>=0)return "../fan/index.html";if(r)return "../index.html";return "../fan/index.html";}
 function goHome(){location.href=homeUrl();}
 try{document.querySelectorAll("a[data-home]").forEach(function(a){a.href=homeUrl();});}catch(e){}</script>
+<nav class="nav"><a data-nav="home" href="../fan/index.html">🏠 首页</a><a data-nav="lessons" href="../fan/index.html#sec-lessons">📚 课程</a><a data-nav="courses" href="../fan/video-courses.html">🎬 视频课</a><a data-nav="my" href="../fan/index.html#sec-my">👤 我的</a><a href="index.html" class="active">🎮 重开</a></nav><script>/* 底部导航：从总站来走总站，其余默认回 fan（更安全） */(function(){var r="";try{r=document.referrer||"";}catch(e){}var fan=r.indexOf("/fan/")>=0||!r;if(fan)return;var m={home:"../index.html",lessons:"../index.html#sec-lessons",courses:"../video-courses.html",my:"../index.html#sec-my"};document.querySelectorAll("nav.nav a[data-nav]").forEach(function(a){var k=a.getAttribute("data-nav");if(m[k])a.href=m[k];});})();</script>
 </body></html>
