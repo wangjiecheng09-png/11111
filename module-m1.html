@@ -65,7 +65,7 @@ details.transcript p{margin:10px 0}
 <div class="card videocard" id="videoCard">
 <h2>🎬 课程预告</h2>
 <div class="video-slot" id="videoSlot" data-video="https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/module-m1-trailer.mp4"><p class="note">正在检查视频…</p></div>
-<p class="note">预告片是这门课的 1 分钟介绍；传好后这里就能直接看。下面 10 节课每节都有自己的视频。</p>
+<p class="note">预告片是这门课的 1 分钟介绍；传好后这里就能直接看。下面 10 节课每节都有自己的详情页，视频、讲稿、笔记、讨论区都在详情页里。</p>
 </div>
 <div class="card"><h2>学完能做到什么</h2>
 <p>10 个夜班里最常说的场景，每个场景至少会 2 句能直接用的原句：</p>
@@ -85,11 +85,11 @@ details.transcript p{margin:10px 0}
 <div class="bar"><div id="progBar"></div></div>
 <p id="progText">正在读进度……</p>
 <p id="moduleCheckin" class="note"></p>
-<a class="btn btn-block" id="continueBtn" href="classroom-ep01-pain.html">▶ 从第 1 课开始</a>
+<a class="btn btn-block" id="continueBtn" href="detail-ep01-pain.html">▶ 从第 1 课开始</a>
 <p class="note">进度存在你这台手机里，换设备要重新学。</p>
 </div>
 <div class="card"><h2>🔓 怎么解锁视频课</h2>
-<p>第 1 课免费整节看：视频、讲稿、笔记、讨论区都能用。第 2–10 课：视频购买后解锁——单课、周包、优惠包或所属合集都能开；讲稿、笔记、讨论区购买或在期会员都能看，会员只学文字，不开视频。</p>
+<p>第 1 课免费整节看：视频、讲稿、笔记、讨论区都能用。第 2–10 课：视频购买后解锁——单课、优惠包或所属合集都能开；讲稿、笔记、讨论区购买或在期会员都能看，会员只学文字，不开视频。</p>
 <p class="note">已经买过？先在「我的」里用兑换码兑换，回来这里就开了；到期了会自动变回普通用户。</p></div>
 
 <div class="card"><h2>🗺️ 学习路径</h2>
@@ -106,69 +106,46 @@ details.transcript p{margin:10px 0}
 
 <div class="card"><h2>💬 课程讨论区</h2>
 <p>课程讨论区还在准备中，敬请期待。</p>
-<p class="note">每节课下面都有自己的视频、讲稿、课堂笔记和讨论区；第 1 课免费整节看，第 2–10 课购买后解锁，会员只学文字，不开视频。</p></div>
+<p class="note">视频、讲稿、课堂笔记和讨论区在各课详情页里；第 1 课免费整节看，第 2–10 课购买后解锁，会员只学文字，不开视频。</p></div>
 <div class="warn">⚠️ 第 6 课有一处要特别说明：课里教的原句是 “Please tell me your name and date of birth.”（请告诉我你的姓名和出生日期）。按中国临床标准（WS/T 840-2025《患者身份识别管理标准》+ 三查七对），发药前要同时用两个以上身份标识——姓名 + 床号 + 住院号，床号不能单独作依据，还要看腕带。完整说法见复习页，夜班重开第 1 关也是按这个标准做的。</div>
 
-<p class="note">视频、讲稿、课堂笔记、讨论区都在本页每节课下面；课堂、讲义、音频、小抄、小测在原课里，这里把它们串成一门课。</p>
+<p class="note">视频、讲稿、课堂笔记、讨论区在各课详情页里；课堂、讲义、音频、小抄、小测在原课里，详情页里有链接，点一下就过去——这里把它们串成一门课。</p>
 </div>
-<nav class="coursebar"><a class="cb-link" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="module-m1-review.html">📖 复习</a><a class="cb-cta" id="barCta" href="classroom-ep01-pain.html">▶ 开始学习</a></nav>
+<nav class="coursebar"><a class="cb-link" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="module-m1-review.html">📖 复习</a><a class="cb-cta" id="barCta" href="detail-ep01-pain.html">▶ 开始学习</a></nav>
 <script src="video/keypoints-ep01-data.js?v=1"></script>
+<script src="video/access.js"></script>
 <script>
 var lessons=[
-{n:1,t:"疼痛评估",f:"classroom-ep01-pain.html",en:"On a scale of zero to ten, how bad is your pain?",zh:"从零到十分，你的疼痛有几分？",en2:"About seven, it's sharp.",zh2:"大概七分，是刺痛。"},
-{n:2,t:"测生命体征",f:"classroom-ep02-vital-signs.html",en:"Let me check your blood pressure.",zh:"我给你量一下血压。",en2:"Your blood pressure is one twenty over eighty, that's normal.",zh2:"你的血压是一百二比八十，正常。"},
-{n:3,t:"入院问过敏史",f:"classroom-ep03-allergies.html",en:"Do you have any allergies?",zh:"你对什么过敏吗？",en2:"Yes, I'm allergic to penicillin.",zh2:"是的，我对青霉素过敏。"},
-{n:4,t:"输液",f:"classroom-ep04-iv-drip.html",en:"I'm going to start an IV drip for you.",zh:"我要给你输液了。",en2:"It may feel a little cold.",zh2:"可能会感觉有点凉。"},
-{n:5,t:"换药",f:"classroom-ep05-dressing.html",en:"I need to change your dressing.",zh:"我需要给你换药。",en2:"Please tell me if it hurts.",zh2:"如果疼请告诉我。"},
-{n:6,t:"给药核对身份",f:"classroom-ep06-identity-check.html",en:"Please tell me your name and date of birth.",zh:"请告诉我你的姓名和出生日期。",en2:"Let me check the medicine name and dose.",zh2:"我来核对一下药名和剂量。"},
-{n:7,t:"术后观察",f:"classroom-ep07-postop.html",en:"How are you feeling after the operation?",zh:"手术后你感觉怎么样？",en2:"A bit dizzy, but okay.",zh2:"有点晕，但还好。"},
-{n:8,t:"术前禁食",f:"classroom-ep08-fasting.html",en:"You need to fast before surgery.",zh:"手术前你需要禁食。",en2:"No food or water after midnight.",zh2:"午夜之后不要吃东西，也不要喝水。"},
-{n:9,t:"防跌倒呼叫铃",f:"classroom-ep09-callbell.html",en:"Please press the call bell if you need help.",zh:"需要帮助请按呼叫铃。",en2:"Don't get up alone.",zh2:"不要自己一个人起来。"},
-{n:10,t:"出院宣教",f:"classroom-ep10-discharge.html",en:"Take this medicine twice a day after meals.",zh:"这个药每天吃两次，饭后吃。",en2:"Come back for a follow-up in one week.",zh2:"一周后来复查。"}
+{n:1,t:"疼痛评估",f:"classroom-ep01-pain.html",d:"detail-ep01-pain.html",en:"On a scale of zero to ten, how bad is your pain?",zh:"从零到十分，你的疼痛有几分？",en2:"About seven, it's sharp.",zh2:"大概七分，是刺痛。"},
+{n:2,t:"测生命体征",f:"classroom-ep02-vital-signs.html",d:"detail-ep02-vital-signs.html",en:"Let me check your blood pressure.",zh:"我给你量一下血压。",en2:"Your blood pressure is one twenty over eighty, that's normal.",zh2:"你的血压是一百二比八十，正常。"},
+{n:3,t:"入院问过敏史",f:"classroom-ep03-allergies.html",d:"detail-ep03-allergies.html",en:"Do you have any allergies?",zh:"你对什么过敏吗？",en2:"Yes, I'm allergic to penicillin.",zh2:"是的，我对青霉素过敏。"},
+{n:4,t:"输液",f:"classroom-ep04-iv-drip.html",d:"detail-ep04-iv-drip.html",en:"I'm going to start an IV drip for you.",zh:"我要给你输液了。",en2:"It may feel a little cold.",zh2:"可能会感觉有点凉。"},
+{n:5,t:"换药",f:"classroom-ep05-dressing.html",d:"detail-ep05-dressing.html",en:"I need to change your dressing.",zh:"我需要给你换药。",en2:"Please tell me if it hurts.",zh2:"如果疼请告诉我。"},
+{n:6,t:"给药核对身份",f:"classroom-ep06-identity-check.html",d:"detail-ep06-identity-check.html",en:"Please tell me your name and date of birth.",zh:"请告诉我你的姓名和出生日期。",en2:"Let me check the medicine name and dose.",zh2:"我来核对一下药名和剂量。"},
+{n:7,t:"术后观察",f:"classroom-ep07-postop.html",d:"detail-ep07-postop.html",en:"How are you feeling after the operation?",zh:"手术后你感觉怎么样？",en2:"A bit dizzy, but okay.",zh2:"有点晕，但还好。"},
+{n:8,t:"术前禁食",f:"classroom-ep08-fasting.html",d:"detail-ep08-fasting.html",en:"You need to fast before surgery.",zh:"手术前你需要禁食。",en2:"No food or water after midnight.",zh2:"午夜之后不要吃东西，也不要喝水。"},
+{n:9,t:"防跌倒呼叫铃",f:"classroom-ep09-callbell.html",d:"detail-ep09-callbell.html",en:"Please press the call bell if you need help.",zh:"需要帮助请按呼叫铃。",en2:"Don't get up alone.",zh2:"不要自己一个人起来。"},
+{n:10,t:"出院宣教",f:"classroom-ep10-discharge.html",d:"detail-ep10-discharge.html",en:"Take this medicine twice a day after meals.",zh:"这个药每天吃两次，饭后吃。",en2:"Come back for a follow-up in one week.",zh2:"一周后来复查。"}
 ];
 
-/* ---- 视频课解锁（2026-11-06 新规则）：第 1 课免费整节看；第 2–10 课视频按购买解锁（单课/周包/优惠包/所属合集），会员不解锁视频；文字（讲稿/笔记/讨论区）购买或在期会员都能看 ---- */
-function getEntitlement(){try{var e=JSON.parse(localStorage.getItem('yeban-entitlement')||'{}');return e&&typeof e==='object'?e:{};}catch(err){return{};}}
-function shanghaiTodayKey(){try{var ps=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Shanghai",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());var y=0,m=0,d=0;ps.forEach(function(p){if(p.type==="year")y=+p.value;if(p.type==="month")m=+p.value;if(p.type==="day")d=+p.value;});return y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");}catch(e){var n=new Date();return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0");}}
-function lessonCollection(n){return null;/* 模块 1 的课属于第 1 周课程，没有所属合集；以后模块复用时按课号返回合集包名，如 'coll-b1' */}
-function hasVideoAccess(n){if(n===1)return true;var e=getEntitlement();var b=(e.buyout||[]);if(b.indexOf('week1')>=0)return true;if(b.indexOf('bundle-w1a')>=0)return true;var nn=('0'+n).slice(-2);if(b.indexOf('lesson-ep'+nn)>=0)return true;var c=lessonCollection(n);if(c&&b.indexOf(c)>=0)return true;return false;}
-function hasTextAccess(n){if(hasVideoAccess(n))return true;var e=getEntitlement();if(e.vip&&e.vip.until&&e.vip.until>=shanghaiTodayKey())return true;return false;}
-var LESSON_VIDEO={"1": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson1-15min.mp4", "2": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson2-15min.mp4", "3": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson3-15min.mp4", "4": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson4-15min.mp4", "5": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson5-15min.mp4", "6": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson6-15min.mp4", "7": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson7-15min.mp4", "8": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson8-15min.mp4", "9": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson9-15min.mp4", "10": "https://pub-8c7c714707454aa292f5d7d7857c9cd0.r2.dev/course-m1-lesson10-15min.mp4"};
-var LESSON_TRANSCRIPT={"1": "护士英语第一课，病人说疼，你只会说 pain 吗？今天教你一句临床最常用的话。护士问，On a scale of zero to ten, how bad is your pain？意思是，从零到十分，你的疼痛有几分？病人回答，About seven, it&#x27;s sharp。意思是，大概七分，是刺痛。记住两个词，sharp 是刺痛，dull 是钝痛。下次查房，你就可以这样问，疼痛几分，是刺痛还是钝痛？评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "2": "护士英语第二课，量血压别只会说 blood pressure。护士说，Let me check your blood pressure，意思是，我给你量一下血压。量完说，Your blood pressure is one twenty over eighty，that&#x27;s normal，意思是，你的血压是一百二比八十，正常。记住，blood pressure 是血压，normal 是正常。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "3": "护士英语第三课，入院第一句一定要问过敏史。护士问，Do you have any allergies？意思是，你对什么过敏吗？病人回答，Yes, I&#x27;m allergic to penicillin，意思是，是的，我对青霉素过敏。记住，allergy 是过敏，allergic to 是对什么过敏。这句问错了会出大事，一定要记牢。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "4": "护士英语第四课，给病人输液怎么说？护士说，I&#x27;m going to start an IV drip for you，意思是，我要给你输液了。再补一句，It may feel a little cold，意思是，可能会感觉有点凉。记住，IV drip 是输液，cold 是凉。这样说，病人就不会紧张了。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "5": "护士英语第五课，换药别只会说 change。护士说，I need to change your dressing，意思是，我需要给你换药。再补一句，Please tell me if it hurts，意思是，如果疼请告诉我。记住，dressing 是敷料、换药，hurt 是疼。疼就说，病人也安心。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "6": "护士英语第六课，发药前一定要核对身份。护士说，Please tell me your name and date of birth，意思是，请告诉我你的姓名和出生日期。病人回答后，再核对药名和剂量。这句不是客套，是给药安全的第一步。记住，date of birth 是出生日期。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "7": "护士英语第七课，术后查房第一句怎么问？护士问，How are you feeling after the operation？意思是，手术后你感觉怎么样？病人回答，A bit dizzy, but okay，意思是，有点晕，但还好。记住，operation 是手术，dizzy 是头晕。听到 dizzy，就要多观察一会儿。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "8": "护士英语第八课，术前禁食怎么交代清楚？护士说，You need to fast before surgery，意思是，手术前你需要禁食。再补一句，No food or water after midnight，意思是，午夜之后不要吃东西，也不要喝水。记住，fast 是禁食，surgery 是手术。这句说不清楚，手术可能要推迟。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "9": "护士英语第九课，防跌倒一句话就能救人。护士说，Please press the call bell if you need help，意思是，需要帮助请按呼叫铃。再补一句，Don&#x27;t get up alone，意思是，不要自己一个人起来。记住，call bell 是呼叫铃，alone 是独自一人。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。", "10": "护士英语第十课，出院宣教别说一半就走。护士说，Take this medicine twice a day after meals，意思是，这个药每天吃两次，饭后吃。再补一句，Come back for a follow-up in one week，意思是，一周后回来复查。记住，twice a day 是每天两次，follow-up 是复查。评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。"};
-function videoBlock(L){
-  var key='ep'+('0'+L.n).slice(-2);
-  var hasV=hasVideoAccess(L.n),hasT=hasTextAccess(L.n);
-  if(!hasV&&!hasT){
-    return '<div class="card lockcard"><h2>\uD83D\uDD12 \u7B2C '+L.n+' \u8BFE\u8FD8\u6CA1\u89E3\u9501</h2><p>\u7B2C 1 \u8BFE\u514D\u8D39\u6574\u8282\u770B\uFF1B\u7B2C 2\u201310 \u8BFE\u8D2D\u4E70\u540E\u89E3\u9501\u2014\u2014\u5355\u8BFE\u3001\u5468\u5305\u3001\u4F18\u60E0\u5305\u6216\u6240\u5C5E\u5408\u96C6\u90FD\u80FD\u5F00\uFF1B\u4F1A\u5458\u53EA\u5B66\u6587\u5B57\uFF0C\u4E0D\u5F00\u89C6\u9891\u3002</p><p class="note">\u5DF2\u4E70\u8FC7\uFF1F\u5148\u5728\u300C\u6211\u7684\u300D\u91CC\u7528\u5151\u6362\u7801\u5151\u6362\u3002</p></div>';
-  }
-  var kp='';
-  if(L.n===1){kp='<div style="margin-top:12px"><b>\uD83D\uDCCC \u7B2C 1 \u8BFE\u91CD\u70B9 \u00B7 \u622A\u56FE\u4FDD\u5B58</b><img id="keypointsImgM1" alt="\u7B2C 1 \u8BFE\u91CD\u70B9 \u00B7 \u75BC\u75DB\u8BC4\u4F30" style="width:100%;border-radius:12px;display:block;margin-top:8px;background:#0F2A28"><p class="note">\u514D\u8D39\u9644\u8D60\uFF0C\u622A\u56FE\u4FDD\u5B58\uFF0C\u4E0B\u6B21\u67E5\u623F\u76F4\u63A5\u7528\u3002</p></div>';}
-  var videoHtml;
-  if(hasV){videoHtml='<div class="card videocard lesson-video"><h2>\uD83C\uDFAC \u7B2C '+L.n+' \u8BFE\u89C6\u9891</h2><div class="video-slot" data-video="'+LESSON_VIDEO[L.n]+'"><p class="note">\u6B63\u5728\u68C0\u67E5\u89C6\u9891\u2026</p></div><p class="note">\u89C6\u9891\u548C\u8BFE\u5802\u6717\u8BFB\u662F\u540C\u4E00\u8BFE\u7684\u539F\u53E5\uFF1B\u5148\u770B\u89C6\u9891\u5B66\u4E00\u904D\uFF0C\u518D\u8DDF\u8BFB\u4E00\u904D\u3002</p>'+kp+'</div>';}
-  else{videoHtml='<div class="card videocard lesson-video"><h2>\uD83C\uDFAC \u7B2C '+L.n+' \u8BFE\u89C6\u9891</h2><p class="note">\u89C6\u9891\u9700\u8D2D\u4E70\u540E\u770B\uFF1B\u6587\u5B57\u5DF2\u5F00\u653E\u3002</p></div>';}
-  return videoHtml
-  +'<details class="card transcript"><summary>\uD83D\uDCDD \u672C\u8BFE\u8BB2\u7A3F\uFF08\u89C6\u9891\u91CC\u8BF4\u7684\u539F\u8BDD\uFF0C\u70B9\u5F00\u770B\uFF09</summary><p>'+LESSON_TRANSCRIPT[String(L.n)]+'</p><p class="note">\u8BB2\u7A3F\u5C31\u662F\u7B2C'+L.n+'\u96C6\u89C6\u9891\u7684\u539F\u7A3F\uFF0C\u4E00\u5B57\u4E0D\u6539\u3002</p></details>'
-  +'<div class="card notes"><h2>\uD83D\uDCDD \u6211\u7684\u8BFE\u5802\u7B14\u8BB0</h2><p class="note">\u8BB0\u4E00\u53E5\u4F60\u81EA\u5DF1\u7684\u8BDD\u3001\u4E00\u4E2A\u5BB9\u6613\u5FD8\u7684\u8BCD\uFF0C\u6216\u4E00\u4E2A\u60F3\u95EE\u7684\u95EE\u9898\u3002\u53EA\u5B58\u5728\u4F60\u8FD9\u53F0\u624B\u673A\u91CC\u3002</p><textarea id="myNotes-'+key+'" placeholder="\u4F8B\u5982\uFF1Asharp \u662F\u523A\u75DB\uFF0Cdull \u662F\u949D\u75DB\uFF0C\u522B\u6DF7\u4E86\u3002"></textarea><p><button onclick="saveModuleNotes(\''+key+'\')">\uD83D\uDCBE \u4FDD\u5B58\u7B14\u8BB0</button> <span id="notesState-'+key+'" class="note"></span></p></div>'
-  +'<div class="card"><h2>\uD83D\uDCAC \u8BA8\u8BBA\u533A</h2><p>\u672C\u8BFE\u8BA8\u8BBA\u533A\u8FD8\u5728\u51C6\u5907\u4E2D\uFF0C\u656C\u8BF7\u671F\u5F85\u3002</p><p class="note">\u60F3\u95EE\u7684\u95EE\u9898\u5148\u8BB0\u5728\u4E0A\u9762\u201C\u6211\u7684\u8BFE\u5802\u7B14\u8BB0\u201D\u91CC\uFF1B\u8BA8\u8BBA\u533A\u4E0A\u7EBF\u540E\uFF0C\u95EE\u9898\u548C\u56DE\u7B54\u90FD\u4F1A\u51FA\u73B0\u5728\u8FD9\u91CC\uFF0C\u4E0D\u4F1A\u7F16\u9020\u522B\u4EBA\u7684\u63D0\u95EE\u3002</p></div>';
-}
-function saveModuleNotes(key){try{var ta=document.getElementById("myNotes-"+key);localStorage.setItem('classroom-'+key+'-notes',ta.value);var st=document.getElementById("notesState-"+key);if(st)st.textContent="\u5DF2\u4FDD\u5B58 "+new Date().toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"})+"\uFF08\u53EA\u5B58\u5728\u8FD9\u53F0\u624B\u673A\u91CC\uFF09";}catch(e){}}
-
+/* access.js 没加载到时的安全默认值：只放行免费的第 1 课，其余全锁；不是权限规则的第二份拷贝，规则只在 video/access.js 里。 */
+if(typeof hasVideoAccess!=="function"){window.hasVideoAccess=function(n){return n===1;};window.hasTextAccess=function(n){return n===1;};}
 var doneKeys=["classroom-ep01-done","classroom-ep02-done","classroom-ep03-done","classroom-ep04-done","classroom-ep05-done","classroom-ep06-done","classroom-ep07-done","classroom-ep08-done","classroom-ep09-done","classroom-ep10-done"];
 function isDone(i){try{return !!localStorage.getItem(doneKeys[i]);}catch(e){return false;}}
 var doneCount=0,html="",firstTodo=-1;
 lessons.forEach(function(L,i){
   var d=isDone(i); if(d)doneCount++;
   if(!d&&firstTodo<0)firstTodo=i;
-  html+='<div class="lesson"><b>第 '+L.n+' 课 · '+L.t+'</b> '+(d?'<span class="done-tag">✅ 已完成</span>':'<span class="tag">未完成</span>')+'<div class="en">'+L.en+'</div><div class="zh">'+L.zh+'</div><div class="en">'+L.en2+'</div><div class="zh">'+L.zh2+'</div><a class="btn ghost" href="'+L.f+'">'+(d?"再学一遍 →":"开始学 →")+'</a></div>';
-  html+=videoBlock(L);
+  var hasV=hasVideoAccess(L.n);
+  html+='<div class="lesson"><b>第 '+L.n+' 课 · '+L.t+'</b> '+(d?'<span class="done-tag">✅ 已完成</span>':'<span class="tag">未完成</span>')+' '+(hasV?(L.n===1?'<span class="tag">免费整节</span>':'<span class="tag">✅ 已解锁</span>'):'<span class="tag">🔒 未解锁</span>')+'<div class="en">'+L.en+'</div><div class="zh">'+L.zh+'</div><div class="en">'+L.en2+'</div><div class="zh">'+L.zh2+'</div>'+(hasV?'':'<p class="note">🔒 视频、讲稿、笔记、讨论区在详情页里，购买后解锁——单课、优惠包或所属合集都能开；会员只学文字，不开视频。</p>')+'<a class="btn" href="'+L.d+'">进详情页 →</a> <a class="btn ghost" href="'+L.f+'">课堂练习 →</a></div>';
+  if(L.n===1){html+='<div class="card"><h2>📌 第 1 课重点 · 截图保存</h2><img id="keypointsImgM1" alt="第 1 课重点 · 疼痛评估" style="width:100%;border-radius:12px;display:block;margin-top:8px;background:#0F2A28"><p class="note">免费附赠，截图保存，下次查房直接用。</p></div>';}
 });
 document.getElementById("lessonList").innerHTML=html;
-lessons.forEach(function(L){var key='ep'+('0'+L.n).slice(-2);try{var ta=document.getElementById("myNotes-"+key);var s=localStorage.getItem('classroom-'+key+'-notes');if(ta&&s)ta.value=s;}catch(e){}});
 document.getElementById("progBar").style.width=(doneCount*10)+"%";
 document.getElementById("progText").textContent=doneCount===10?"✅ 10 课全学完了，去复习页拿总结小抄卡吧。":"已完成 "+doneCount+" / 10 课。";
 var cb=document.getElementById("continueBtn");
 if(doneCount===10){cb.textContent="📖 10 课全学完了，去复习页";cb.href="module-m1-review.html";}
-else{cb.textContent="▶ 继续学第 "+(firstTodo+1)+" 课 · "+lessons[firstTodo].t;cb.href=lessons[firstTodo].f;}
+else{cb.textContent="▶ 继续学第 "+(firstTodo+1)+" 课 · "+lessons[firstTodo].t;cb.href=lessons[firstTodo].d;}
 </script>
 <script>(function(){var im=document.getElementById('keypointsImgM1');if(!im)return;try{var b=window.__KEYPOINTS_EP01;if(!b)return;var s=atob(b),a=new Uint8Array(s.length);for(var i=0;i<s.length;i++)a[i]=s.charCodeAt(i);im.src=URL.createObjectURL(new Blob([a],{type:'image/png'}));}catch(e){}})();</script>
 <script>(function(){var cb=document.getElementById("continueBtn"),b=document.getElementById("barCta");if(cb&&b){b.textContent=cb.textContent;b.href=cb.href;}})();</script><script>
@@ -213,7 +190,7 @@ if(map&&typeof lessons!=="undefined"&&typeof isDone==="function"){
   var firstTodo=-1;var h="";
   lessons.forEach(function(L,i){var d=isDone(i);if(!d&&firstTodo<0)firstTodo=i;
     var cls=d?"done":(i===firstTodo?"now":"todo");
-    h+='<div class="pm-node '+cls+'"><a href="'+L.f+'"><div class="pm-dot">'+(d?"\u2713":L.n)+'</div>'+L.t+'</a></div>';});
+    h+='<div class="pm-node '+cls+'"><a href="'+L.d+'"><div class="pm-dot">'+(d?"\u2713":L.n)+'</div>'+L.t+'</a></div>';});
   map.innerHTML=h;
 }
 var mc=document.getElementById("moduleCheckin");

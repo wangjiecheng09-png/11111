@@ -257,12 +257,11 @@ button.opt:active{transform:scale(.99)}
 <p class="note" style="color:#FFE08A">打卡存在本机浏览器里，换设备要重新算。每天学一课、点一次打卡，断了就从 1 重新数。</p></div>
 <div class="card"><h2>📈 我的进度</h2><div class="card" id="memberCard"><h2>💎 我的会员</h2>
 <p class="member-row">当前身份：<span class="tier tier-free" id="memberTier">普通用户</span></p>
-<p class="member-row" id="memberBuyoutLine" style="display:none">已购周包：<b>入院到出院</b>（买断，不限期）</p>
 <p class="member-row" id="memberLessonLine" style="display:none">已购单课：<b id="memberLessonList"></b>（买断，不限期）</p>
 <p class="member-row" id="memberBundleLine" style="display:none">已购优惠包：<b>入院到出院 + 护士基本功</b>（买断，不限期）</p>
 <p class="member-row" id="memberCollLine" style="display:none">已购合集：<b id="memberCollList"></b>（买断，不限期）</p>
 <p class="member-row">会员到期时间：<b id="memberUntil">未开通会员</b></p>
-<p class="note">买断（单课、周包、优惠包、合集）不限期，不算会员；会员只学文字，不解锁视频；会员到期后自动变回普通用户。会员到期时间按兑换那天算：月会员 30 天、季会员 90 天、年会员 365 天。</p></div>
+<p class="note">买断（单课、优惠包、合集）不限期，不算会员；会员只学文字，不解锁视频；会员到期后自动变回普通用户。会员到期时间按兑换那天算：月会员 30 天、季会员 90 天、年会员 365 天。</p></div>
 
 <p><b>入院到出院</b> <span id="m1ProgText">0 / 10 节</span></p>
 <div class="bar"><div id="m1Bar"></div></div>
@@ -292,7 +291,7 @@ button.opt:active{transform:scale(.99)}
 <p>兑换码：<input type="text" id="redeemInput" maxlength="32" placeholder="输入兑换码"> <button class="btn gold" onclick="redeemCode()">兑换</button></p>
 <p id="redeemMsg" class="note"></p>
 <p id="redeemState" class="note"></p>
-<p class="note">兑换码现在是本机验证（没有服务器），以后会上服务器验码；一个码只能用一次。买断码开单课、周包、优惠包或合集（不限期），会员码开会员（会员只学文字，不解锁视频）。如果点了兑换没反应，先把页面彻底关掉重开再试（微信会留着旧页面）。</p>
+<p class="note">兑换码现在是本机验证（没有服务器），以后会上服务器验码；一个码只能用一次。买断码开单课、优惠包或合集（不限期），会员码开会员（会员只学文字，不解锁视频）。如果点了兑换没反应，先把页面彻底关掉重开再试（微信会留着旧页面）。</p>
 
 <p><button class="ghost" onclick="clearAllProgress()">清除本机全部课堂进度</button>
 <button class="ghost" onclick="clearCheckins()">清除本机打卡记录</button>
@@ -338,9 +337,8 @@ function clearCheckins(){localStorage.removeItem('yeban-checkin-days');loadMy();
 var MEMBER_TIERS={month:['月会员','tier-month',30],quarter:['季会员','tier-quarter',90],year:['年会员','tier-year',365]};
 /* 合集名：B1 急诊科、B2 外科、B3 手术室、B4 预检分诊、B5 体检、B6 内科、B7 儿科、B8 妇产科、B9 心内科、B10 内分泌科；基础合集是“护士基本功” */
 var COLL_NAMES={b1:'急诊科',b2:'外科',b3:'手术室',b4:'预检分诊',b5:'体检',b6:'内科',b7:'儿科',b8:'妇产科',b9:'心内科',b10:'内分泌科'};
-/* 买断包的中文名：周包 / 优惠包 / 单课（MY_NAMES 的课名）/ 合集（科室名）；与模块页共用同一套 */
+/* 买断包的中文名：优惠包 / 单课（MY_NAMES 的课名）/ 合集（科室名）；与模块页共用同一套 */
 function packDisplayName(pack){
-if(pack==='week1')return '周包“入院到出院”';
 if(pack==='bundle-w1a')return '优惠包“入院到出院 + 护士基本功”';
 if(pack&&pack.indexOf('lesson-')===0){var k=pack.slice(7);return (typeof MY_NAMES!=='undefined'&&MY_NAMES[k])?('单课“'+MY_NAMES[k]+'”'):('单课“'+pack+'”');}
 if(pack&&pack.indexOf('coll-')===0){var c=pack.slice(5);return COLL_NAMES[c]?('合集“'+COLL_NAMES[c]+'”'):('合集“'+pack+'”');}
@@ -349,10 +347,9 @@ function boughtPacks(ent){
 var bo=(ent&&ent.buyout)||[];
 var lessons=bo.filter(function(p){return p.indexOf('lesson-')===0;}).sort(function(a,b){return parseInt(a.slice(9),10)-parseInt(b.slice(9),10);});
 var colls=bo.filter(function(p){return p.indexOf('coll-')===0;}).sort(function(a,b){return parseInt(a.slice(6),10)-parseInt(b.slice(6),10);});
-return {week1:bo.indexOf('week1')>=0,bundle:bo.indexOf('bundle-w1a')>=0,lessons:lessons,colls:colls};}
+return {bundle:bo.indexOf('bundle-w1a')>=0,lessons:lessons,colls:colls};}
 /* 测试码的 SHA-256（只存哈希，不存明文；正式码由服务器发，绝不进仓库） */
 var REDEEM_CODES={
-'58e03a19070568b0ef243af4418d80034dd6b4e197ac308b7d3270184599dd6b':{type:'buyout',pack:'week1'},
 '76b4936f620c0892e9d5f574c3621ccbb94d0cacf70b0e2ca1faf09cc014b76c':{type:'buyout',pack:'lesson-ep02'},
 '2fa240c6a78f13ce7be4f1129b703644c5570446144b8b05e92bfa6ea2a8f8c6':{type:'buyout',pack:'lesson-ep03'},
 '0e71104f4b5d3e007c4825df3f658e883c1fcc68a4f701e136e4d3e3b73bd0f8':{type:'buyout',pack:'lesson-ep10'},
@@ -369,11 +366,10 @@ function getUsedCodes(){try{var a=JSON.parse(localStorage.getItem('yeban-used-co
 function addDays(key,days){var p=key.split('-');var d=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]));d.setUTCDate(d.getUTCDate()+days);return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0');}
 function renderMember(){var ent=getEntitlement();var today=shanghaiToday().key;
 if(ent.vip&&ent.vip.until&&ent.vip.until<today){delete ent.vip;saveEntitlement(ent);}
-var tierEl=document.getElementById('memberTier'),untilEl=document.getElementById('memberUntil'),buyEl=document.getElementById('memberBuyoutLine');
+var tierEl=document.getElementById('memberTier'),untilEl=document.getElementById('memberUntil');
 if(ent.vip&&ent.vip.until&&MEMBER_TIERS[ent.vip.tier]){var t=MEMBER_TIERS[ent.vip.tier];tierEl.textContent=t[0];tierEl.className='tier '+t[1];untilEl.textContent=ent.vip.until+'（到期后自动变回普通用户）';}
 else{tierEl.textContent='普通用户';tierEl.className='tier tier-free';untilEl.textContent='未开通会员';}
 var bought=boughtPacks(ent);
-if(buyEl)buyEl.style.display=bought.week1?'block':'none';
 var lesEl=document.getElementById('memberLessonLine'),lesList=document.getElementById('memberLessonList');
 if(lesEl){lesEl.style.display=bought.lessons.length?'block':'none';if(lesList)lesList.textContent=bought.lessons.map(function(p){var k=p.slice(7);return MY_NAMES[k]||p;}).join('、');}
 var bunEl=document.getElementById('memberBundleLine');
@@ -383,7 +379,6 @@ if(colEl){colEl.style.display=bought.colls.length?'block':'none';if(colList)colL
 var rs=document.getElementById('redeemState');if(rs){
 var vipTxt=(ent.vip&&ent.vip.until&&MEMBER_TIERS[ent.vip.tier])?MEMBER_TIERS[ent.vip.tier][0]+'，到期 '+ent.vip.until:'普通用户（未开通会员）';
 var owned=[];
-if(bought.week1)owned.push('周包：入院到出院');
 if(bought.lessons.length)owned.push('单课：'+bought.lessons.map(function(p){var k=p.slice(7);return MY_NAMES[k]||p;}).join('、'));
 if(bought.bundle)owned.push('优惠包：入院到出院 + 护士基本功');
 if(bought.colls.length)owned.push('合集：'+bought.colls.map(function(p){var c=p.slice(5);return COLL_NAMES[c]||p;}).join('、'));
