@@ -57,22 +57,7 @@ a{color:#0F5E5A}
 button.opt:active{transform:scale(.99)}
 .wordrow{display:flex;width:100%;gap:12px;align-items:center;background:#FFF7E8;border-radius:10px;padding:10px 14px;margin:8px 0}
 .wordrow span{flex:1;min-width:0}
-.wordrow button{flex:none;margin:0;padding:6px 10px;min-height:36px;font-size:14px}
-.videocard video{width:100%;border-radius:12px;background:#0F2A28;display:block}
-.video-slot .ph{background:#0F2A28;color:#FFF7E8;border-radius:12px;padding:28px 16px;text-align:center;line-height:1.8}
-.video-slot .ph b{color:#FFD97A}
-.vrate{margin-top:8px}
-.vrate select{font-size:15px;padding:8px;border-radius:10px;border:1.5px solid #0F5E5A}
-details.transcript summary{cursor:pointer;font-weight:bold;color:#0F5E5A;font-size:17px}
-details.transcript p{margin:10px 0}
-.notes textarea{width:100%;min-height:90px;box-sizing:border-box;padding:10px;border-radius:10px;border:1.5px solid #0F5E5A;font-size:16px;font-family:inherit}
-.pathmap{display:flex;overflow-x:auto;padding:6px 2px}
-.pm-node{flex:1;min-width:56px;text-align:center;font-size:12px;color:#666}
-.pm-node a{color:inherit;text-decoration:none}
-.pm-dot{width:34px;height:34px;line-height:34px;border-radius:50%;margin:0 auto 4px;background:#fff;border:2px solid #E7DFC8;color:#666;font-weight:bold}
-.pm-node.done .pm-dot{background:#E8A838;border-color:#E8A838;color:#222}
-.pm-node.now .pm-dot{border-color:#0F5E5A;color:#0F5E5A;box-shadow:0 0 0 3px #FFE08A}
-</style></head><body><div class="wrap">
+.wordrow button{flex:none;margin:0;padding:6px 10px;min-height:36px;font-size:14px}</style></head><body><div class="wrap">
 <p><a href="index.html">← 回总站首页</a></p>
 <h1>夜班英语课堂 · 第1课</h1>
 <p class="sub">疼痛评估 · 跟第1集同一课 · 只用第1集原句</p>
@@ -80,15 +65,6 @@ details.transcript p{margin:10px 0}
 <p><label>语速 <input type="range" id="rate" min="0.7" max="1.1" step="0.1" value="0.9"> <span id="ratev">0.9</span></label>
 <button class="ghost" onclick="toggleZh()">中文开/关</button></p>
 <p id="voicehint" class="note" style="display:none">🔇 没听到声音？先把手机媒体音量调大，再点一次 🔊；如果还不行，彻底关掉页面重开，或在链接后加 ?v=2。</p>
-<div class="card videocard" id="videoCard">
-<h2>🎬 本课视频</h2>
-<div class="video-slot" id="videoSlot" data-video="video/week1-ep01-pain-shortvideo-careful.mp4"><p class="note">正在检查视频…</p></div>
-<p class="note">视频和下面朗读是同一课的原句；先看视频学一遍，再跟读一遍。</p>
-</div>
-<details class="card transcript"><summary>📝 本课讲稿（视频里说的原话，点开看）</summary>
-<p>护士英语第一课，病人说疼，你只会说 pain 吗？今天教你一句临床最常用的话。护士问，On a scale of zero to ten, how bad is your pain？意思是，从零到十分，你的疼痛有几分？病人回答，About seven, it&#x27;s sharp。意思是，大概七分，是刺痛。记住两个词，sharp 是刺痛，dull 是钝痛。下次查房，你就可以这样问，疼痛几分，是刺痛还是钝痛？评论区告诉我，你还想学哪句临床英语？关注我，每天一个临床场景。</p>
-<p class="note">讲稿就是第1集视频的原稿，一字不改。</p>
-</details>
 <div class="card teacher"><h2>👩‍🏫 老师讲</h2>
 <div class="line"><div class="line-text"><div class="en">On a scale of zero to ten, how bad is your pain?</div><div class="zh">从零到十分，你的疼痛有几分？</div></div><button onclick="speak('On a scale of zero to ten, how bad is your pain?')">🔊 朗读</button></div>
 <div class="line"><div class="line-text"><div class="en">About seven, it&#x27;s sharp.</div><div class="zh">大概七分，是刺痛。</div></div><button onclick="speak('About seven, it&#x27;s sharp.')">🔊 朗读</button></div>
@@ -109,10 +85,6 @@ details.transcript p{margin:10px 0}
 <p id="mysent" class="ans"></p>
 <p><button class="ghost" onclick="if(document.getElementById('mysent').dataset.t){speak(document.getElementById('mysent').dataset.t)}">🔊 朗读我的句子</button></p>
 <p class="note">这只是语言练习，不是问诊；真实情况以医生诊断和医嘱为准。</p></div>
-<div class="card notes"><h2>📝 我的课堂笔记</h2>
-<p class="note">记一句你自己的话、一个容易忘的词，或一个想问的问题。只存在你这台手机里。</p>
-<textarea id="myNotes" placeholder="例如：sharp 是刺痛，dull 是钝痛，别混了。"></textarea>
-<p><button onclick="saveNotes()">💾 保存笔记</button> <span id="notesState" class="note"></span></p></div>
 <div class="card"><h2>✅ 学完打勾 + 错题回炉</h2>
 <p id="checkinState" class="note"></p>
 <p id="progress">进度：还没完成本课小测</p>
@@ -124,12 +96,6 @@ details.transcript p{margin:10px 0}
 <p class="note">原型说明：本课只用第1集原句，没有新编的模板句。</p></div>
 </div>
 <script src="audio/audio-data.js?v=2"></script>
-<div class="card"><h2>🗺️ 学习路径</h2>
-<p>第 1 / 10 课 · 入院到出院（建议按顺序学）</p>
-<p><a class="btn ghost" href="module-m1.html">← 课程目录</a> <a class="btn" href="classroom-ep02-vital-signs.html">第 2 课 · 测生命体征 →</a></p></div>
-<div class="card"><h2>💬 讨论区</h2>
-<p>本课讨论区还在准备中，敬请期待。</p>
-<p class="note">想问的问题先记在上面“我的课堂笔记”里；讨论区上线后，问题和回答都会出现在这里，不会编造别人的提问。</p></div>
 <script>
 let showZh=true;
 function showVoiceHint(){document.getElementById('voicehint').style.display='block';}
@@ -151,35 +117,12 @@ function clearProgress(){localStorage.removeItem('classroom-ep01-done');localSto
 showProgress();
 </script><script>
 (function(){var _sp=window.showProgress;if(typeof _sp!=="function")return;window.showProgress=function(){_sp();var d=null;try{d=localStorage.getItem('classroom-ep01-done');}catch(e){}var b=document.getElementById("homeBtn"),h=document.getElementById("homeHint");if(b)b.style.display=d?"block":"none";if(h)h.textContent=d?"✅ 本课已完成，点下面回首页继续。":"完成本课打勾后，从这里回首页。";};showProgress();})();
-</script><script>
-/* ---- 视频接口：video/<文件名>；文件不存在时显示占位，不出坏播放器 ---- */
-(function(){
-var slot=document.getElementById("videoSlot");if(!slot)return;
-var src=slot.getAttribute("data-video");
-function placeholder(msg){slot.innerHTML='<div class="ph"><b>\uD83C\uDFAC 本课视频'+msg+'</b><br>先看下面朗读和白板，视频传好后这里就能直接看。</div>';}
-if(!src){placeholder("还没拍");return;}
-fetch(src,{method:"HEAD",cache:"no-store"}).then(function(r){
-  if(!r.ok){placeholder("正在上传，稍后上线");return;}
-  var v=document.createElement("video");
-  v.setAttribute("controls","");v.setAttribute("playsinline","");v.setAttribute("preload","metadata");v.src=src;
-  slot.innerHTML="";slot.appendChild(v);
-  var bar=document.createElement("p");bar.className="vrate";
-  bar.innerHTML='倍速 <select id="vrate" aria-label="倍速"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select>　<button class="ghost" id="vfull">⛶ 全屏</button>';
-  slot.parentNode.insertBefore(bar,slot.nextSibling);
-  document.getElementById("vrate").addEventListener("change",function(e){v.playbackRate=parseFloat(e.target.value);});
-  document.getElementById("vfull").addEventListener("click",function(){if(v.requestFullscreen)v.requestFullscreen();});
-  v.addEventListener("error",function(){placeholder("正在上传，稍后上线");var b=document.querySelector(".vrate");if(b)b.remove();});
-}).catch(function(){placeholder("正在上传，稍后上线");});
-})();
 </script>
 <script>
-/* ---- 课堂笔记（本机保存）+ 学完打勾自动打卡（复用 yeban-checkin-days） ---- */
+/* ---- 学完打勾自动打卡（复用 yeban-checkin-days；视频课内容在视频课模块页） ---- */
 (function(){
-var nk='classroom-ep01-notes';
-try{var ta=document.getElementById("myNotes");var saved=localStorage.getItem(nk);if(ta&&saved)ta.value=saved;}catch(e){}
-window.saveNotes=function(){try{var ta=document.getElementById("myNotes");localStorage.setItem(nk,ta.value);var st=document.getElementById("notesState");if(st)st.textContent="已保存 "+new Date().toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"})+"（只存在这台手机里）";}catch(e){}};
 function shanghaiToday(){try{var ps=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Shanghai",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());var y=0,m=0,d=0;ps.forEach(function(p){if(p.type==="year")y=+p.value;if(p.type==="month")m=+p.value;if(p.type==="day")d=+p.value;});return y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0");}catch(e){var n=new Date();return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0");}}
-function refreshCheckin(){try{var a=JSON.parse(localStorage.getItem('yeban-checkin-days')||'[]');var t=shanghaiToday();var el=document.getElementById("checkinState");if(el)el.textContent=a.indexOf(t)>=0?("\u2705 今天已打卡（"+t+"），去\u201C我的\u201D看打卡日历。"):"";}catch(e){}}
+function refreshCheckin(){try{var a=JSON.parse(localStorage.getItem('yeban-checkin-days')||'[]');var t=shanghaiToday();var el=document.getElementById("checkinState");if(el)el.textContent=a.indexOf(t)>=0?("\u2705 \u4eca\u5929\u5df2\u6253\u5361\uff08"+t+"\uff09\uff0c\u53bb\u201c\u6211\u7684\u201d\u770b\u6253\u5361\u65e5\u5386\u3002"):"";}catch(e){}}
 var _md=window.markDone;
 if(typeof _md==="function"){window.markDone=function(){_md();try{if(localStorage.getItem('classroom-ep01-done')){var a=JSON.parse(localStorage.getItem('yeban-checkin-days')||'[]');var t=shanghaiToday();if(a.indexOf(t)<0){a.push(t);localStorage.setItem('yeban-checkin-days',JSON.stringify(a));}refreshCheckin();}}catch(e){}};}
 refreshCheckin();

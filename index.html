@@ -74,13 +74,16 @@ button.opt:active{transform:scale(.99)}
 .mycourse{display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid #E7DFC8;padding:10px 0}
 .mycourse:last-child{border-bottom:0}
 .btn.gold{background:#E8A838;color:#222}
-</style>
 .tier{font-weight:bold;padding:4px 12px;border-radius:999px;font-size:15px}
 .tier-free{background:#EDEBE3;color:#666}
 .tier-month{background:#0F5E5A;color:#fff}
 .tier-quarter{background:#E8A838;color:#222}
 .tier-year{background:#0F2A28;color:#FFD97A}
 .member-row{margin:6px 0}
+#redeemMsg{font-size:16px;font-weight:bold;min-height:22px;margin:8px 0}
+#redeemMsg.ok{color:#0F5E5A}
+#redeemMsg.err{color:#C0392B}
+</style>
 </head><body><div class="wrap">
 <h1>夜班英语课堂</h1>
 <p class="sub">每天一个临床场景 · 护士英语一句即用 · 错 vs 对，截图保存，下次查房直接用</p>
@@ -229,7 +232,7 @@ button.opt:active{transform:scale(.99)}
 <p><span class="streak">🔥 <b id="streakNum">0</b> 天连续打卡</span><br><span id="todayCheckinState">今天还没打卡</span></p>
 <p><button class="gold" id="checkinBtn" onclick="doCheckin()">✅ 今日打卡</button></p>
 <p class="note" style="color:#FFE08A">打卡存在本机浏览器里，换设备要重新算。每天学一课、点一次打卡，断了就从 1 重新数。</p></div>
-<div class="card"><h2>📈 我的进度</h2><div class="card"><h2>💎 我的会员</h2>
+<div class="card"><h2>📈 我的进度</h2><div class="card" id="memberCard"><h2>💎 我的会员</h2>
 <p class="member-row">当前身份：<span class="tier tier-free" id="memberTier">普通用户</span></p>
 <p class="member-row" id="memberBuyoutLine" style="display:none">已购周包：<b>入院到出院</b>（买断，不限期）</p>
 <p class="member-row">会员到期时间：<b id="memberUntil">未开通会员</b></p>
@@ -262,7 +265,8 @@ button.opt:active{transform:scale(.99)}
 <p id="userNameMsg" class="note"></p>
 <p>兑换码：<input type="text" id="redeemInput" maxlength="32" placeholder="输入兑换码"> <button class="btn gold" onclick="redeemCode()">兑换</button></p>
 <p id="redeemMsg" class="note"></p>
-<p class="note">兑换码现在是本机验证（没有服务器），以后会上服务器验码；一个码只能用一次。买断码开周包，会员码开会员。</p>
+<p id="redeemState" class="note"></p>
+<p class="note">兑换码现在是本机验证（没有服务器），以后会上服务器验码；一个码只能用一次。买断码开周包，会员码开会员。如果点了兑换没反应，先把页面彻底关掉重开再试（微信会留着旧页面）。</p>
 
 <p><button class="ghost" onclick="clearAllProgress()">清除本机全部课堂进度</button>
 <button class="ghost" onclick="clearCheckins()">清除本机打卡记录</button>
@@ -324,21 +328,24 @@ var tierEl=document.getElementById('memberTier'),untilEl=document.getElementById
 if(ent.vip&&ent.vip.until&&MEMBER_TIERS[ent.vip.tier]){var t=MEMBER_TIERS[ent.vip.tier];tierEl.textContent=t[0];tierEl.className='tier '+t[1];untilEl.textContent=ent.vip.until+'（到期后自动变回普通用户）';}
 else{tierEl.textContent='普通用户';tierEl.className='tier tier-free';untilEl.textContent='未开通会员';}
 if(buyEl)buyEl.style.display=(ent.buyout&&ent.buyout.indexOf('week1')>=0)?'block':'none';
+var rs=document.getElementById('redeemState');if(rs){if(ent.vip&&ent.vip.until&&MEMBER_TIERS[ent.vip.tier]){rs.textContent='当前：'+MEMBER_TIERS[ent.vip.tier][0]+'，到期 '+ent.vip.until+'。';}else if(ent.buyout&&ent.buyout.indexOf('week1')>=0){rs.textContent='当前：普通用户（已购周包：入院到出院，买断不限期）。';}else{rs.textContent='当前：普通用户（未开通会员）。';}}
 var nm='';try{nm=(localStorage.getItem('yeban-username')||'').trim();}catch(err){}
 var disp=document.getElementById('userNameDisplay');if(disp)disp.textContent=nm||'夜班学员';
 var inp=document.getElementById('userNameInput');if(inp&&document.activeElement!==inp)inp.value=nm;}
-async function sha256hex(s){if(window.crypto&&crypto.subtle){try{var buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');}catch(err){}}return sha256sync(s);}
+/* 兑换码验码只用本机同步 SHA-256（已逐字节对过 Node crypto），不依赖 crypto.subtle / TextEncoder，微信内置浏览器也能用 */
 function sha256sync(ascii){function rr(v,a){return (v>>>a)|(v<<(32-a));}var maxWord=Math.pow(2,32),i,j,result='';var words=[],asciiBitLength=ascii.length*8;var hash=sha256sync.h=sha256sync.h||[],k=sha256sync.k=sha256sync.k||[];var primeCounter=k.length,isComposite={};for(var candidate=2;primeCounter<64;candidate++){if(!isComposite[candidate]){for(i=0;i<313;i+=candidate)isComposite[i]=candidate;hash[primeCounter]=(Math.pow(candidate,.5)*maxWord)|0;k[primeCounter++]=(Math.pow(candidate,1/3)*maxWord)|0;}}ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);if(j>>8)return '';words[i>>2]|=j<<((3-i)%4)*8;}words[words.length]=((asciiBitLength/maxWord)|0);words[words.length]=(asciiBitLength);for(j=0;j<words.length;){var w=words.slice(j,j+=16),oldHash=hash;hash=hash.slice(0,8);for(i=0;i<64;i++){var w15=w[i-15],w2=w[i-2];var a=hash[0],e=hash[4];var temp1=hash[7]+(rr(e,6)^rr(e,11)^rr(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rr(w15,7)^rr(w15,18)^(w15>>>3))+w[i-7]+(rr(w2,17)^rr(w2,19)^(w2>>>10)))|0);var temp2=(rr(a,2)^rr(a,13)^rr(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));hash=[(temp1+temp2)|0].concat(hash);hash[4]=(hash[4]+temp1)|0;}for(i=0;i<8;i++)hash[i]=(hash[i]+oldHash[i])|0;}for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16);}return result;}
-async function redeemCode(){var msg=document.getElementById('redeemMsg');var inp=document.getElementById('redeemInput');var code=(inp.value||'').trim().toUpperCase();if(!code){msg.textContent='先输入兑换码。';return;}
-var h=await sha256hex(code);if(!h){msg.textContent='当前浏览器不支持本机验码，换 Chrome / Safari 再试。';return;}
-var c=REDEEM_CODES[h];if(!c){msg.textContent='这个码不对，再看一眼，是不是字母输错了？';return;}
-if(c.type==='expired'){msg.textContent='这个码已经过期了。';return;}
-var used=getUsedCodes();if(used.indexOf(h)>=0){msg.textContent='这个码已经用过啦，一个码只能用一次。去“我的会员”看一眼是不是已经开通过了。';return;}
+function normalizeCode(s){return (s||'').replace(/[\s\u3000]+/g,'').replace(/[\uFF01-\uFF5E]/g,function(ch){return String.fromCharCode(ch.charCodeAt(0)-0xFEE0);}).toUpperCase();}
+function redeemCode(){var msg=document.getElementById('redeemMsg');var inp=document.getElementById('redeemInput');var code=normalizeCode(inp.value);if(!code){msg.className='err';msg.textContent='先输入兑换码。';return;}
+var h=sha256sync(code);if(!h){msg.className='err';msg.textContent='这个码里有打不出来的字符，换个输入法再试。';return;}
+var c=REDEEM_CODES[h];if(!c){msg.className='err';msg.textContent='这个码不对，再看一眼，是不是字母输错了？';return;}
+if(c.type==='expired'){msg.className='err';msg.textContent='这个码已经过期了。';return;}
+var used=getUsedCodes();if(used.indexOf(h)>=0){msg.className='ok';msg.textContent='这个码已经用过啦——就是你刚才兑的那个，一个码只能用一次。去上面“我的会员”看一眼，已经开通过了。';renderMember();return;}
 used.push(h);localStorage.setItem('yeban-used-codes',JSON.stringify(used));
 var ent=getEntitlement();
-if(c.type==='buyout'){ent.buyout=ent.buyout||[];if(ent.buyout.indexOf('week1')<0)ent.buyout.push('week1');msg.textContent='开通成功！周包“入院到出院”已买断，不限期。';}
-else{var t=MEMBER_TIERS[c.tier];ent.vip={tier:c.tier,until:addDays(shanghaiToday().key,t[2])};msg.textContent='开通成功！'+t[0]+'已开通，到期时间 '+ent.vip.until+'。';}
-saveEntitlement(ent);inp.value='';renderMember();}
+if(c.type==='buyout'){ent.buyout=ent.buyout||[];if(ent.buyout.indexOf('week1')<0)ent.buyout.push('week1');msg.className='ok';msg.textContent='✅ 开通成功！周包“入院到出院”已买断，不限期。';}
+else{var t=MEMBER_TIERS[c.tier];ent.vip={tier:c.tier,until:addDays(shanghaiToday().key,t[2])};msg.className='ok';msg.textContent='✅ 开通成功！'+t[0]+'已开通，到期时间 '+ent.vip.until+'。';}
+saveEntitlement(ent);inp.value='';renderMember();
+try{var mc=document.getElementById('memberCard');if(mc)mc.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}}
 function saveUserName(){var inp=document.getElementById('userNameInput');var v=(inp.value||'').trim().slice(0,20);try{localStorage.setItem('yeban-username',v);}catch(err){}document.getElementById('userNameMsg').textContent=v?'已保存：'+v:'已清空，用默认名字“夜班学员”。';renderMember();}
 function clearMembership(){localStorage.removeItem('yeban-entitlement');localStorage.removeItem('yeban-used-codes');renderMember();document.getElementById('redeemMsg').textContent='本机会员与兑换记录已清除（测试用）。';}
 
