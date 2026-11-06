@@ -29,42 +29,88 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 .nav{position:fixed;left:0;right:0;bottom:0;background:#0F5E5A;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));z-index:10}
 .nav a{background:none;color:#FFF7E8;font-size:15px;margin:0;padding:8px 6px;min-height:44px;text-decoration:none;display:inline-block}
 .nav a.active{color:#FFD97A;font-weight:bold}
+
+.course{background:#fff;border:2px solid #0F5E5A;border-radius:16px;padding:16px;margin:14px 0;box-shadow:0 2px 10px rgba(15,42,40,.08)}
+.course.locked{border-color:#E7DFC8;background:#FFFBF0}
+.course-top{display:flex;gap:12px;align-items:flex-start}
+.cover{flex:none;width:64px;height:64px;border-radius:14px;background:#0F5E5A;color:#FFF7E8;font-size:32px;display:flex;align-items:center;justify-content:center}
+.cover.locked{background:#E7DFC8;color:#999}
+.course-top b{font-size:17px}
+.course .meta{font-size:13px;color:#0F5E5A;margin-top:2px}
+.course .desc{font-size:14px;color:#555;margin:10px 0}
+.course .bar{height:10px;background:#E7DFC8;border-radius:999px;overflow:hidden;margin:10px 0 4px}
+.course .bar>div{height:100%;background:#E8A838;width:0%}
+.lockpill{display:inline-block;background:#E7DFC8;color:#666;border-radius:999px;padding:10px 18px;font-size:15px;min-height:44px;line-height:1.4}
+.hero{background:#0F2A28;color:#FFF7E8;border:2px solid #0F2A28;border-radius:16px;padding:16px;margin:14px 0}
+.hero h2{color:#FFE08A}
+.hero .bar{height:12px;background:#0B4743;border-radius:999px;overflow:hidden;margin:10px 0}
+.hero .bar>div{height:100%;background:#E8A838;width:0%}
+.btn.gold{background:#E8A838;color:#222}
+.filter{width:100%;box-sizing:border-box;padding:10px;border-radius:10px;border:1.5px solid #0F5E5A;font-size:16px}
 </style></head>
 <body><div class="wrap">
 <p><a href="index.html">← 回课堂首页</a></p>
 <h1>🎬 视频课</h1>
 <p class="sub">一门课学完一整套：按课、按顺序学，每门课结尾有一次复习和一张总结小抄卡。入院到出院已经做完，先上；后面做好一门、开一门。</p>
-<div class="card"><h2>9 门课 · 54 节课</h2>
-<div class="lesson">
-<b>夜班英语 · 入院到出院</b> <span class="tag">第 1 周 · 10 节 · 已上线</span><br>
-<span class="">从病人入院到出院，夜班里最常说的 10 个场景：疼痛评估、生命体征、过敏史、输液、换药、给药核对、术后观察、术前禁食、防跌倒呼叫铃、出院宣教。</span><br>
-<a class="btn" href="module-m1.html">开始学习 →</a></div>
-<div class="lesson">
-<b>护士基本功 · 采血取药</b> <span class="tag soon">13 节 · 敬请期待</span><br>
-<span class="soon">采血、取药送药、检查单、交接班、手卫生、尿标本、翻身防压疮——所有护士每天都用得上的基本功。</span></div>
-<div class="lesson">
-<b>急诊英语</b> <span class="tag soon">4 节 · 敬请期待</span><br>
-<span class="soon">分诊主诉、胸痛优先、发烧先问、等医生 15 分钟。</span></div>
-<div class="lesson">
-<b>外科英语</b> <span class="tag soon">4 节 · 敬请期待</span><br>
-<span class="soon">术前禁食再确认、取下首饰假牙、术后伤口观察、术后下床。</span></div>
-<div class="lesson">
-<b>手术室英语</b> <span class="tag soon">5 节 · 敬请期待</span><br>
-<span class="soon">术前访视、进手术室核对、麻醉前、术后复苏、术后引流管。</span></div>
-<div class="lesson">
-<b>分诊英语</b> <span class="tag soon">5 节 · 敬请期待</span><br>
-<span class="soon">分诊第一句、量体征、分级告知、分诊记录分流。</span></div>
-<div class="lesson">
-<b>体检英语</b> <span class="tag soon">5 节 · 敬请期待</span><br>
-<span class="soon">体检前说明、问诊病史、听诊深呼吸、腹部检查、体检结束。</span></div>
-<div class="lesson">
-<b>内科英语</b> <span class="tag soon">4 节 · 敬请期待</span><br>
-<span class="soon">吸氧、心电图、雾化吸入、测血糖。</span></div>
-<div class="lesson">
-<b>儿科英语</b> <span class="tag soon">4 节 · 敬请期待</span><br>
-<span class="soon">安抚孩子、打针、请家长配合、孩子发烧。</span></div>
-<p class="note">学完是本课的结课记录，<b>不是执业资格、不是职称、不是学历</b>。学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p>
-</div>
+<div class="hero"><h2>🔥 继续学习</h2>
+<p><b>夜班英语 · 入院到出院</b><br><span id="heroProg">正在读取进度……</span></p>
+<div class="bar"><div id="heroBar"></div></div>
+<a class="btn gold btn-block" id="heroCta" href="module-m1.html">开始学习 →</a></div>
+<p><input type="text" class="filter" id="courseFilter" placeholder="🔍 搜一门课，例如：急诊、儿科、采血" oninput="filterCourses()"></p>
+<p class="note" id="filterNote"></p>
+<div id="courseList">
+<div class="course" data-kw="入院到出院 疼痛 生命体征 过敏 输液 换药 给药 术后 禁食 呼叫铃 出院 夜班英语 · 入院到出院">
+<div class="course-top"><div class="cover">🌙</div><div><b>夜班英语 · 入院到出院</b><div class="meta">第 1 周 · 10 节 · 已上线</div></div></div>
+<p class="desc">从病人入院到出院，夜班里最常说的 10 个场景：疼痛评估、生命体征、过敏史、输液、换药、给药核对、术后观察、术前禁食、防跌倒呼叫铃、出院宣教。</p>
+<div class="bar"><div id="courseBar0"></div></div>
+<p class="note" id="courseProg0">正在读取进度……</p>
+<a class="btn btn-block gold" id="courseCta0" href="module-m1.html">开始学习 →</a></div>
+<div class="course locked" data-kw="采血 取药 送药 检查单 交接班 手卫生 尿标本 翻身 基本功 护士基本功 · 采血取药">
+<div class="course-top"><div class="cover locked">🩸</div><div><b>护士基本功 · 采血取药</b><div class="meta" style="color:#999">13 节 · 敬请期待</div></div></div>
+<p class="desc" style="color:#999">采血、取药送药、检查单、交接班、手卫生、尿标本、翻身防压疮——所有护士每天都用得上的基本功。</p>
+<span class="lockpill">🔒 敬请期待</span></div>
+<div class="course locked" data-kw="急诊 分诊 胸痛 发烧 急诊英语">
+<div class="course-top"><div class="cover locked">🚨</div><div><b>急诊英语</b><div class="meta" style="color:#999">4 节 · 敬请期待</div></div></div>
+<p class="desc" style="color:#999">分诊主诉、胸痛优先、发烧先问、等医生 15 分钟。</p>
+<span class="lockpill">🔒 敬请期待</span></div>
+<div class="course locked" data-kw="外科 术前 首饰 假牙 伤口 下床 外科英语">
+<div class="course-top"><div class="cover locked">🩺</div><div><b>外科英语</b><div class="meta" style="color:#999">4 节 · 敬请期待</div></div></div>
+<p class="desc" style="color:#999">术前禁食再确认、取下首饰假牙、术后伤口观察、术后下床。</p>
+<span class="lockpill">🔒 敬请期待</span></div>
+<div class="course locked" data-kw="手术室 麻醉 复苏 引流管 手术室英语">
+<div class="course-top"><div class="cover locked">💉</div><div><b>手术室英语</b><div class="meta" style="color:#999">5 节 · 敬请期待</div></div></div>
+<p class="desc" style="color:#999">术前访视、进手术室核对、麻醉前、术后复苏、术后引流管。</p>
+<span class="lockpill">🔒 敬请期待</span></div>
+<div class="course locked" data-kw="分诊 预检 量体征 分级 分诊英语">
+<div class="course-top"><div class="cover locked">📋</div><div><b>分诊英语</b><div class="meta" style="color:#999">5 节 · 敬请期待</div></div></div>
+<p class="desc" style="color:#999">分诊第一句、量体征、分级告知、分诊记录分流。</p>
+<span class="lockpill">🔒 敬请期待</span></div>
+<div class="course locked" data-kw="体检 健康评估 问诊 听诊 腹部 体检英语">
+<div class="course-top"><div class="cover locked">🩻</div><div><b>体检英语</b><div class="meta" style="color:#999">5 节 · 敬请期待</div></div></div>
+<p class="desc" style="color:#999">体检前说明、问诊病史、听诊深呼吸、腹部检查、体检结束。</p>
+<span class="lockpill">🔒 敬请期待</span></div>
+<div class="course locked" data-kw="内科 吸氧 心电图 雾化 血糖 内科英语">
+<div class="course-top"><div class="cover locked">❤️</div><div><b>内科英语</b><div class="meta" style="color:#999">4 节 · 敬请期待</div></div></div>
+<p class="desc" style="color:#999">吸氧、心电图、雾化吸入、测血糖。</p>
+<span class="lockpill">🔒 敬请期待</span></div>
+<div class="course locked" data-kw="儿科 孩子 打针 家长 发烧 儿科英语">
+<div class="course-top"><div class="cover locked">🧒</div><div><b>儿科英语</b><div class="meta" style="color:#999">4 节 · 敬请期待</div></div></div>
+<p class="desc" style="color:#999">安抚孩子、打针、请家长配合、孩子发烧。</p>
+<span class="lockpill">🔒 敬请期待</span></div>
 </div>
 <div class="nav"><a href="index.html">🏠 首页</a><a href="video-courses.html" class="active">🎬 视频课</a><a href="module-m1.html">📚 入院到出院</a><a href="night-reopen/index.html">🎮 重开</a></div>
-<script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
+<script>
+var COURSE_KEYS=['ep01','ep02','ep03','ep04','ep05','ep06','ep07','ep08','ep09','ep10'];
+function courseDone(){var n=0;COURSE_KEYS.forEach(function(k){if(localStorage.getItem('classroom-'+k+'-done'))n++;});return n;}
+function paintCourses(){var n=courseDone(),total=10;var pct=Math.round(n/total*100);
+var hb=document.getElementById('heroBar');if(hb)hb.style.width=pct+'%';
+var hp=document.getElementById('heroProg');if(hp)hp.textContent='已学 '+n+' / '+total+' 节 · '+pct+'%';
+var hc=document.getElementById('heroCta');if(hc)hc.textContent=(n>0?'继续学习 →':'开始学习 →');
+var cb=document.getElementById('courseBar0');if(cb)cb.style.width=pct+'%';
+var cp=document.getElementById('courseProg0');if(cp)cp.textContent='已学 '+n+' / '+total+' 节';
+var cc=document.getElementById('courseCta0');if(cc)cc.textContent=(n>0?'继续学习 →':'开始学习 →');}
+function filterCourses(){var q=document.getElementById('courseFilter').value.trim().toLowerCase();var n=0,shown=0;
+document.querySelectorAll('#courseList .course').forEach(function(el){n++;var hit=!q||(el.dataset.kw||'').toLowerCase().indexOf(q)>=0;el.style.display=hit?'':'none';if(hit)shown++;});
+document.getElementById('filterNote').textContent=q?(shown?('找到 '+shown+' 门课'):'没找到“'+document.getElementById('courseFilter').value+'”，换个词试试'):'';}
+paintCourses();
+</script><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>

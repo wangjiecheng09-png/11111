@@ -55,7 +55,26 @@ a{color:#0F5E5A}
 button.opt:active{transform:scale(.99)}
 .wordrow{display:flex;width:100%;gap:12px;align-items:center;background:#FFF7E8;border-radius:10px;padding:10px 14px;margin:8px 0}
 .wordrow span{flex:1;min-width:0}
-.wordrow button{flex:none;margin:0;padding:6px 10px;min-height:36px;font-size:14px}</style></head><body><div class="wrap">
+.wordrow button{flex:none;margin:0;padding:6px 10px;min-height:36px;font-size:14px}
+.hero-my{background:#0F2A28;color:#FFF7E8;border-color:#0F2A28}
+.hero-my h2{color:#FFE08A}
+.streak{font-size:22px}
+.bar{height:12px;background:#E7DFC8;border-radius:999px;overflow:hidden;margin:8px 0}
+.bar>div{height:100%;background:#0F5E5A;width:0%}
+.cal{width:100%;border-collapse:collapse;text-align:center;font-size:14px}
+.cal th{color:#666;font-weight:normal;padding:6px 0}
+.cal td{padding:8px 0;border-radius:8px}
+.cal td.hit{background:#FFE08A;font-weight:bold;color:#222}
+.cal td.today{outline:2px solid #E8A838}
+.cal td.dim{color:#ccc}
+.badge-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.badge-cell{background:#FFF7E8;border:1.5px solid #E8A838;border-radius:12px;padding:12px;text-align:center}
+.badge-cell.locked{background:#f5f5f5;border-color:#ddd;color:#999}
+.badge-cell .ic{font-size:28px}
+.mycourse{display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid #E7DFC8;padding:10px 0}
+.mycourse:last-child{border-bottom:0}
+.btn.gold{background:#E8A838;color:#222}
+</style></head><body><div class="wrap">
 <h1>夜班英语课堂</h1>
 <p class="sub">每天一个临床场景 · 护士英语一句即用 · 错 vs 对，截图保存，下次查房直接用</p>
 <p class="note">怎么用：苹果手机在微信里直接打开就能听、能学；想像 App 那样放桌面图标，就在自带浏览器 Safari 里打开，再点分享 → 添加到主屏幕。安卓手机在微信里听不到声，要在 Chrome 里打开（微信里点 … → 在浏览器打开）再听、再加图标。</p>
@@ -78,6 +97,10 @@ button.opt:active{transform:scale(.99)}
 </div>
 
 <div id="sec-lessons" class="section">
+<div class="card"><h2>🔍 搜索</h2>
+<p><input type="text" id="q" placeholder="搜一句英文、一个单词、一个场景，例如：输液、allergy、血压" oninput="doSearch()"></p>
+<p class="note">想按场景找课，直接搜场景词，例如：入院场景、给药输液、输液、过敏。试试搜：输液、allergy、penicillin、cold、血压</p>
+<div id="searchResult"></div></div>
 <div class="card"><h2>📚 课程</h2>
 <div id="lessonList">
 <div class="group" id="group-week1">
@@ -192,27 +215,47 @@ button.opt:active{transform:scale(.99)}
 </div>
 </div>
 
-<div id="sec-search" class="section">
-<div class="card"><h2>🔍 搜索</h2>
-<p><input type="text" id="q" placeholder="搜一句英文、一个单词、一个场景，例如：输液、allergy、血压" oninput="doSearch()"></p>
-<p class="note">想按场景找课，直接搜场景词，例如：入院场景、给药输液、输液、过敏。试试搜：输液、allergy、penicillin、cold、血压</p>
-<div id="searchResult"></div></div>
-</div>
 
 <div id="sec-my" class="section">
-<div class="card"><h2>👤 我的</h2>
-<p id="myprog">正在读取本机进度……</p>
-<p><button class="ghost" onclick="clearAllProgress()">清除本机全部课堂进度</button></p>
-<p class="note">说明：总站没有登录账号，进度和错题只存在你这台手机 / 这台电脑的浏览器里，换设备要重新学。学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p></div>
+<div class="card hero-my"><h2>👤 我的学习</h2>
+<p><span class="streak">🔥 <b id="streakNum">0</b> 天连续打卡</span><br><span id="todayCheckinState">今天还没打卡</span></p>
+<p><button class="gold" id="checkinBtn" onclick="doCheckin()">✅ 今日打卡</button></p>
+<p class="note" style="color:#FFE08A">打卡存在本机浏览器里，换设备要重新算。每天学一课、点一次打卡，断了就从 1 重新数。</p></div>
+<div class="card"><h2>📈 我的进度</h2>
+<p><b>夜班英语 · 入院到出院</b> <span id="m1ProgText">0 / 10 节</span></p>
+<div class="bar"><div id="m1Bar"></div></div>
+<p><b>全部 9 门课</b> <span id="allProgText">0 / 54 节</span></p>
+<div class="bar"><div id="allBar"></div></div>
+<p class="note">54 节是 9 门课的总数；已上线 11 节（第 1 周 10 节 + 基础合集 1 节），其余做好一门、开一门。</p></div>
+<div class="card"><h2>📅 打卡日历</h2>
+<p><button class="ghost" onclick="calShift(-1)">‹ 上月</button> <b id="calTitle"></b> <button class="ghost" onclick="calShift(1)">下月 ›</button></p>
+<div id="calBox"></div>
+<p class="note">金色的是打过卡的日子；今天有金边。只能打今天的卡，不能补以前的。</p></div>
+<div class="card"><h2>🏅 我的徽章</h2>
+<div class="badge-grid" id="badgeGrid"></div>
+<p class="note">徽章按本机进度自动点亮，换设备要重新攒。</p></div>
+<div class="card"><h2>↩️ 继续学习</h2>
+<p id="continueMy">还没开始任何一课，先从第 1 课试试。</p>
+<a class="btn" id="continueMyBtn" href="classroom-ep01-pain.html">第 1 课 · 疼痛评估</a></div>
+<div class="card"><h2>📚 我的课程</h2>
+<div id="myCourses"></div></div>
+<div class="card"><h2>📝 我的错题</h2>
+<div id="myMistakes"></div>
+<p class="note">做题错了会记在这里，点“回炉”回去重做。</p></div>
+<div class="card"><h2>🎁 免费资料包</h2>
+<p>第 1、2 课的样品包：单词短语表、小抄卡、跟读音频、小测、打卡、口袋卡。</p>
+<a class="btn ghost" href="fan/free-pack.html">领免费体验包 →</a></div>
+<div class="card"><h2>⚙️ 设置</h2>
+<p><button class="ghost" onclick="clearAllProgress()">清除本机全部课堂进度</button>
+<button class="ghost" onclick="clearCheckins()">清除本机打卡记录</button></p>
+<p class="note">说明：没有登录账号，进度、错题、打卡只存在你这台手机 / 这台电脑的浏览器里，换设备要重新学。学习交流，不构成诊疗建议；临床操作以本院制度和医嘱为准。</p></div>
 </div>
-
 <p class="note">总站链接固定不变：https://wangjiecheng09-png.github.io/11111/ —— 以后新课、部门合集、学生课都往这里加。</p>
 </div>
 <nav class="nav">
 <button class="active" onclick="showSec(this,'sec-home')">🏠 首页</button>
 <button onclick="showSec(this,'sec-lessons')">📚 课程</button>
 <button onclick="showSec(this,'sec-courses')">🎬 视频课</button>
-<button onclick="showSec(this,'sec-search')">🔍 搜索</button>
 <button onclick="showSec(this,'sec-my')">👤 我的</button>
 <button onclick="location.href='night-reopen/index.html'">🎮 重开</button>
 </nav>
@@ -225,8 +268,61 @@ function todayKey(){try{var ps=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/S
 function todayLesson(){var k=todayKey();if(LESSONS_BY_DATE[k])return LESSONS_BY_DATE[k];return k<"2026-11-02"?LESSONS_BY_DATE["2026-11-02"]:LESSONS_BY_DATE["2026-11-11"];}
 function updateToday(){var L=todayLesson();document.getElementById('todayTitle').textContent=L[0];document.getElementById('todayLines').innerHTML=L[1];var b=document.getElementById('todayBtn');b.href=L[2];b.textContent='开始'+L[0].split(' · ')[0]+' →';}
 var CONTINUE_LESSONS=[['ep01','第 1 课 · 疼痛评估','classroom-ep01-pain.html'],['ep02','第 2 课 · 生命体征','classroom-ep02-vital-signs.html'],['ep03','第 3 课 · 入院问过敏史','classroom-ep03-allergies.html'],['ep04','第 4 课 · 输液','classroom-ep04-iv-drip.html'],['ep05','第 5 课 · 换药','classroom-ep05-dressing.html'],['ep06','第 6 课 · 给药核对','classroom-ep06-identity-check.html'],['ep07','第 7 课 · 术后观察','classroom-ep07-postop.html'],['ep08','第 8 课 · 术前禁食','classroom-ep08-fasting.html'],['ep09','第 9 课 · 防跌倒呼叫铃','classroom-ep09-callbell.html'],['ep10','第 10 课 · 出院宣教','classroom-ep10-discharge.html']];
-function updateContinue(){var next=null;for(var i=0;i<CONTINUE_LESSONS.length;i++){if(!localStorage.getItem('classroom-'+CONTINUE_LESSONS[i][0]+'-done')){next=CONTINUE_LESSONS[i];break;}}var txt=document.getElementById('continue'),btn=document.getElementById('continueBtn');if(next){txt.textContent='下一课是'+next[1]+'，点下面继续。';btn.href=next[2];btn.textContent=next[1];}else{var L=todayLesson();txt.textContent='10 课都学完了，复习一下今日一课吧。';btn.href=L[2];btn.textContent=L[0];}}
-function loadMy(){const names={'ep01':'第 1 课 · 疼痛评估','ep02':'第 2 课 · 生命体征','ep03':'第 3 课 · 入院问过敏史','ep04':'第 4 课 · 输液','ep05':'第 5 课 · 换药','ep06':'第 6 课 · 给药核对','ep07':'第 7 课 · 术后观察','ep08':'第 8 课 · 术前禁食','ep09':'第 9 课 · 防跌倒呼叫铃','ep10':'第 10 课 · 出院宣教'};let html='';let any=false;for(const k in names){const d=localStorage.getItem('classroom-'+k+'-done')?'✅ 已完成':'还没完成';if(localStorage.getItem('classroom-'+k+'-done'))any=true;const m=JSON.parse(localStorage.getItem('classroom-'+k+'-mistakes')||'[]');html+=names[k]+'：'+d+(m.length?'（错题回炉：'+m.join('、')+'）':'')+'<br>';}document.getElementById('myprog').innerHTML=html;updateContinue();}
-function clearAllProgress(){['classroom-ep01-done','classroom-ep01-mistakes','classroom-ep02-done','classroom-ep02-mistakes','classroom-ep03-done','classroom-ep03-mistakes','classroom-ep04-done','classroom-ep04-mistakes','classroom-ep05-done','classroom-ep05-mistakes','classroom-ep06-done','classroom-ep06-mistakes','classroom-ep07-done','classroom-ep07-mistakes','classroom-ep08-done','classroom-ep08-mistakes','classroom-ep09-done','classroom-ep09-mistakes','classroom-ep10-done','classroom-ep10-mistakes'].forEach(k=>localStorage.removeItem(k));loadMy();}
+function updateContinue(){var next=null;for(var i=0;i<CONTINUE_LESSONS.length;i++){if(!localStorage.getItem('classroom-'+CONTINUE_LESSONS[i][0]+'-done')){next=CONTINUE_LESSONS[i];break;}}var txt=document.getElementById('continue'),btn=document.getElementById('continueBtn');if(next){txt.textContent='下一课是'+next[1]+'，点下面继续。';btn.href=next[2];btn.textContent=next[1];}else{var L=todayLesson();txt.textContent='10 课都学完了，复习一下今日一课吧。';btn.href=L[2];btn.textContent=L[0];}var cm=document.getElementById('continueMy'),cb2=document.getElementById('continueMyBtn');if(cm&&cb2){if(next){cm.textContent='下一课是'+next[1]+'，点下面继续。';cb2.href=next[2];cb2.textContent=next[1];}else{var L2=todayLesson();cm.textContent='10 课都学完了，复习一下今日一课吧。';cb2.href=L2[2];cb2.textContent=L2[0];}}}
+/* ---- 我的：打卡 / 进度 / 日历 / 徽章（新 key：yeban-checkin-days，存 YYYY-MM-DD 数组；与免费包的 freepack-checkin 不冲突） ---- */
+function shanghaiToday(){try{var ps=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Shanghai",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());var y=0,m=0,d=0;ps.forEach(function(p){if(p.type==="year")y=+p.value;if(p.type==="month")m=+p.value;if(p.type==="day")d=+p.value;});return{y:y,m:m,d:d,key:y+"-"+String(m).padStart(2,"0")+"-"+String(d).padStart(2,"0")};}catch(e){var n=new Date();return{y:n.getFullYear(),m:n.getMonth()+1,d:n.getDate(),key:n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0")};}}
+function getCheckins(){try{var a=JSON.parse(localStorage.getItem('yeban-checkin-days')||'[]');return Array.isArray(a)?a:[];}catch(e){return[];}}
+function doCheckin(){var t=shanghaiToday();var days=getCheckins();if(days.indexOf(t.key)<0){days.push(t.key);localStorage.setItem('yeban-checkin-days',JSON.stringify(days));}loadMy();}
+function calcStreak(days){var set={};days.forEach(function(k){set[k]=1;});var t=shanghaiToday();var d=new Date(Date.UTC(t.y,t.m-1,t.d));if(!set[t.key])d.setUTCDate(d.getUTCDate()-1);var n=0;while(true){var k=d.getUTCFullYear()+"-"+String(d.getUTCMonth()+1).padStart(2,"0")+"-"+String(d.getUTCDate()).padStart(2,"0");if(set[k]){n++;d.setUTCDate(d.getUTCDate()-1);}else break;}return n;}
+var calView=null;
+function calShift(n){if(!calView){var t=shanghaiToday();calView={y:t.y,m:t.m};}calView.m+=n;while(calView.m<1){calView.m+=12;calView.y--;}while(calView.m>12){calView.m-=12;calView.y++;}renderCal();}
+function renderCal(){var t=shanghaiToday();if(!calView)calView={y:t.y,m:t.m};var y=calView.y,m=calView.m;var days=getCheckins();var set={};days.forEach(function(k){set[k]=1;});
+document.getElementById('calTitle').textContent=y+' 年 '+m+' 月';
+var first=new Date(Date.UTC(y,m-1,1)).getUTCDay();var dim=new Date(Date.UTC(y,m,0)).getUTCDate();
+var html='<table class="cal"><tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr><tr>';var cell=0;
+for(var i=0;i<first;i++){html+='<td class="dim"></td>';cell++;}
+for(var d=1;d<=dim;d++){var k=y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0');var cls=[];if(set[k])cls.push('hit');if(y===t.y&&m===t.m&&d===t.d)cls.push('today');html+='<td class="'+cls.join(' ')+'">'+d+'</td>';cell++;if(cell%7===0&&d<dim)html+='</tr><tr>';}
+while(cell%7!==0){html+='<td class="dim"></td>';cell++;}
+html+='</tr></table>';document.getElementById('calBox').innerHTML=html;}
+function clearCheckins(){localStorage.removeItem('yeban-checkin-days');loadMy();}
+
+var MY_NAMES={'ep01':'第 1 课 · 疼痛评估','ep02':'第 2 课 · 生命体征','ep03':'第 3 课 · 入院问过敏史','ep04':'第 4 课 · 输液','ep05':'第 5 课 · 换药','ep06':'第 6 课 · 给药核对','ep07':'第 7 课 · 术后观察','ep08':'第 8 课 · 术前禁食','ep09':'第 9 课 · 防跌倒呼叫铃','ep10':'第 10 课 · 出院宣教'};
+var MY_KEYS=Object.keys(MY_NAMES);
+var MY_TOTAL=10;
+function myDoneCount(){var n=0;MY_KEYS.forEach(function(k){if(localStorage.getItem('classroom-'+k+'-done'))n++;});return n;}
+function myAllDoneCount(){var n=myDoneCount();if(localStorage.getItem('classroom-a1-done'))n++;return n;}
+function renderBadges(){var done=myDoneCount(),streak=calcStreak(getCheckins());
+var zeroFree=false;MY_KEYS.forEach(function(k){if(localStorage.getItem('classroom-'+k+'-done')){var mm=JSON.parse(localStorage.getItem('classroom-'+k+'-mistakes')||'[]');if(!mm.length)zeroFree=true;}});
+var list=[
+['🌱','第一课','学完 1 节',done>=1],
+['📚','入院到出院学完','学完 10 节',done>=MY_TOTAL],
+['🎯','零错题','一课全对',zeroFree],
+['🔥','打卡 7 天','连续打卡 7 天',streak>=7]];
+document.getElementById('badgeGrid').innerHTML=list.map(function(b){return '<div class="badge-cell'+(b[3]?'':' locked')+'"><div class="ic">'+b[0]+'</div><b>'+b[1]+'</b><br><span style="font-size:13px">'+(b[3]?'✅ 已解锁':('🔒 '+b[2]))+'</span></div>';}).join('');}
+function renderMyCourses(){var done=myDoneCount();var rows=[
+['🌙','夜班英语 · 入院到出院','10 节','module-m1.html',done+' / '+MY_TOTAL+' 节'],
+['🩸','护士基本功 · 采血取药','13 节',null,'敬请期待'],
+['🚨','急诊英语','4 节',null,'敬请期待'],
+['🩺','外科英语','4 节',null,'敬请期待'],
+['💉','手术室英语','5 节',null,'敬请期待'],
+['📋','分诊英语','5 节',null,'敬请期待'],
+['🩻','体检英语','5 节',null,'敬请期待'],
+['❤️','内科英语','4 节',null,'敬请期待'],
+['🧒','儿科英语','4 节',null,'敬请期待']];
+document.getElementById('myCourses').innerHTML=rows.map(function(r){return '<div class="mycourse"><div><b>'+r[0]+' '+r[1]+'</b><br><span class="note">'+r[2]+' · '+r[4]+'</span></div>'+(r[3]?'<a class="btn ghost" href="'+r[3]+'">去学习 →</a>':'<span class="note">🔒 敬请期待</span>')+'</div>';}).join('');}
+function renderMyMistakes(){var html='';var any=false;
+MY_KEYS.forEach(function(k){var mm=JSON.parse(localStorage.getItem('classroom-'+k+'-mistakes')||'[]');if(mm.length){any=true;var nm=MY_NAMES[k];var title=Array.isArray(nm)?nm[0]:nm;var href=Array.isArray(nm)?nm[1]:('classroom-'+k+'-'+({'ep01':'pain','ep02':'vital-signs','ep03':'allergies','ep04':'iv-drip','ep05':'dressing','ep06':'identity-check','ep07':'postop','ep08':'fasting','ep09':'callbell','ep10':'discharge'}[k])+'.html');html+='<p><b>'+title+'</b>：'+mm.join('、')+' <a href="'+href+'">回炉 →</a></p>';}});
+document.getElementById('myMistakes').innerHTML=any?html:'<p class="note">还没有错题，做题错了会记在这里。</p>';}
+function loadMy(){var done=myDoneCount(),all=myAllDoneCount(),streak=calcStreak(getCheckins());var t=shanghaiToday();var days=getCheckins();
+document.getElementById('streakNum').textContent=streak;
+var st=document.getElementById('todayCheckinState');var cb=document.getElementById('checkinBtn');
+if(days.indexOf(t.key)>=0){st.textContent='✅ 今天已打卡，连续 '+streak+' 天';cb.textContent='✅ 今天已打卡';cb.disabled=true;}else{st.textContent='今天还没打卡';cb.textContent='✅ 今日打卡';cb.disabled=false;}
+var pct1=Math.round(done/MY_TOTAL*100),pctA=Math.round(all/54*100);
+document.getElementById('m1ProgText').textContent='已学 '+done+' / '+MY_TOTAL+' 节 · '+pct1+'%';
+document.getElementById('m1Bar').style.width=pct1+'%';
+document.getElementById('allProgText').textContent='已学 '+all+' / 54 节 · '+pctA+'%';
+document.getElementById('allBar').style.width=pctA+'%';
+renderCal();renderBadges();renderMyCourses();renderMyMistakes();updateContinue();}
+function clearAllProgress(){['classroom-ep01-done','classroom-ep01-mistakes','classroom-ep02-done','classroom-ep02-mistakes','classroom-ep03-done','classroom-ep03-mistakes','classroom-ep04-done','classroom-ep04-mistakes','classroom-ep05-done','classroom-ep05-mistakes','classroom-ep06-done','classroom-ep06-mistakes','classroom-ep07-done','classroom-ep07-mistakes','classroom-ep08-done','classroom-ep08-mistakes','classroom-ep09-done','classroom-ep09-mistakes','classroom-ep10-done','classroom-ep10-mistakes','classroom-a1-done','classroom-a1-mistakes'].forEach(k=>localStorage.removeItem(k));loadMy();}
 updateToday();updateContinue();loadMy();doSearch();
 </script><!-- pages-rebuild --><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
