@@ -33,6 +33,21 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 .coursebar a{color:#FFF7E8;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding:8px 6px;font-size:14px;white-space:nowrap}
 .coursebar a.cb-link.active{color:#FFD97A;font-weight:bold}
 .coursebar a.cb-cta{flex:1;justify-content:center;background:#E8A838;color:#222;font-weight:bold;border-radius:999px;font-size:15px;padding:11px 12px;white-space:normal;text-align:center}
+
+.videocard video{width:100%;border-radius:12px;background:#0F2A28;display:block}
+.video-slot .ph{background:#0F2A28;color:#FFF7E8;border-radius:12px;padding:28px 16px;text-align:center;line-height:1.8}
+.video-slot .ph b{color:#FFD97A}
+.vrate{margin-top:8px}
+.vrate select{font-size:15px;padding:8px;border-radius:10px;border:1.5px solid #0F5E5A}
+details.transcript summary{cursor:pointer;font-weight:bold;color:#0F5E5A;font-size:17px}
+details.transcript p{margin:10px 0}
+.notes textarea{width:100%;min-height:90px;box-sizing:border-box;padding:10px;border-radius:10px;border:1.5px solid #0F5E5A;font-size:16px;font-family:inherit}
+.pathmap{display:flex;overflow-x:auto;padding:6px 2px}
+.pm-node{flex:1;min-width:56px;text-align:center;font-size:12px;color:#666}
+.pm-node a{color:inherit;text-decoration:none}
+.pm-dot{width:34px;height:34px;line-height:34px;border-radius:50%;margin:0 auto 4px;background:#fff;border:2px solid #E7DFC8;color:#666;font-weight:bold}
+.pm-node.done .pm-dot{background:#E8A838;border-color:#E8A838;color:#222}
+.pm-node.now .pm-dot{border-color:#0F5E5A;color:#0F5E5A;box-shadow:0 0 0 3px #FFE08A}
 </style></head>
 <body><div class="wrap">
 <p><a href="index.html">← 回课堂首页</a> · <a href="video-courses.html">视频课</a></p>
@@ -40,6 +55,11 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 <p class="sub">第 1 周 · 10 节课</p>
 <p class="sub">10 节课 · 每节约 10 分钟 · 按病人走的路排：入院 → 住院日常 → 操作 → 出院。每天一课，10 天走完一个夜班的完整流程。</p>
 
+<div class="card videocard" id="videoCard">
+<h2>🎬 课程预告</h2>
+<div class="video-slot" id="videoSlot" data-video="video/module-m1-trailer.mp4"><p class="note">正在检查视频…</p></div>
+<p class="note">预告片是这门课的 1 分钟介绍；传好后这里就能直接看。下面 10 节课每节都有自己的视频。</p>
+</div>
 <div class="card"><h2>学完能做到什么</h2>
 <p>10 个夜班里最常说的场景，每个场景至少会 2 句能直接用的原句：</p>
 <ul>
@@ -57,10 +77,14 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 <div class="card"><h2>我的进度</h2>
 <div class="bar"><div id="progBar"></div></div>
 <p id="progText">正在读进度……</p>
+<p id="moduleCheckin" class="note"></p>
 <a class="btn btn-block" id="continueBtn" href="classroom-ep01-pain.html">▶ 从第 1 课开始</a>
 <p class="note">进度存在你这台手机里，换设备要重新学。</p>
 </div>
 
+<div class="card"><h2>🗺️ 学习路径</h2>
+<p class="note">按顺序学：1 → 10；金色是已完成，描金边的是正在学的那课。点任意一课都能直接进（建议按顺序，不强制锁课）。</p>
+<div class="pathmap" id="pathMap"></div></div>
 <div class="card"><h2>10 节课，按顺序学</h2>
 <div id="lessonList"></div>
 </div>
@@ -70,6 +94,9 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 <a class="btn btn-block" href="module-m1-review.html">📖 去复习页</a>
 </div>
 
+<div class="card"><h2>💬 课程讨论区</h2>
+<p>课程讨论区还在准备中，敬请期待。</p>
+<p class="note">每节课课末都有自己的讨论区（也在准备中）；问题先记在那节课的“我的课堂笔记”里。</p></div>
 <div class="warn">⚠️ 第 6 课有一处要特别说明：课里教的原句是 “Please tell me your name and date of birth.”（请告诉我你的姓名和出生日期）。按中国临床标准（WS/T 840-2025《患者身份识别管理标准》+ 三查七对），发药前要同时用两个以上身份标识——姓名 + 床号 + 住院号，床号不能单独作依据，还要看腕带。完整说法见复习页，夜班重开第 1 关也是按这个标准做的。</div>
 
 <p class="note">这门课的 10 节课就是第 1 周的 10 课，视频、课堂、讲义、音频、小抄、小测都在原课里，这里只把它们串成一门课，没有重做。</p>
@@ -103,4 +130,42 @@ var cb=document.getElementById("continueBtn");
 if(doneCount===10){cb.textContent="📖 10 课全学完了，去复习页";cb.href="module-m1-review.html";}
 else{cb.textContent="▶ 继续学第 "+(firstTodo+1)+" 课 · "+lessons[firstTodo].t;cb.href=lessons[firstTodo].f;}
 </script>
-<script>(function(){var cb=document.getElementById("continueBtn"),b=document.getElementById("barCta");if(cb&&b){b.textContent=cb.textContent;b.href=cb.href;}})();</script><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
+<script>(function(){var cb=document.getElementById("continueBtn"),b=document.getElementById("barCta");if(cb&&b){b.textContent=cb.textContent;b.href=cb.href;}})();</script><script>
+/* ---- 视频接口：video/<文件名>；文件不存在时显示占位，不出坏播放器 ---- */
+(function(){
+var slot=document.getElementById("videoSlot");if(!slot)return;
+var src=slot.getAttribute("data-video");
+function placeholder(msg){slot.innerHTML='<div class="ph"><b>\uD83C\uDFAC 本课视频'+msg+'</b><br>先看下面朗读和白板，视频传好后这里就能直接看。</div>';}
+if(!src){placeholder("还没拍");return;}
+fetch(src,{method:"HEAD",cache:"no-store"}).then(function(r){
+  if(!r.ok){placeholder("正在上传，稍后上线");return;}
+  var v=document.createElement("video");
+  v.setAttribute("controls","");v.setAttribute("playsinline","");v.setAttribute("preload","metadata");v.src=src;
+  slot.innerHTML="";slot.appendChild(v);
+  var bar=document.createElement("p");bar.className="vrate";
+  bar.innerHTML='倍速 <select id="vrate" aria-label="倍速"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select>　<button class="ghost" id="vfull">⛶ 全屏</button>';
+  slot.parentNode.insertBefore(bar,slot.nextSibling);
+  document.getElementById("vrate").addEventListener("change",function(e){v.playbackRate=parseFloat(e.target.value);});
+  document.getElementById("vfull").addEventListener("click",function(){if(v.requestFullscreen)v.requestFullscreen();});
+  v.addEventListener("error",function(){placeholder("正在上传，稍后上线");var b=document.querySelector(".vrate");if(b)b.remove();});
+}).catch(function(){placeholder("正在上传，稍后上线");});
+})();
+</script>
+<script>
+/* ---- 学习路径图 + 今日打卡状态（复用 lessons/isDone 与 yeban-checkin-days） ---- */
+(function(){
+var map=document.getElementById("pathMap");
+if(map&&typeof lessons!=="undefined"&&typeof isDone==="function"){
+  var firstTodo=-1;var h="";
+  lessons.forEach(function(L,i){var d=isDone(i);if(!d&&firstTodo<0)firstTodo=i;
+    var cls=d?"done":(i===firstTodo?"now":"todo");
+    h+='<div class="pm-node '+cls+'"><a href="'+L.f+'"><div class="pm-dot">'+(d?"\u2713":L.n)+'</div>'+L.t+'</a></div>';});
+  map.innerHTML=h;
+}
+var mc=document.getElementById("moduleCheckin");
+if(mc){try{var a=JSON.parse(localStorage.getItem('yeban-checkin-days')||'[]');
+  var tk=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Shanghai",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+  mc.textContent=a.indexOf(tk)>=0?("\u2705 今天已打卡（"+tk+"）"):"今天还没打卡，学完一课打勾后会自动打卡。";}catch(e){}}
+})();
+</script>
+<script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
