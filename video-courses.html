@@ -47,6 +47,10 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 .hero .bar>div{height:100%;background:#E8A838;width:0%}
 .btn.gold{background:#E8A838;color:#222}
 .filter{width:100%;box-sizing:border-box;padding:10px;border-radius:10px;border:1.5px solid #0F5E5A;font-size:16px}
+.coursebar{position:fixed;left:0;right:0;bottom:0;background:#0F2A28;display:flex;align-items:center;gap:2px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));z-index:10}
+.coursebar a{color:#FFF7E8;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding:8px 6px;font-size:14px;white-space:nowrap}
+.coursebar a.cb-link.active{color:#FFD97A;font-weight:bold}
+.coursebar a.cb-cta{flex:1;justify-content:center;background:#E8A838;color:#222;font-weight:bold;border-radius:999px;font-size:15px;padding:11px 12px;white-space:normal;text-align:center}
 </style></head>
 <body><div class="wrap">
 <p><a href="index.html">← 回课堂首页</a></p>
@@ -98,7 +102,7 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 <p class="desc" style="color:#999">安抚孩子、打针、请家长配合、孩子发烧。</p>
 <span class="lockpill">🔒 敬请期待</span></div>
 </div>
-<nav class="nav"><a href="index.html">🏠 首页</a><a href="index.html#sec-lessons">📚 课程</a><a href="video-courses.html" class="active">🎬 视频课</a><a href="index.html#sec-my">👤 我的</a><a href="night-reopen/index.html">🎮 重开</a></nav>
+<nav class="coursebar"><a class="cb-home" href="index.html">🏠 回课堂</a><a class="cb-link active" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="index.html#sec-my">👤 我的进度</a><a class="cb-cta" id="barCta" href="module-m1.html">▶ 开始学习</a></nav>
 <script>
 var COURSE_KEYS=['ep01','ep02','ep03','ep04','ep05','ep06','ep07','ep08','ep09','ep10'];
 function courseDone(){var n=0;COURSE_KEYS.forEach(function(k){if(localStorage.getItem('classroom-'+k+'-done'))n++;});return n;}
@@ -112,5 +116,4 @@ var cc=document.getElementById('courseCta0');if(cc)cc.textContent=(n>0?'继续�
 function filterCourses(){var q=document.getElementById('courseFilter').value.trim().toLowerCase();var n=0,shown=0;
 document.querySelectorAll('#courseList .course').forEach(function(el){n++;var hit=!q||(el.dataset.kw||'').toLowerCase().indexOf(q)>=0;el.style.display=hit?'':'none';if(hit)shown++;});
 document.getElementById('filterNote').textContent=q?(shown?('找到 '+shown+' 门课'):'没找到“'+document.getElementById('courseFilter').value+'”，换个词试试'):'';}
-paintCourses();
-</script><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
+paintCourses();</script><script>(function(){var files=['classroom-ep01-pain.html','classroom-ep02-vital-signs.html','classroom-ep03-allergies.html','classroom-ep04-iv-drip.html','classroom-ep05-dressing.html','classroom-ep06-identity-check.html','classroom-ep07-postop.html','classroom-ep08-fasting.html','classroom-ep09-callbell.html','classroom-ep10-discharge.html'];var b=document.getElementById('barCta');if(!b)return;var i=0;for(;i<10;i++){try{if(!localStorage.getItem('classroom-ep'+('0'+(i+1)).slice(-2)+'-done'))break;}catch(e){break;}}if(i>=10){b.textContent='📖 去复习';b.href='module-m1-review.html';}else{var n=courseDone();b.textContent='▶ '+(n>0?'继续学习':'开始学习');b.href=files[i];}})();</script><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>

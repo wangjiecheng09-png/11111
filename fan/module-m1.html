@@ -29,6 +29,10 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 .nav{position:fixed;left:0;right:0;bottom:0;background:#0F5E5A;display:flex;justify-content:space-around;padding:10px 0 calc(10px + env(safe-area-inset-bottom));z-index:10}
 .nav a{background:none;color:#FFF7E8;font-size:15px;margin:0;padding:8px 6px;min-height:44px;text-decoration:none;display:inline-block}
 .nav a.active{color:#FFD97A;font-weight:bold}
+.coursebar{position:fixed;left:0;right:0;bottom:0;background:#0F2A28;display:flex;align-items:center;gap:2px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));z-index:10}
+.coursebar a{color:#FFF7E8;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding:8px 6px;font-size:14px;white-space:nowrap}
+.coursebar a.cb-link.active{color:#FFD97A;font-weight:bold}
+.coursebar a.cb-cta{flex:1;justify-content:center;background:#E8A838;color:#222;font-weight:bold;border-radius:999px;font-size:15px;padding:11px 12px;white-space:normal;text-align:center}
 </style></head>
 <body><div class="wrap">
 <p><a href="index.html">← 回课堂首页</a> · <a href="video-courses.html">视频课</a></p>
@@ -74,7 +78,7 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 <a class="btn btn-block" href="free-pack.html">🎁 领免费体验包 →</a></div>
 
 </div>
-<nav class="nav"><a href="index.html">🏠 首页</a><a href="index.html#sec-lessons">📚 课程</a><a href="video-courses.html" class="active">🎬 视频课</a><a href="index.html#sec-my">👤 我的</a><a href="../night-reopen/index.html">🎮 重开</a></nav>
+<nav class="coursebar"><a class="cb-home" href="index.html">🏠 回课堂</a><a class="cb-link" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="index.html#sec-my">👤 我的进度</a><a class="cb-cta" id="barCta" href="classroom-ep01-pain.html">▶ 从第 1 课开始</a></nav>
 <script>
 var doneKeys=["classroom-ep01-done","classroom-ep02-done"];
 function isDone(i){try{return !!localStorage.getItem(doneKeys[i]);}catch(e){return false;}}
@@ -85,4 +89,4 @@ if(n===2){document.getElementById("progText").textContent="✅ 第 1、2 课都�
 else if(n===1){document.getElementById("progText").textContent="已完成 1 / 2 课（免费体验）。";cb.textContent="▶ 继续学第 2 课 · 测生命体征";cb.href="classroom-ep02-vital-signs.html";}
 else{document.getElementById("progText").textContent="还没开始，先从第 1 课试试。";cb.textContent="▶ 从第 1 课开始";cb.href="classroom-ep01-pain.html";}
 </script>
-<script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("../maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("../maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
+<script>(function(){var cb=document.getElementById("continueBtn"),b=document.getElementById("barCta");if(cb&&b){b.textContent=cb.textContent;b.href=cb.href;}})();</script><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("../maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("../maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
