@@ -57,8 +57,8 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 <body><div class="wrap">
 <p><a class="homebtn" href="index.html">🌙 回课堂首页</a></p>
 <h1>🎬 视频课</h1>
-<p class="sub">视频课正在完善中，9 门课暂未开放，敬请期待。先免费体验第 1、2 课。</p>
-<div class="card"><h2>🔒 视频课正在完善中</h2><p>9 门课的内容还在完善，暂未开放。先免费体验第 1、2 课，完整版 11 月 11 日之后上。</p><a class="btn gold btn-block" href="classroom-ep01-pain.html">🎁 免费体验第 1、2 课 →</a></div>
+<p class="sub">视频课正在完善中，9 门课暂未开放，敬请期待。先免费体验第 1 课。</p>
+<div class="card"><h2>🔒 视频课正在完善中</h2><p>9 门课的内容还在完善，暂未开放。先免费体验第 1 课，完整版 11 月 11 日之后上。</p><a class="btn gold btn-block" href="classroom-ep01-pain.html">🎁 免费体验第 1 课 →</a></div>
 <p><input type="text" class="filter" id="courseFilter" placeholder="🔍 搜一门课，例如：急诊、儿科、采血" oninput="filterCourses()"></p>
 <p class="note" id="filterNote"></p>
 <div id="courseList">
@@ -99,11 +99,11 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 <p class="desc" style="color:#999">安抚孩子、打针、请家长配合、孩子发烧。</p>
 <span class="lockpill">🔒 敬请期待</span></div>
 </div>
-<nav class="coursebar"><a class="cb-link active" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="index.html#sec-my">👤 我的进度</a><a class="cb-cta" id="barCta" href="classroom-ep01-pain.html">🎁 免费体验第 1、2 课</a></nav>
+<nav class="coursebar"><a class="cb-link active" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="index.html#sec-my">👤 我的进度</a><a class="cb-cta" id="barCta" href="classroom-ep01-pain.html">🎁 免费体验第 1 课</a></nav>
 <script>
-var COURSE_KEYS=['ep01','ep02'];
+var COURSE_KEYS=['ep01'];
 function courseDone(){var n=0;COURSE_KEYS.forEach(function(k){if(localStorage.getItem('classroom-'+k+'-done'))n++;});return n;}
-function paintCourses(){var n=courseDone(),total=2;var pct=Math.round(n/total*100);
+function paintCourses(){var n=courseDone(),total=1;var pct=Math.round(n/total*100);
 var hb=document.getElementById('heroBar');if(hb)hb.style.width=pct+'%';
 var hp=document.getElementById('heroProg');if(hp)hp.textContent='已学 '+n+' / '+total+' 节 · '+pct+'%';
 var hc=document.getElementById('heroCta');if(hc)hc.textContent=(n>0?'继续学习 →':'开始学习 →');

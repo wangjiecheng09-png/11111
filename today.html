@@ -99,12 +99,11 @@ if (!lesson) {
     : LESSONS["2026-11-11"];
 }
 var _ref="";try{_ref=document.referrer||"";}catch(e){}
-/* 从粉丝版来：第 1、2 课去 fan 课堂，第 3-10 课回 fan 首页（锁定列表）；其余情况去原课 */
+/* 从粉丝版来：第 1 课去 fan 课堂，第 2-10 课回 fan 首页（锁定列表）；其余情况去原课 */
 var _fromFan = _ref.indexOf("/fan/")>=0;
 var target = lesson[2];
 if(_fromFan){
   if(lesson[0]==="ep01") target="fan/classroom-ep01-pain.html";
-  else if(lesson[0]==="ep02") target="fan/classroom-ep02-vital-signs.html";
   else target="fan/index.html";
 }
 document.getElementById("msg").textContent = "今天是" + key + "，" + lesson[1] + "，正在带你去……";
