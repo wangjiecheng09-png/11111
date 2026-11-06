@@ -150,11 +150,11 @@ button.opt:active{transform:scale(.99)}
 
 <div id="sec-courses" class="section">
 <div class="card"><h2>🎬 视频课</h2>
-<p>一门课学完一整套：按课、按顺序学。入院到出院先上，第 1、2 课免费体验，第 3–10 课在完整版里；后面做好一门、开一门。</p>
+<p>视频课正在完善中，9 门课暂未开放，敬请期待。第 1、2 课免费体验在课堂里。</p>
 <div class="lesson">
-<b>夜班英语 · 入院到出院</b> <span class="tag">第 1 周 · 10 节 · 第 1、2 课免费</span><br>
+<b>夜班英语 · 入院到出院</b> <span class="tag">第 1 周 · 10 节 · 内容完善中</span><br>
 <span>从病人入院到出院，夜班里最常说的 10 个场景：疼痛评估、生命体征、过敏史、输液、换药、给药核对、术后观察、术前禁食、防跌倒呼叫铃、出院宣教。</span><br>
-<a class="btn" href="module-m1.html">开始学习 →</a></div>
+<span class="tag soon">🔒 内容完善中，敬请期待</span></div>
 <div class="lesson">
 <b>护士基本功 · 采血取药</b> <span class="tag soon">13 节 · 敬请期待</span><br>
 <span class="soon">采血、取药送药、检查单、交接班、手卫生、尿标本、翻身防压疮——所有护士每天都用得上的基本功。</span></div>
@@ -263,7 +263,7 @@ var list=[
 ['🔥','打卡 7 天','连续打卡 7 天',streak>=7]];
 document.getElementById('badgeGrid').innerHTML=list.map(function(b){return '<div class="badge-cell'+(b[3]?'':' locked')+'"><div class="ic">'+b[0]+'</div><b>'+b[1]+'</b><br><span style="font-size:13px">'+(b[3]?'✅ 已解锁':('🔒 '+b[2]))+'</span></div>';}).join('');}
 function renderMyCourses(){var done=myDoneCount();var rows=[
-['🌙','夜班英语 · 入院到出院','10 节','module-m1.html',done+' / '+MY_TOTAL+' 节'],
+['🌙','夜班英语 · 入院到出院','10 节',null,'内容完善中'],
 ['🩸','护士基本功 · 采血取药','13 节',null,'敬请期待'],
 ['🚨','急诊英语','4 节',null,'敬请期待'],
 ['🩺','外科英语','4 节',null,'敬请期待'],

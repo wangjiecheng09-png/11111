@@ -55,20 +55,15 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 <body><div class="wrap">
 <p><a href="index.html">← 回课堂首页</a></p>
 <h1>🎬 视频课</h1>
-<p class="sub">一门课学完一整套：按课、按顺序学。入院到出院先上，第 1、2 课免费体验，第 3–10 课在完整版里；后面做好一门、开一门。</p>
-<div class="hero"><h2>🔥 继续学习</h2>
-<p><b>夜班英语 · 入院到出院</b><br><span id="heroProg">正在读取进度……</span></p>
-<div class="bar"><div id="heroBar"></div></div>
-<a class="btn gold btn-block" id="heroCta" href="module-m1.html">开始学习 →</a></div>
+<p class="sub">视频课正在完善中，9 门课暂未开放，敬请期待。先免费体验第 1、2 课。</p>
+<div class="card"><h2>🔒 视频课正在完善中</h2><p>9 门课的内容还在完善，暂未开放。先免费体验第 1、2 课，完整版 11 月 11 日之后上。</p><a class="btn gold btn-block" href="classroom-ep01-pain.html">🎁 免费体验第 1、2 课 →</a></div>
 <p><input type="text" class="filter" id="courseFilter" placeholder="🔍 搜一门课，例如：急诊、儿科、采血" oninput="filterCourses()"></p>
 <p class="note" id="filterNote"></p>
 <div id="courseList">
 <div class="course" data-kw="入院到出院 疼痛 生命体征 过敏 输液 换药 给药 术后 禁食 呼叫铃 出院 夜班英语 · 入院到出院">
-<div class="course-top"><div class="cover">🌙</div><div><b>夜班英语 · 入院到出院</b><div class="meta">第 1 周 · 10 节 · 已上线</div></div></div>
+<div class="course-top"><div class="cover">🌙</div><div><b>夜班英语 · 入院到出院</b><div class="meta">第 1 周 · 10 节 · 内容完善中</div></div></div>
 <p class="desc">从病人入院到出院，夜班里最常说的 10 个场景：疼痛评估、生命体征、过敏史、输液、换药、给药核对、术后观察、术前禁食、防跌倒呼叫铃、出院宣教。</p>
-<div class="bar"><div id="courseBar0"></div></div>
-<p class="note" id="courseProg0">正在读取进度……</p>
-<a class="btn btn-block gold" id="courseCta0" href="module-m1.html">开始学习 →</a></div>
+<p class="note">🔒 内容完善中，敬请期待。</p></div>
 <div class="course locked" data-kw="采血 取药 送药 检查单 交接班 手卫生 尿标本 翻身 基本功 护士基本功 · 采血取药">
 <div class="course-top"><div class="cover locked">🩸</div><div><b>护士基本功 · 采血取药</b><div class="meta" style="color:#999">13 节 · 敬请期待</div></div></div>
 <p class="desc" style="color:#999">采血、取药送药、检查单、交接班、手卫生、尿标本、翻身防压疮——所有护士每天都用得上的基本功。</p>
@@ -102,7 +97,7 @@ button.ghost,.btn.ghost{background:#fff;color:#0F5E5A;border:1.5px solid #0F5E5A
 <p class="desc" style="color:#999">安抚孩子、打针、请家长配合、孩子发烧。</p>
 <span class="lockpill">🔒 敬请期待</span></div>
 </div>
-<nav class="coursebar"><a class="cb-home" href="index.html">🏠 回课堂</a><a class="cb-link active" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="index.html#sec-my">👤 我的进度</a><a class="cb-cta" id="barCta" href="classroom-ep01-pain.html">▶ 从第 1 课开始</a></nav>
+<nav class="coursebar"><a class="cb-home" href="index.html">🏠 回课堂</a><a class="cb-link active" href="video-courses.html">📚 课程目录</a><a class="cb-link" href="index.html#sec-my">👤 我的进度</a><a class="cb-cta" id="barCta" href="classroom-ep01-pain.html">🎁 免费体验第 1、2 课</a></nav>
 <script>
 var COURSE_KEYS=['ep01','ep02'];
 function courseDone(){var n=0;COURSE_KEYS.forEach(function(k){if(localStorage.getItem('classroom-'+k+'-done'))n++;});return n;}
@@ -116,4 +111,4 @@ var cc=document.getElementById('courseCta0');if(cc)cc.textContent=(n>0?'继续�
 function filterCourses(){var q=document.getElementById('courseFilter').value.trim().toLowerCase();var n=0,shown=0;
 document.querySelectorAll('#courseList .course').forEach(function(el){n++;var hit=!q||(el.dataset.kw||'').toLowerCase().indexOf(q)>=0;el.style.display=hit?'':'none';if(hit)shown++;});
 document.getElementById('filterNote').textContent=q?(shown?('找到 '+shown+' 门课'):'没找到“'+document.getElementById('courseFilter').value+'”，换个词试试'):'';}
-paintCourses();</script><script>(function(){var b=document.getElementById('barCta');if(!b)return;var n=courseDone();if(n>=2){b.textContent='🎁 去领免费资料包';b.href='free-pack.html';}else if(n===1){b.textContent='▶ 继续学第 2 课';b.href='classroom-ep02-vital-signs.html';}else{b.textContent='▶ 从第 1 课开始';b.href='classroom-ep01-pain.html';}})();</script><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
+paintCourses();</script><script>/* 维护开关：maintenance.json 里 maintenance 为 true 时才跳转，平时不影响页面 */(function(){try{fetch("maintenance.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.maintenance&&location.pathname.indexOf("maintenance.html")<0){location.replace("maintenance.html")}}).catch(function(){})}catch(e){}})();</script></body></html>
